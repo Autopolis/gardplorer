@@ -4,13 +4,13 @@ import $ajax from '@/utils/ajax'
 
 const formatDetail = data => {
   if (!data) return null
-  const tags = get(data, 'result.tags', [])
+  const tags = get(data, 'result.tags', []).map(item => ({
+    key: crypto.Base64.parse(item.key).toString(crypto.Utf8),
+    value: crypto.Base64.parse(item.value).toString(crypto.Utf8)
+  }))
   return {
     ...data,
-    tags: map(tags, item => ({
-      key: crypto.Base64.parse(item.key).toString(crypto.Utf8),
-      value: crypto.Base64.parse(item.value).toString(crypto.Utf8)
-    })),
+    tags,
     input: get(data, 'tx.value.msg.0.value.inputs.0'),
     output: get(data, 'tx.value.msg.0.value.outputs.0'),
     coin: get(data, 'tx.value.msg.0.value.inputs.0.coins.0'),

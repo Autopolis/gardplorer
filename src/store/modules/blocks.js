@@ -68,7 +68,6 @@ export default {
       list.forEach(item => {
         const height = get(item, 'header.height')
         const details = context.state.details
-        const validatorsets = context.state.validatorsets
         if (isEmpty(details[height])) {
           context.dispatch('fetchDetail', item.header.height)
         }

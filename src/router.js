@@ -6,6 +6,7 @@ import BlockDetail from './views/BlockDetail.vue';
 import Transactions from './views/Transactions.vue';
 import TransactionDetail from './views/TransactionDetail.vue';
 import AddressDetail from './views/AddressDetail.vue';
+import Validators from './views/Validators.vue';
 import NotFound from './views/NotFound.vue';
 
 Vue.use(Router);
@@ -30,12 +31,12 @@ export default new Router({
       component: BlockDetail,
     },
     {
-      path: '/transactions',
+      path: '/txs',
       name: 'transactions',
       component: Transactions,
     },
     {
-      path: '/transaction/:hash',
+      path: '/tx/:hash',
       name: 'transactionDetail',
       component: TransactionDetail,
     },
@@ -43,6 +44,11 @@ export default new Router({
       path: '/address/:address',
       name: 'addressDetail',
       component: AddressDetail,
+    },
+    {
+      path: '/validators',
+      name: 'validators',
+      component: Validators
     },
     {
       path: '*',

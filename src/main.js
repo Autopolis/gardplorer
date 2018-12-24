@@ -8,9 +8,7 @@ import * as filters from '@/utils/filters.js';
 import rootStore from './store/index.js';
 
 import Card from '@/components/Card';
-import BlockLink from '@/components/BlockLink';
-import AddressLink from '@/components/AddressLink';
-import TransactionLink from '@/components/TransactionLink';
+import Link from '@/components/Link';
 import TransactionList from '@/components/TransactionList';
 import SubTitle from '@/components/SubTitle';
 import DataArea from '@/components/DataArea/index.vue';
@@ -29,9 +27,7 @@ store.dispatch('basic/fetch');
 
 // 注册全局组件
 Vue.component('Card', Card);
-Vue.component('block-link', BlockLink);
-Vue.component('address-link', AddressLink);
-Vue.component('transaction-link', TransactionLink);
+Vue.component('hg-link', Link);
 Vue.component('transaction-list', TransactionList);
 Vue.component('sub-title', SubTitle);
 Vue.component('data-area', DataArea);

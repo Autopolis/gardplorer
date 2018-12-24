@@ -1,9 +1,11 @@
 <template>
   <header class="header-container">
-    <img
-      class="logo"
-      src="~@/assets/logo.png"
-    />
+    <a href="/">
+      <img
+        class="logo"
+        src="~@/assets/logo.png"
+      />
+    </a>
     <p class="version">{{ name }}</p>
     <div class="search-container">
       <input
@@ -89,7 +91,7 @@ svg {
   .search-inner {
     flex: 1 1 auto;
     height: 100%;
-    padding: 0 12px;
+    padding: 0 36px 0 12px;
     border: 0;
     box-shadow: none;
     background: transparent;

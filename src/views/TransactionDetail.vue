@@ -7,16 +7,16 @@
           <span>{{ detail.hash }}</span>
         </data-item>
         <data-item label="Block">
-          <block-link :content="detail.height" />
+          <hg-link type="block" :content="detail.height" />
         </data-item>
         <data-item label="Type">
           <span>{{ type }}</span>
         </data-item>
         <data-item label="From">
-          <address-link :content="get(detail, 'input.address')" :ellipsis="false" />
+          <hg-link type="address" :content="get(detail, 'input.address')" :ellipsis="false" />
         </data-item>
         <data-item label="To">
-          <address-link :content="get(detail, 'output.address')" :ellipsis="false"/>
+          <hg-link type="address" :content="get(detail, 'output.address')" :ellipsis="false"/>
         </data-item>
         <data-item label="Amount">
           {{ get(detail, 'coin.amount') }}

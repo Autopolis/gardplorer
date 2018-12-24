@@ -34,10 +34,16 @@
           class="item transactions"
         >
           <p class="hash">TX:
-            <transaction-link :content="item.hash" />
+            <link
+              type="tx"
+              :content="item.hash"
+            />
           </p>
           <p class="block">Block:
-            <block-link :content="item.height" />
+            <link
+              type="block"
+              :content="item.height"
+            />
           </p>
           <p class="gas">Gas Used: {{ item.result.gasUsed }}</p>
         </li>

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="`/transaction/${content}`">{{ ellipsis === false ? content : content.slice(0, 18) + '...' }}</router-link>
+  <router-link :to="`/tx/${content}`">{{ ellipsis === false ? content : content.slice(0, 18) + '...' }}</router-link>
 </template>
 <script>
 export default {

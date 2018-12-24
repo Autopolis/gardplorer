@@ -7,7 +7,10 @@
       <RouterLink to="/blocks" class="link">BLOCKS</RouterLink>
     </el-menu-item>
     <el-menu-item index="3" class="item">
-        <RouterLink to="/transactions" class="link">TRANSACTIONS</RouterLink>
+        <RouterLink to="/txs" class="link">TRANSACTIONS</RouterLink>
+    </el-menu-item>
+    <el-menu-item index="3" class="item">
+        <RouterLink to="/validators" class="link">VALIDATORS</RouterLink>
     </el-menu-item>
   </el-menu>
 </template>

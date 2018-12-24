@@ -2,7 +2,8 @@ import basic from './modules/basic.js';
 import blocks from './modules/blocks.js';
 import transactions from './modules/transactions.js';
 import address from './modules/address.js';
+import validators from './modules/validators';
 
 export default {
-  modules: { basic, blocks, transactions, address },
+  modules: { basic, blocks, transactions, address, validators },
 };
