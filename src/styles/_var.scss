@@ -1,0 +1,26 @@
+$basic-margin: 24px;
+$basic-padding: 24px;
+
+$normal-font-size: 16px;
+$large-font-size: 20px;
+
+$deepBlue: rgba(0,33,64,1);
+$blue: #2d71b8;
+$grey: #DDE1E8;
+
+%shadow {
+  content: '';
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $grey;
+  filter: blur(10px);
+}
+
+%center {
+  width: 1280px;
+  margin: 0 auto;
+}

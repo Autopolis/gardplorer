@@ -1,0 +1,112 @@
+<template>
+  <header class="header-container">
+    <img
+      class="logo"
+      src="~@/assets/logo.png"
+    />
+    <p class="version">{{ name }}</p>
+    <div class="search-container">
+      <input
+        class="search-inner"
+        placeholder="Search by Address/Txhash/Block/"
+        suffix-icon="el-icon-search"
+        v-model="value"
+        @keyup.enter="onSearch"
+      />
+      <i class="el-icon-search search-icon"></i>
+    </div>
+  </header>
+</template>
+
+<script>
+import { getMapper } from 'vuex';
+
+export default {
+  data () {
+    return {
+      value: ''
+    }
+  },
+  props: {
+    name: String
+  },
+  methods: {
+    onSearch () {
+      const { value } = this;
+
+      // jump to block detail page;
+      const numberPattern = /^\d+$/g;
+      if (numberPattern.test(value)) {
+        this.$router.push({ path: '/block/' + value })
+        return false;
+      }
+
+      // jump to address detail page;
+      const addressPattern = /^hash.+$/g;
+      if (addressPattern.test(value)) {
+        this.$router.push({ path: '/address/' + value })
+        return false;
+      }
+
+      this.$router.push({ path: '/transaction/' + value })
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+svg {
+  fill: red;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $basic-padding;
+}
+.logo {
+  flex-basis: 150px;
+  flex-shrink: 0;
+}
+.version {
+  flex: 1;
+  font-size: $normal-font-size;
+  color: $blue;
+  margin-right: $basic-margin;
+  text-align: right;
+}
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 480px;
+  height: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 0 3px 3px rgba(0, 33, 64, 0.08) inset;
+
+  .search-inner {
+    flex: 1 1 auto;
+    height: 100%;
+    padding: 0 12px;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .search-inner::focus {
+    outline: none;
+  }
+
+  .search-inner::placeholder {
+    color: rgba(0, 0, 0, 0.25);
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 12px;
+    color: $blue;
+  }
+}
+</style>

@@ -1,29 +1,51 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <Header :name="name"/>
+    <Menu/>
+    <div class="main">
+      <RouterView />
     </div>
-    <router-view/>
+    <Footer/>
   </div>
 </template>
 
+<script>
+import Header from '@/components/Header/index.vue';
+import Menu from '@/components/Menu/index.vue';
+import Footer from '@/components/Footer/index.vue';
+
+import { mapState } from 'vuex';
+
+export default {
+  components: { Header, Menu, Footer },
+  computed: {
+    ...mapState({
+      name: store => store.basic.name
+    })
+  }
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import "~@/styles/_reset.scss";
+@import "~@/styles/_common.scss";
+
+html, body {
+  font-size: 14px;
+  line-height: 1.571428;
+  font-family: "PingFangSC", Microsoft YaHei, "Helvetica Neue", Helvetica, Arial, STHeiTi, sans-serif;
+  background: #fff;
+  color: black(0.85);
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .main {
+    flex: 1;
   }
 }
+
 </style>
