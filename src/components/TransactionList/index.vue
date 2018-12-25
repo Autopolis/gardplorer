@@ -39,7 +39,6 @@
     <el-table-column label="FEE">
       <template slot-scope="scope">
         {{ scope.row.fee.amount }}
-        {{ scope.row.coin.denom }}
       </template>
     </el-table-column>
 

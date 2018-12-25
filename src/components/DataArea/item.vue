@@ -1,7 +1,7 @@
 <template>
   <div class="data-item">
-    <span class="label">{{ label }}</span>
-    <span class="content"><slot/></span>
+    <p class="label">{{ label }}</p>
+    <p class="content"><slot/></p>
   </div> 
 </template>
 
@@ -17,6 +17,7 @@ export default {
 $height: 36px;
 
 .data-item {
+  display: flex;
   height: $height;
   line-height: $height;
   // border-bottom: 1px solid rgba(0, 0, 0, 0.25);

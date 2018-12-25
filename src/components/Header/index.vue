@@ -50,7 +50,7 @@ export default {
         return false;
       }
 
-      this.$router.push({ path: '/transaction/' + value })
+      this.$router.push({ path: '/tx/' + value })
     }
   }
 };
@@ -86,7 +86,6 @@ svg {
   height: 32px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  box-shadow: 0 0 3px 3px rgba(0, 33, 64, 0.08) inset;
 
   .search-inner {
     flex: 1 1 auto;
