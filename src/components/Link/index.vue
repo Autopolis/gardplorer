@@ -33,6 +33,7 @@ export default {
 <style lang="scss" scoped>
 .ellipsis {
   display: inline-block;
+  vertical-align: top;
   width: 200px;
   text-overflow: ellipsis;
   overflow: hidden;

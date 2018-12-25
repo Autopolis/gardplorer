@@ -7,6 +7,7 @@ import Transactions from './views/Transactions.vue';
 import TransactionDetail from './views/TransactionDetail.vue';
 import AddressDetail from './views/AddressDetail.vue';
 import Validators from './views/Validators.vue';
+import ValidatorDetail from './views/ValidatorDetail.vue';
 import NotFound from './views/NotFound.vue';
 
 Vue.use(Router);
@@ -49,6 +50,11 @@ export default new Router({
       path: '/validators',
       name: 'validators',
       component: Validators
+    },
+    {
+      path: '/validator/:address',
+      name: 'validatorDetail',
+      component: ValidatorDetail 
     },
     {
       path: '*',

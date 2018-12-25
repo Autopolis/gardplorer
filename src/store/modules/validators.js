@@ -7,11 +7,15 @@ export default {
   state: {
     list: [],
     latest: null,
+    details: {}
   },
 
   mutations: {
     setList: function (state, data) {
       set(state, 'list', data);
+    },
+    setDetail: function (state, data) {
+      state.details = Object.assign({}, state.details, data);
     }
   },
 
@@ -22,5 +26,16 @@ export default {
         context.commit('setList', data);
       }
     },
+    fetchDetail: async function (context, address) {
+      if (!isEmpty(context.state.details[address])) {
+        return Promise.resolve();
+      }
+      const { data } = await $ajax.get(`/api/stake/validators/${address}`);
+      if (isEmpty(data)) {
+        return Promise.reject();
+      }
+      context.commit('setDetail', { [address]: data });
+      return Promise.resolve();
+    }
   }
 }

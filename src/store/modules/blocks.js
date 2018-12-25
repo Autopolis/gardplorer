@@ -81,10 +81,14 @@ export default {
       }
     },
     fetchDetail: async function(context, height) {
+      if (!isEmpty(context.state.details[height])) {
+        return Promise.resolve(context.state.details[height]);
+      }
       const { data } = await $ajax.get(`/api/blocks/${height}`)
       if (!isEmpty(data)) {
         context.dispatch('fetchValidatorset', height)
         context.commit('setDetails', { [height]: data })
+        return Promise.resolve(data);
       }
     }
   }

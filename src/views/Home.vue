@@ -24,7 +24,7 @@
     </Card>
     <Card
       title="transactions"
-      link="/transactions"
+      link="/txs"
       class="card"
     >
       <ul>
@@ -33,14 +33,12 @@
           :key="index"
           class="item transactions"
         >
-          <p class="hash">TX:
-            <link
-              type="tx"
-              :content="item.hash"
-            />
+          <p class="hash">
+            <span>TX:</span>
+            <hg-link type="tx" :content="item.hash" />
           </p>
           <p class="block">Block:
-            <link
+            <hg-link
               type="block"
               :content="item.height"
             />

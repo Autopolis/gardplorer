@@ -60,12 +60,16 @@ export default {
       return Promise.resolve()
     },
     fetch: async function(context, hash) {
+      // check if existed;
+      if (!isEmpty(context.state.details[hash])) {
+        return Promise.resolve();
+      }
       const { data } = await $ajax.get(`/api/txs/${hash}`)
       if (isEmpty(data)) {
         return Promise.reject()
       }
       context.commit('setDetails', data)
-      return Promise.resolve()
+      return Promise.resolve(data)
     }
   }
 }
