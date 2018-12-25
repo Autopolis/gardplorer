@@ -5,42 +5,32 @@
   >
     <div class="page">
       <p>TOTAL AMOUNT: {{ totalCount }}</P>
-      <el-pagination
-        class="pagination"
-        background
-        layout="prev, next"
-        :current-page="currentPage"
-        :page-size="pageSize"
-        :total="totalCount"
-        @prev-click="onPageChange"
-        @next-click="onPageChange"
-        @current-change="onPageChange"
-      />
     </div>
-    <transaction-list :list="list" />
+    <transaction-list :list="lastList" />
   </Card>
 </template>
 
 <script>
-import Card from '@/components/Card';
-import TransactionList from '@/components/TransactionList';
-import { mapGetters, mapState } from 'vuex';
+import Card from "@/components/Card";
+import TransactionList from "@/components/TransactionList";
+import { mapGetters, mapState } from "vuex";
 
 export default {
-  components: { Card, 'transaction-list': TransactionList },
+  components: { Card, "transaction-list": TransactionList },
   computed: {
-    ...mapState('transactions', ['list', 'totalCount', 'currentPage', 'pageSize']),
+    ...mapState("transactions", ["lastList", "totalCount"])
   },
   methods: {
-    onPageChange: function (page) {
+    onPageChange: function(page) {
       const { pageSize, totalCount } = this;
-      this.$store.dispatch('transactions/fetchList', { action: 'send', page });
-    },
+      this.$store.dispatch("transactions/fetchList", { action: "send", page });
+    }
   },
-  mounted: async function () {
-    this.$store.dispatch('transactions/fetchList');
-  },
-}
+  mounted: async function() {
+    await this.$store.dispatch("transactions/fetchTotalCount");
+    this.$store.dispatch("transactions/fetchLastList", { targetNum: 30 });
+  }
+};
 </script>
 
 <style lang="scss">
