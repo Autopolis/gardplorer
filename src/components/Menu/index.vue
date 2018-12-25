@@ -9,10 +9,10 @@
     <el-menu-item index="3" class="item">
         <RouterLink to="/txs" class="link">TRANSACTIONS</RouterLink>
     </el-menu-item>
-    <el-menu-item index="3" class="item">
+    <el-menu-item index="4" class="item">
         <RouterLink to="/validators" class="link">VALIDATORS</RouterLink>
     </el-menu-item>
-    <el-menu-item index="4" class="item">
+    <el-menu-item index="5" class="item">
         <a href="https://www.hashgard.pro" target="_blank" class="link">HASHGARD PRO</a>
     </el-menu-item>
   </el-menu>

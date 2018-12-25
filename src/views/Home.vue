@@ -35,7 +35,10 @@
         >
           <p class="hash">
             <span>TX:</span>
-            <hg-link type="tx" :content="item.hash" />
+            <hg-link
+              type="tx"
+              :content="item.hash"
+            />
           </p>
           <p class="block">Block:
             <hg-link
@@ -51,27 +54,30 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import { get } from 'lodash';
+import { mapState, mapGetters } from "vuex";
+import { get } from "lodash";
 
 export default {
-  name: 'Home',
+  name: "Home",
   interval: null,
   computed: {
-    ...mapGetters('blocks', { blocksLastList: 'lastList' }),
-    ...mapGetters('transactions', { transactionsLastList: 'lastList' }),
+    ...mapGetters("blocks", { blocksLastList: "lastList" }),
+    ...mapState("transactions", { transactionsLastList: "lastList" })
   },
   methods: {
-    fetchData: function () {
-      this.$store.dispatch('blocks/fetchList');
-      this.$store.dispatch('transactions/fetchList');
+    fetchData: function() {
+      this.$store.dispatch("blocks/fetchList");
+      this.$store.dispatch("transactions/fetchLastList");
     }
   },
-  mounted: function () {
+  mounted: async function() {
+    await this.$store.dispatch("transactions/fetchTotalCount");
     this.fetchData();
-    this.interval = setInterval(() => { this.fetchData() }, 5 * 1000);
+    this.interval = setInterval(() => {
+      this.fetchData();
+    }, 5 * 1000);
   },
-  beforeDestroy: function () {
+  beforeDestroy: function() {
     clearInterval(this.interval);
     this.interval = null;
   }
