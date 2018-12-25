@@ -1,7 +1,24 @@
 <template>
-<card title="transactions" class="transactions-card">
-  <transaction-list :list="list" />
-</Card>
+  <card
+    title="transactions"
+    class="transactions-card"
+  >
+    <div class="page">
+      <p>TOTAL AMOUNT: {{ totalCount }}</P>
+      <el-pagination
+        class="pagination"
+        background
+        layout="prev, next"
+        :current-page="currentPage"
+        :page-size="pageSize"
+        :total="totalCount"
+        @prev-click="onPageChange"
+        @next-click="onPageChange"
+        @current-change="onPageChange"
+      />
+    </div>
+    <transaction-list :list="list" />
+  </Card>
 </template>
 
 <script>
@@ -10,11 +27,17 @@ import TransactionList from '@/components/TransactionList';
 import { mapGetters, mapState } from 'vuex';
 
 export default {
-  components: { Card, 'transaction-list': TransactionList},
+  components: { Card, 'transaction-list': TransactionList },
   computed: {
-    ...mapState('transactions', ['list']),
+    ...mapState('transactions', ['list', 'totalCount', 'currentPage', 'pageSize']),
   },
-  mounted: function () {
+  methods: {
+    onPageChange: function (page) {
+      const { pageSize, totalCount } = this;
+      this.$store.dispatch('transactions/fetchList', { action: 'send', page });
+    },
+  },
+  mounted: async function () {
     this.$store.dispatch('transactions/fetchList');
   },
 }
@@ -22,7 +45,7 @@ export default {
 
 <style lang="scss">
 .transactions-card {
-  margin:  32px 64px 64px; 
+  margin: 32px;
 
   .height {
     color: $blue;
@@ -39,7 +62,6 @@ export default {
     margin-bottom: 24px;
   }
 }
-
 </style>
 
 

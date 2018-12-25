@@ -5,7 +5,7 @@ export default {
   namespaced: true,
   state: {
     pageSize: 20,
-    currentPage: 2,
+    currentPage: 1,
     lastHeight: 0,
     list: [],
     details: {},

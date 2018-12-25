@@ -25,14 +25,11 @@ export default {
 
 .card-container {
   position: relative;
-  min-width: 684px;
+  padding: 0 0 20px 0;
   border-radius: 2px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.65);
-}
-
-.card-container::before {
-  @extend %shadow;
+  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.15);
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .header { 
@@ -44,7 +41,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
-  border-bottom: 1px dashed #000;
+  border-bottom: 1px solid  rgba(0,0,0,0.15);
   color: black;
   font-weight: bold;
 

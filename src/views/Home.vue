@@ -82,7 +82,11 @@ export default {
 .home-container {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
+  margin: $basic-margin;
+}
+
+.home-container > .card {
+  flex: 1;
 }
 .home-container > .card:nth-child(1) {
   margin-right: $basic-margin;

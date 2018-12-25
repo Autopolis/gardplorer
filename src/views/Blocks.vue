@@ -95,7 +95,7 @@ export default {
 
 <style lang="scss">
 .blocks-card {
-  margin: 32px 64px 64px;
+  margin: $basic-margin;
 
   .height {
     color: $blue;

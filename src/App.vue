@@ -34,7 +34,6 @@ html, body {
   font-size: 14px;
   line-height: 1.571428;
   font-family: "PingFangSC", Microsoft YaHei, "Helvetica Neue", Helvetica, Arial, STHeiTi, sans-serif;
-  background: #fff;
   color: black(0.85);
 }
 

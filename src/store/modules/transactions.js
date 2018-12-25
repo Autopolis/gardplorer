@@ -20,6 +20,9 @@ const formatDetail = data => {
 export default {
   namespaced: true,
   state: {
+    pageSize: 20,
+    currentPage: 1,
+    totalCount: 20,
     list: [],
     details: {}
   },
@@ -36,6 +39,9 @@ export default {
     }
   },
   mutations: {
+    setTotalCount: function(state, data) {
+      state.totalCount = data
+    },
     setList: function(state, list) {
       state.list = list.reverse()
     },
@@ -48,21 +54,28 @@ export default {
     }
   },
   actions: {
-    fetchList: async function(context, params = { action: 'send' }) {
-      // clear old data
-      context.list = []
-      const { data } = await $ajax.get('/api/txs', { params })
+    fetchTotalCount: async function(context) {
+      const { data } = await $ajax.get('/api/txs', { params: { action: 'send', page: 1 } })
       if (isEmpty(data)) {
-        context.commit('setList', [])
         return Promise.reject()
       }
-      context.commit('setList', data)
+      context.commit('setTotalCount', Number(data.totalCount))
+      return Promise.resolve()
+    },
+    fetchList: async function(context, params = { action: 'send', page: 1 }) {
+      params.size = context.state.pageSize
+      const { data } = await $ajax.get('/api/txs', { params })
+      if (isEmpty(data)) {
+        return Promise.reject()
+      }
+      context.commit('setTotalCount', Number(data.totalCount))
+      context.commit('setList', data.txs)
       return Promise.resolve()
     },
     fetch: async function(context, hash) {
       // check if existed;
       if (!isEmpty(context.state.details[hash])) {
-        return Promise.resolve();
+        return Promise.resolve()
       }
       const { data } = await $ajax.get(`/api/txs/${hash}`)
       if (isEmpty(data)) {

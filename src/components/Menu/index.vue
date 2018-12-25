@@ -12,6 +12,9 @@
     <el-menu-item index="3" class="item">
         <RouterLink to="/validators" class="link">VALIDATORS</RouterLink>
     </el-menu-item>
+    <el-menu-item index="4" class="item">
+        <a href="https://www.hashgard.pro" target="_blank" class="link">HASHGARD PRO</a>
+    </el-menu-item>
   </el-menu>
 </template>
 
@@ -31,28 +34,33 @@ export default {
   height: 64px;
   background: $blue;
   border-bottom: none;
-  box-shadow: 2px 0px 6px 0px rgba(0, 21, 41, 0.35);
+box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+  // &::after {
+  //   @extend %shadow;
+  // }
 
   > .item {
     height: 100%;
     padding: 0;
     border-bottom: none;
     font-size :16px;
-    color: rgba(255, 255, 255, 0.4);
   }
 
   > .item .link {
     display: block;
     height: 100%;
     padding: 0 28px;
+    background: $blue;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 350ms ease-in-out;
   }
 
   > .item .link:hover,
   > .item .router-link-exact-active {
+    color: rgba(255, 255, 255, 0.8);
     background: $deepBlue;
-    color: #fff;
     border-right: none;
-    box-shadow:2px 0px 6px 0px rgba(0,21,41,0.35);
   }
 
   a {

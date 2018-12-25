@@ -18,13 +18,12 @@ export default {
 
   actions: {
     fetch: async function(context) {
-      const { data } = await ajax.get('/node/abci_info')
-      const result = get(data, 'result')
-      if (isEmpty(result)) {
+      const { data } = await ajax.get('/api/node_info')
+      if (isEmpty(data)) {
         return Promise.reject()
       }
-      const { response } = result
-      context.commit('setName', get(response, 'data'))
+      console.log(data);
+      context.commit('setName', get(data, 'network'))
       return Promise.resolve()
     }
   }

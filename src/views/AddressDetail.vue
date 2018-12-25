@@ -60,6 +60,6 @@ $title-height: 32px;
   width: 100%;
 }
 .address-detail-content {
-  margin: 0 32px;
+  margin: 0 $basic-margin;
 }
 </style>
