@@ -91,7 +91,7 @@ export default {
     fetchLastList: async function(context) {
       // fetch totalCounot
       const targetNum = 10;
-      const totalCount = context.state.totalCount;
+      let totalCount = context.state.totalCount;
       let params = { action: 'send', size: totalCount - targetNum, page: 2 };
       if (totalCount - targetNum < targetNum) {
         params = { action: 'send', size: totalCount, page: 1 };

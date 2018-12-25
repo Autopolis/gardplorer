@@ -1,19 +1,54 @@
 <template>
-  <el-menu :default-active="activeIndex" class="menu-container" mode="horizontal" >
-    <el-menu-item index="1" class="item">
-      <RouterLink to="/" class="link">HOME</RouterLink>
+  <el-menu
+    :default-active="activeIndex"
+    class="menu-container"
+    mode="horizontal"
+  >
+    <el-menu-item
+      index="1"
+      class="item"
+    >
+      <RouterLink
+        to="/home"
+        class="link"
+      >HOME</RouterLink>
     </el-menu-item>
-    <el-menu-item index="2" class="item">
-      <RouterLink to="/blocks" class="link">BLOCKS</RouterLink>
+    <el-menu-item
+      index="2"
+      class="item"
+    >
+      <RouterLink
+        to="/block"
+        class="link"
+      >BLOCKS</RouterLink>
     </el-menu-item>
-    <el-menu-item index="3" class="item">
-        <RouterLink to="/txs" class="link">TRANSACTIONS</RouterLink>
+    <el-menu-item
+      index="3"
+      class="item"
+    >
+      <RouterLink
+        to="/tx"
+        class="link"
+      >TRANSACTIONS</RouterLink>
     </el-menu-item>
-    <el-menu-item index="4" class="item">
-        <RouterLink to="/validators" class="link">VALIDATORS</RouterLink>
+    <el-menu-item
+      index="4"
+      class="item"
+    >
+      <RouterLink
+        to="/validator"
+        class="link"
+      >VALIDATORS</RouterLink>
     </el-menu-item>
-    <el-menu-item index="5" class="item">
-        <a href="https://www.hashgard.pro" target="_blank" class="link">HASHGARD PRO</a>
+    <el-menu-item
+      index="5"
+      class="item"
+    >
+      <a
+        href="https://www.hashgard.pro"
+        target="_blank"
+        class="link"
+      >HASHGARD PRO</a>
     </el-menu-item>
   </el-menu>
 </template>
@@ -22,10 +57,10 @@
 export default {
   data() {
     return {
-      activeIndex: '0'
+      activeIndex: "0"
     };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -34,7 +69,8 @@ export default {
   height: 64px;
   background: $blue;
   border-bottom: none;
-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
 
   // &::after {
   //   @extend %shadow;
@@ -44,7 +80,7 @@ box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 
     height: 100%;
     padding: 0;
     border-bottom: none;
-    font-size :16px;
+    font-size: 16px;
   }
 
   > .item .link {
@@ -57,7 +93,7 @@ box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 
   }
 
   > .item .link:hover,
-  > .item .router-link-exact-active {
+  > .item .router-link-active {
     color: rgba(255, 255, 255, 0.8);
     background: $deepBlue;
     border-right: none;

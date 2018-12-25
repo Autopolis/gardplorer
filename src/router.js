@@ -9,6 +9,7 @@ import AddressDetail from './views/AddressDetail.vue';
 import Validators from './views/Validators.vue';
 import ValidatorDetail from './views/ValidatorDetail.vue';
 import NotFound from './views/NotFound.vue';
+import View from '@/components/View';
 
 Vue.use(Router);
 
@@ -18,48 +19,73 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/home'
+    },
+    {
+      path: '/home',
       name: 'home',
-      component: Home,
+      component: Home
     },
     {
-      path: '/blocks',
+      path: '/block',
       name: 'blocks',
-      component: Blocks,
+      component: View,
+      children: [
+        {
+          path: '',
+          name: 'blockIndex',
+          component: Blocks
+        },
+        {
+          path: '/block/:id',
+          name: 'blockDetail',
+          component: BlockDetail
+        }
+      ]
     },
     {
-      path: '/block/:id',
-      name: 'blockDetail',
-      component: BlockDetail,
-    },
-    {
-      path: '/txs',
+      path: '/tx',
       name: 'transactions',
-      component: Transactions,
-    },
-    {
-      path: '/tx/:hash',
-      name: 'transactionDetail',
-      component: TransactionDetail,
+      component: View,
+      children: [
+        {
+          path: '',
+          name: 'transactionIndex',
+          component: Transactions
+        },
+        {
+          path: ':hash',
+          name: 'transactionDetail',
+          component: TransactionDetail
+        }
+      ]
     },
     {
       path: '/address/:address',
       name: 'addressDetail',
-      component: AddressDetail,
+      component: AddressDetail
     },
     {
-      path: '/validators',
+      path: '/validator',
       name: 'validators',
-      component: Validators
-    },
-    {
-      path: '/validator/:address',
-      name: 'validatorDetail',
-      component: ValidatorDetail 
+      component: View,
+      children: [
+        {
+          path: '',
+          name: 'validatorIndex',
+          component: Validators
+        },
+        {
+          path: ':address',
+          name: 'validatorDetail',
+          component: ValidatorDetail
+        }
+      ]
     },
     {
       path: '*',
       name: 'notFound',
       component: NotFound
     }
-  ],
+  ]
 });
