@@ -1,14 +1,15 @@
 <template>
-    <div class="footer-container">
-      <img class="logo" src="~@/assets/logo.png"/>
-      <p>Powered by Hashgard</p>
-    </div>
+  <div class="footer-container">
+    <img
+      class="logo"
+      src="~@/assets/logo-white.png"
+    />
+    <p>Powered by Hashgard</p>
+  </div>
 </template>
 
 <script>
-export default {
-  
-}
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -21,9 +22,9 @@ export default {
   height: 68px;
   background: $deepBlue;
 
-   > img {
-     margin-right: $basic-margin;
-   }
+  > img {
+    margin-right: $basic-margin;
+  }
 }
 </style>
 
