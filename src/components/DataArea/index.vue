@@ -26,7 +26,7 @@ export default {
   margin-top: 0;
 }
 
-.data-area .content {
+.data-area > .content {
   padding: $basic-padding;
 }
 
