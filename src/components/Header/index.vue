@@ -21,36 +21,36 @@
 </template>
 
 <script>
-import { getMapper } from 'vuex';
+import { getMapper } from "vuex";
 
 export default {
-  data () {
+  data() {
     return {
-      value: ''
-    }
+      value: ""
+    };
   },
   props: {
     name: String
   },
   methods: {
-    onSearch () {
+    onSearch() {
       const { value } = this;
 
       // jump to block detail page;
       const numberPattern = /^\d+$/g;
       if (numberPattern.test(value)) {
-        this.$router.push({ path: '/block/' + value })
+        this.$router.push({ path: "/block/" + value });
         return false;
       }
 
       // jump to address detail page;
       const addressPattern = /^hash.+$/g;
       if (addressPattern.test(value)) {
-        this.$router.push({ path: '/address/' + value })
+        this.$router.push({ path: "/address/" + value });
         return false;
       }
 
-      this.$router.push({ path: '/tx/' + value })
+      this.$router.push({ path: "/tx/" + value });
     }
   }
 };
@@ -65,6 +65,7 @@ svg {
   justify-content: space-between;
   align-items: center;
   padding: $basic-padding;
+  background: #fff;
 }
 .logo {
   flex-basis: 150px;

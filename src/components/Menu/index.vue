@@ -88,13 +88,13 @@ export default {
     height: 100%;
     padding: 0 28px;
     background: $blue;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.8);
     transition: all 350ms ease-in-out;
   }
 
   > .item .link:hover,
   > .item .router-link-active {
-    color: rgba(255, 255, 255, 0.8);
+    color: #fff;
     background: $deepBlue;
     border-right: none;
   }

@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-    <Header :name="name"/>
-    <Menu/>
+    <Header :name="name" />
+    <Menu />
     <div class="main">
       <RouterView />
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header/index.vue';
-import Menu from '@/components/Menu/index.vue';
-import Footer from '@/components/Footer/index.vue';
+import Header from "@/components/Header/index.vue";
+import Menu from "@/components/Menu/index.vue";
+import Footer from "@/components/Footer/index.vue";
 
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   components: { Header, Menu, Footer },
@@ -30,11 +30,14 @@ export default {
 @import "~@/styles/_reset.scss";
 @import "~@/styles/_common.scss";
 
-html, body {
+html,
+body {
   font-size: 14px;
   line-height: 1.571428;
-  font-family: "PingFangSC", Microsoft YaHei, "Helvetica Neue", Helvetica, Arial, STHeiTi, sans-serif;
+  font-family: "PingFangSC", Microsoft YaHei, "Helvetica Neue", Helvetica, Arial,
+    STHeiTi, sans-serif;
   color: black(0.85);
+  background: #f0f2f5;
 }
 
 #app {
@@ -46,5 +49,4 @@ html, body {
     flex: 1;
   }
 }
-
 </style>
