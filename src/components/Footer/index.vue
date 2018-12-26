@@ -15,12 +15,12 @@ export default {};
 <style lang="scss" scoped>
 .footer-container {
   display: flex;
+  height: 68px;
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.8);
-  bottom: 0;
-  height: 68px;
   background: $deepBlue;
+  margin-top: $basic-margin;
 
   > img {
     margin-right: $basic-margin;

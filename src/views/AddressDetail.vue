@@ -59,12 +59,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$title-height: 32px;
-
 .address-detail-container {
   width: 100%;
 }
 .address-detail-content {
-  margin: 0 $basic-margin;
+  padding: $basic-padding;
 }
 </style>

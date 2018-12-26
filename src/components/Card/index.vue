@@ -1,38 +1,42 @@
 <template>
- <div class="card-container">
-   <div class="header">
-     <p>{{ title.toUpperCase() }}</p>
-     <RouterLink :to="link" class="link" v-if="link">VIEW ALL</RouterLink>
-   </div>
-   <div class="content">
+  <div class="card-container">
+    <div class="header">
+      <p>{{ title.toUpperCase() }}</p>
+      <RouterLink
+        :to="link"
+        class="link"
+        v-if="link"
+      >VIEW ALL</RouterLink>
+    </div>
+    <div class="content">
       <slot />
-   </div>
-</div> 
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'card',
+  name: "card",
   props: {
     title: String,
     link: String,
     data: Array
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-
 .card-container {
   position: relative;
   padding: 0 0 20px 0;
   border-radius: 2px;
   color: rgba(0, 0, 0, 0.65);
-  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.15);
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(0, 0, 0, 0.03);
+  background: white;
 }
 
-.header { 
+.header {
   display: flex;
   box-sizing: border-box;
   padding: 0 32px;
@@ -41,7 +45,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   font-size: 16px;
-  border-bottom: 1px solid  rgba(0,0,0,0.15);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   color: black;
   font-weight: bold;
 
@@ -53,7 +57,6 @@ export default {
 .content {
   min-height: 50px;
 }
-
 </style>
 
 

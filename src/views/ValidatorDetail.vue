@@ -50,31 +50,31 @@
 </template>
 
 <script>
-import { get } from 'lodash';
-import { mapGetters, mapState } from 'vuex';
+import { get } from "lodash";
+import { mapGetters, mapState } from "vuex";
 
 export default {
-  data: function () {
+  data: function() {
     return {
       address: this.$route.params.address
-    }
+    };
   },
   computed: {
-    ...mapState('validators', ['details']),
-    detail: function () {
+    ...mapState("validators", ["details"]),
+    detail: function() {
       console.log(this.details);
       return get(this.details, this.address);
     }
   },
-  mounted: function () {
-    this.$store.dispatch('validators/fetchDetail', this.address);
+  mounted: function() {
+    this.$store.dispatch("validators/fetchDetail", this.address);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .validator-detail-container .content {
-  margin: 0 32px;
+  padding: $basic-padding;
 }
 </style>
 

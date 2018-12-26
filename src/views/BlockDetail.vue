@@ -31,7 +31,7 @@
         <transaction-list :list="transactionList" />
       </data-area>
       <data-area
-        title="Validator"
+        title="Validators"
         v-if="validatorList"
       >
         <validator-list
@@ -118,6 +118,6 @@ export default {
   width: 100%;
 }
 .block-detail-content {
-  margin: 0 32px;
+  padding: $basic-padding;
 }
 </style>

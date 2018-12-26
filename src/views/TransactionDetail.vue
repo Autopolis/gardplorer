@@ -1,22 +1,36 @@
 <template>
   <div class="transaction-detail-container">
     <sub-title :title="`TRANSACTION ${hash}`" />
-    <div class="transaction-detail-content" v-if="detail">
+    <div
+      class="transaction-detail-content"
+      v-if="detail"
+    >
       <data-area title="Transaction Information">
         <data-item label="TxHash">
           <span>{{ detail.hash }}</span>
         </data-item>
         <data-item label="Block">
-          <hg-link type="block" :content="detail.height" />
+          <hg-link
+            type="block"
+            :content="detail.height"
+          />
         </data-item>
         <data-item label="Type">
           <span>{{ type }}</span>
         </data-item>
         <data-item label="From">
-          <hg-link type="address" :content="get(detail, 'input.address')" :ellipsis="false" />
+          <hg-link
+            type="address"
+            :content="get(detail, 'input.address')"
+            :ellipsis="false"
+          />
         </data-item>
         <data-item label="To">
-          <hg-link type="address" :content="get(detail, 'output.address')" :ellipsis="false"/>
+          <hg-link
+            type="address"
+            :content="get(detail, 'output.address')"
+            :ellipsis="false"
+          />
         </data-item>
         <data-item label="Amount">
           {{ get(detail, 'coin.amount') }}
@@ -38,35 +52,37 @@
 </template>
 
 <script>
-import { isEmpty, get } from 'lodash';
-import { mapGetters, mapState } from 'vuex';
+import { isEmpty, get } from "lodash";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   methods: {
     get
   },
   computed: {
-    ...mapState('transactions', ['details']),
-    ...mapGetters('transactions', ['getDetail', 'formatDetail']),
+    ...mapState("transactions", ["details"]),
+    ...mapGetters("transactions", ["getDetail", "formatDetail"]),
 
-    hash: function () {
+    hash: function() {
       return this.$route.params.hash;
     },
-    detail: function () {
+    detail: function() {
       const detail = this.details[this.hash];
       if (isEmpty(detail)) return false;
 
       return this.formatDetail(detail);
     },
-    type: function () {
-      const action = get(this.detail, 'tags', []).filter(item => item.key === 'action')[0];
+    type: function() {
+      const action = get(this.detail, "tags", []).filter(
+        item => item.key === "action"
+      )[0];
       return action && action.value;
     }
   },
-  mounted () {
-    this.$store.dispatch('transactions/fetch', this.hash);
+  mounted() {
+    this.$store.dispatch("transactions/fetch", this.hash);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -77,7 +93,7 @@ $title-height: 32px;
 }
 
 .transaction-detail-content {
-  margin: 0 32px;
+  padding: $basic-padding;
 }
 </style>
 
