@@ -34,9 +34,6 @@ export default {
     },
     formatDetail: state => data => {
       return formatDetail(data);
-    },
-    getDetail: state => hash => {
-      return state.details[hash];
     }
   },
   mutations: {

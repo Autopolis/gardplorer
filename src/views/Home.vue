@@ -2,7 +2,7 @@
   <div class="home-container">
     <Card
       title="blocks"
-      link="/blocks"
+      link="/block"
       class="card"
     >
       <ul>
@@ -24,7 +24,7 @@
     </Card>
     <Card
       title="transactions"
-      link="/txs"
+      link="/tx"
       class="card"
     >
       <ul>

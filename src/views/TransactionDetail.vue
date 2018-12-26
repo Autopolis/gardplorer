@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     ...mapState("transactions", ["details"]),
-    ...mapGetters("transactions", ["getDetail", "formatDetail"]),
+    ...mapGetters("transactions", ["formatDetail"]),
 
     hash: function() {
       return this.$route.params.hash;
@@ -86,8 +86,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$title-height: 32px;
-
 .transaction-detail-container {
   width: 100%;
 }

@@ -4,7 +4,7 @@
       class="logo"
       src="~@/assets/logo-white.png"
     />
-    <p>Powered by Hashgard</p>
+    <p>POWERED BY GARDPLORER.IO</p>
   </div>
 </template>
 

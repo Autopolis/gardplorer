@@ -76,7 +76,6 @@ export default {
   computed: {
     ...mapState("blocks", ["details"]),
     ...mapGetters("transactions", ["formatList"]),
-    ...mapGetters("blocks", ["getDetail"]),
 
     formated: function() {
       if (isEmpty(this.list)) return false;

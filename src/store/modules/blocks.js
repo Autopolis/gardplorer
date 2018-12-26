@@ -22,9 +22,6 @@ export default {
         const block = get(details, [height, 'block']);
         return { ...item, block, validators };
       });
-    },
-    getDetail: state => height => {
-      return state.details[height];
     }
   },
   mutations: {
