@@ -21,10 +21,7 @@
       </data-area>
       <data-area title="Last Block">
         <data-item label="Last Block Hash">
-          <hg-link
-            :content="detail.last_commit.block_id.hash"
-            type="tx"
-          />
+          {{ detail.last_commit.block_id.hash }}
         </data-item>
       </data-area>
       <data-area title="Transactions">
