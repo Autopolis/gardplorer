@@ -22,6 +22,10 @@ export default {
   margin-top: 32px;
 }
 
+.data-area:first-child {
+  margin-top: 0;
+}
+
 .data-area .content {
   padding: $basic-padding;
 }
