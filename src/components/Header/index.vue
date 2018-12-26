@@ -44,7 +44,7 @@ export default {
       }
 
       // jump to address detail page;
-      const addressPattern = /^hash.+$/g;
+      const addressPattern = /^gard.+$/g;
       if (addressPattern.test(value)) {
         this.$router.push({ path: "/address/" + value });
         return false;
