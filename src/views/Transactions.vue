@@ -36,6 +36,7 @@ export default {
 <style lang="scss">
 .transactions-card {
   margin: 32px;
+  background: #fff;
 
   .height {
     color: $blue;

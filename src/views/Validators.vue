@@ -34,6 +34,7 @@ export default {
 <style lang="scss">
 .validator-list-container {
   margin: $basic-margin;
+  background: #fff;
 
   .content {
     padding: $basic-padding;

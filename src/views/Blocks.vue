@@ -64,38 +64,47 @@
 </template>
 
 <script>
-import { get } from 'lodash';
-import Card from '@/components/Card';
-import { mapGetters, mapState } from 'vuex';
+import { get } from "lodash";
+import Card from "@/components/Card";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   components: { Card },
   computed: {
-    ...mapGetters('blocks', ['list']),
-    ...mapState('blocks', ['lastHeight', 'currentPage', 'lastHeight', 'pageSize'])
+    ...mapGetters("blocks", ["list"]),
+    ...mapState("blocks", [
+      "lastHeight",
+      "currentPage",
+      "lastHeight",
+      "pageSize"
+    ])
   },
   methods: {
     get,
-    countVotingPower: function (validators) {
-      if (!validators) return '';
-      return validators.reduce((prev, current) => prev + Number(current.voting_power), 0);
+    countVotingPower: function(validators) {
+      if (!validators) return "";
+      return validators.reduce(
+        (prev, current) => prev + Number(current.voting_power),
+        0
+      );
     },
-    onPageChange: function (page) {
+    onPageChange: function(page) {
       const { pageSize, lastHeight } = this;
       const maxHeight = lastHeight - pageSize * (page - 1) + 1;
       const minHeight = Math.max(0, lastHeight - pageSize * page);
-      this.$store.dispatch('blocks/fetchList', { page, maxHeight, minHeight });
-    },
+      this.$store.dispatch("blocks/fetchList", { page, maxHeight, minHeight });
+    }
   },
-  mounted: function () {
-    this.$store.dispatch('blocks/fetchList');
-  },
-}
+  mounted: function() {
+    this.$store.dispatch("blocks/fetchList");
+  }
+};
 </script>
 
 <style lang="scss">
 .blocks-card {
   margin: $basic-margin;
+  background: #fff;
 
   .height {
     color: $blue;

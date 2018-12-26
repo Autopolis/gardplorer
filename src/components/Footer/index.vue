@@ -17,7 +17,7 @@ export default {};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
   bottom: 0;
   height: 68px;
   background: $deepBlue;

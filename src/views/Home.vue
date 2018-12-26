@@ -93,6 +93,7 @@ export default {
 
 .home-container > .card {
   flex: 1;
+  background: #fff;
 }
 .home-container > .card:nth-child(1) {
   margin-right: $basic-margin;
