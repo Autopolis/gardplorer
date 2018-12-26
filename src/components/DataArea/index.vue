@@ -1,7 +1,10 @@
 <template>
-  <div class="data-area">
-    <div class="data-area-title">{{ title }}</div>
+  <card
+    :title="title"
+    class="data-area"
+  >
     <slot />
+  </card>
   </div>
 </template>
 
@@ -10,13 +13,17 @@ export default {
   props: {
     title: String
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .data-area {
   padding: 0 $basic-padding;
   margin-top: 32px;
+}
+
+.data-area .content {
+  padding: $basic-padding;
 }
 
 .data-area-title {

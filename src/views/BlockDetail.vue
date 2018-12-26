@@ -80,7 +80,7 @@ export default {
       const { txs, transactionDetails } = this;
       if (isEmpty(txs)) return null;
       return txs
-        .map(hash => get(transactionDetails, ["hash"]))
+        .map(hash => get(transactionDetails, [hash]))
         .filter(item => !!item);
     },
 
