@@ -62,7 +62,6 @@ export default {
   computed: {
     ...mapState("validators", ["details"]),
     detail: function() {
-      console.log(this.details);
       return get(this.details, this.address);
     }
   },
