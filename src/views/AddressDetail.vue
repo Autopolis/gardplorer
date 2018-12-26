@@ -24,33 +24,38 @@
 </template>
 
 <script>
-import { get, isEmpty } from 'lodash'
-import { mapState, mapGetters } from 'vuex';
+import { get, isEmpty } from "lodash";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   methods: { get, isEmpty },
 
   computed: {
-    ...mapState('address', ['info']),
-    ...mapState('transactions', { transactionList: 'list' }),
-    address: function () {
+    ...mapState("address", ["info"]),
+    ...mapState("transactions", { transactionList: "list" }),
+    address: function() {
       return this.$route.params.address;
     }
   },
 
-  beforeRouteUpdate (to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     const address = to.params.address;
-    this.$store.dispatch('address/fetch', address);
-    this.$store.dispatch('transactions/fetchList', { action: 'send', 'sender': address });
+    this.$store.dispatch("address/fetch", address);
+    this.$store.dispatch("transactions/fetchList", {
+      action: "send",
+      sender: address
+    });
     next();
   },
 
-  mounted () {
-    this.$store.dispatch('address/fetch', this.address);
-    this.$store.dispatch('transactions/fetchList', { action: 'send', 'sender': this.address });
+  mounted() {
+    this.$store.dispatch("address/fetch", this.address);
+    this.$store.dispatch("transactions/fetchList", {
+      action: "send",
+      sender: this.address
+    });
   }
-
-}
+};
 </script>
 
 <style lang="scss" scoped>

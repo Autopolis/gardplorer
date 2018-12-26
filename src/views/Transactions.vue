@@ -28,7 +28,7 @@ export default {
   },
   mounted: async function() {
     await this.$store.dispatch("transactions/fetchTotalCount");
-    this.$store.dispatch("transactions/fetchLastList", { targetNum: 30 });
+    this.$store.dispatch("transactions/fetchLastList", { targetNum: 100 });
   }
 };
 </script>

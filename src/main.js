@@ -10,6 +10,7 @@ import rootStore from './store/index.js';
 import Card from '@/components/Card';
 import Link from '@/components/Link';
 import TransactionList from '@/components/TransactionList';
+import ValidatorList from '@/components/ValidatorList';
 import SubTitle from '@/components/SubTitle';
 import DataArea from '@/components/DataArea/index.vue';
 import DataItem from '@/components/DataArea/item.vue';
@@ -29,14 +30,13 @@ store.dispatch('basic/fetch');
 Vue.component('Card', Card);
 Vue.component('hg-link', Link);
 Vue.component('transaction-list', TransactionList);
+Vue.component('validator-list', ValidatorList);
 Vue.component('sub-title', SubTitle);
 Vue.component('data-area', DataArea);
 Vue.component('data-item', DataItem);
 
-
 new Vue({
   router,
   store,
-  render: h => h(App),
+  render: h => h(App)
 }).$mount('#app');
-

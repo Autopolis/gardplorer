@@ -48,7 +48,7 @@
         href="https://www.hashgard.pro"
         target="_blank"
         class="link"
-      >HASHGARD PRO</a>
+      >FAUCET</a>
     </el-menu-item>
   </el-menu>
 </template>

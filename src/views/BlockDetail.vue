@@ -21,14 +21,23 @@
       </data-area>
       <data-area title="Last Block">
         <data-item label="Last Block Hash">
-          <span>{{ detail.last_commit.block_id.hash }}</span>
+          <hg-link
+            :content="detail.last_commit.block_id.hash"
+            type="tx"
+          />
         </data-item>
       </data-area>
-      <data-area
-        title="Transaction List"
-        v-if="transactionList"
-      >
+      <data-area title="Transactions">
         <transaction-list :list="transactionList" />
+      </data-area>
+      <data-area
+        title="Validator"
+        v-if="validatorList"
+      >
+        <validator-list
+          :list="validatorList"
+          type="brief"
+        />
       </data-area>
     </div>
   </div>
@@ -48,16 +57,15 @@ export default {
     };
   },
   computed: {
-    ...mapState("blocks", ["details"]),
-    ...mapState("transactions", ["details"]),
-    ...mapGetters("blocks", { getBlockDetail: "getDetail" }),
-    ...mapGetters("transactions", { getTransactionDetail: "getDetail" }),
+    ...mapState("blocks", {
+      blockDetails: "details",
+      validatorsets: "validatorsets"
+    }),
+    ...mapState("transactions", { transactionDetails: "details" }),
 
     detail: function() {
-      const { height } = this;
-      return (
-        this.getBlockDetail(height) && this.getBlockDetail(height)["block"]
-      );
+      const { height, blockDetails } = this;
+      return get(blockDetails, [height, "block"]);
     },
 
     txs: function() {
@@ -69,11 +77,16 @@ export default {
     },
 
     transactionList: function() {
-      const { txs } = this;
+      const { txs, transactionDetails } = this;
       if (isEmpty(txs)) return null;
       return txs
-        .map(hash => this.getTransactionDetail(hash))
+        .map(hash => get(transactionDetails, ["hash"]))
         .filter(item => !!item);
+    },
+
+    validatorList: function() {
+      const { height, validatorsets } = this;
+      return get(validatorsets, [height, "validators"]);
     }
   },
   methods: {
@@ -86,7 +99,6 @@ export default {
       const height = this.height;
       const data = await this.$store.dispatch("blocks/fetchDetail", height);
       const txs = data.block.data.txs;
-      console.log(isEmpty(txs));
       if (isEmpty(txs)) {
         return false;
       }

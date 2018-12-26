@@ -88,7 +88,7 @@ export default {
       context.commit('setDetails', data);
       return Promise.resolve(data);
     },
-    fetchLastList: async function(context, config) {
+    fetchLastList: async function(context, config = {}) {
       // fetch totalCounot
       const targetNum = config.targetNum || 10;
       let totalCount = context.state.totalCount;

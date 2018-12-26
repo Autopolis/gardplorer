@@ -1,5 +1,5 @@
-import { isEmpty, get } from 'lodash'
-import ajax from '@/utils/ajax.js'
+import { isEmpty, get } from 'lodash';
+import ajax from '@/utils/ajax.js';
 
 export default {
   namespaced: true,
@@ -12,19 +12,18 @@ export default {
 
   mutations: {
     setName: function(state, name) {
-      state.name = name
+      state.name = name;
     }
   },
 
   actions: {
     fetch: async function(context) {
-      const { data } = await ajax.get('/api/node_info')
+      const { data } = await ajax.get('/api/node_info');
       if (isEmpty(data)) {
-        return Promise.reject()
+        return Promise.reject();
       }
-      console.log(data);
-      context.commit('setName', get(data, 'network'))
-      return Promise.resolve()
+      context.commit('setName', get(data, 'network'));
+      return Promise.resolve();
     }
   }
-}
+};
