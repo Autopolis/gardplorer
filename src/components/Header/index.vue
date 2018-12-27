@@ -12,7 +12,7 @@
         class="search-inner"
         placeholder="Search by Address/Txhash/Block/"
         suffix-icon="el-icon-search"
-        v-model="value"
+        v-model.trim="value"
         @keyup.enter="onSearch"
       />
       <i class="el-icon-search search-icon"></i>
@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     onSearch() {
-      const { value } = this;
-
+      let { value } = this;
+      value = value.replace(/ /g, "");
       // jump to block detail page;
       const numberPattern = /^\d+$/g;
       if (numberPattern.test(value)) {
