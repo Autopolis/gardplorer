@@ -38,7 +38,7 @@
         </data-item>
         <data-item label="Fee">
           {{ get(detail, 'fee.amount') }}
-          {{ get(detail, 'coin.denom') }}
+          {{ get(detail, 'fee.denom', '') }}
         </data-item>
         <data-item label="Gas Used">
           <span>{{ get(detail, 'result.gas_used') }}</span>
