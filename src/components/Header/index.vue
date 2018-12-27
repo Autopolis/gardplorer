@@ -6,7 +6,22 @@
         src="~@/assets/logo.png"
       />
     </a>
-    <p class="version">{{ name }}</p>
+    <div class="select-net">
+      <el-select
+        value="TESTNET"
+        placeholder="请选择"
+        size='small'
+      >
+        <el-option
+          key="TESTNET"
+          label="TESTNET"
+          value="TESTNET"
+        >
+        </el-option>
+      </el-select>
+      <p class="version">{{ name }}</p>
+    </div>
+
     <div class="search-container">
       <input
         class="search-inner"
@@ -71,8 +86,20 @@ svg {
   flex-basis: 150px;
   flex-shrink: 0;
 }
-.version {
+.select-net {
   flex: 1;
+  align-items: center;
+  text-align: right;
+  .el-select {
+    width: 150px;
+    margin-right: 24px;
+  }
+  > p,
+  > div {
+    display: inline-block;
+  }
+}
+.version {
   font-size: $normal-font-size;
   color: $blue;
   margin-right: $basic-margin;
