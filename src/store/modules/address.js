@@ -1,5 +1,5 @@
-import { isEmpty, get } from 'lodash'
-import ajax from '@/utils/ajax.js'
+import { isEmpty, get } from 'lodash';
+import ajax from '@/utils/ajax.js';
 
 export default {
   namespaced: true,
@@ -12,18 +12,19 @@ export default {
 
   mutations: {
     setInfo: function(state, info) {
-      state.info = info
+      state.info = info;
     }
   },
 
   actions: {
     fetch: async function(context, address) {
-      const { data } = await ajax.get(`api/bank/balances/${address}`)
+      context.commit('setInfo', {});
+      const { data } = await ajax.get(`api/bank/balances/${address}`);
       if (isEmpty(data)) {
-        return Promise.reject()
+        return Promise.reject();
       }
-      context.commit('setInfo', data)
-      return Promise.resolve()
+      context.commit('setInfo', data);
+      return Promise.resolve();
     }
   }
-}
+};
