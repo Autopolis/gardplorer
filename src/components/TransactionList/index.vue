@@ -2,8 +2,16 @@
   <el-table
     class="table"
     :data="formated || []"
+    v-loading="load"
     style="width: 100%"
+    v-if="type==='send'"
   >
+    <el-table-column label="ACTION">
+      <template slot-scope="scope">
+        {{ scope.row.tags.find(i => i.key === 'action').value }}
+      </template>
+    </el-table-column>
+
     <el-table-column label="TX HASH">
       <template slot-scope="scope">
         <hg-link
@@ -69,7 +77,9 @@ import { isEmpty, get } from "lodash";
 import { mapGetters, mapState } from "vuex";
 export default {
   props: {
-    list: Array
+    list: Array,
+    type: { type: String, default: "send" },
+    load: { type: Boolean, default: true }
   },
   methods: { get },
 
