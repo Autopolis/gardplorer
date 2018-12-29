@@ -17,6 +17,7 @@ const formatDetail = data => {
     fee: get(data, 'tx.value.fee.amount.0')
   };
 };
+
 export default {
   namespaced: true,
   state: {
@@ -30,10 +31,7 @@ export default {
   },
   getters: {
     lastList: state => state.list.slice(0, 10),
-    formatList: state => list => {
-      return list.map(formatDetail);
-    },
-    formatDetail: state => data => {
+    format: staet => data => {
       return formatDetail(data);
     }
   },

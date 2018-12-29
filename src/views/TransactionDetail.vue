@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     ...mapState("transactions", ["details"]),
-    ...mapGetters("transactions", ["formatDetail"]),
+    ...mapGetters("transactions", ["format"]),
 
     hash: function() {
       return this.$route.params.hash;
@@ -69,8 +69,7 @@ export default {
     detail: function() {
       const detail = this.details[this.hash];
       if (isEmpty(detail)) return false;
-
-      return this.formatDetail(detail);
+      return this.format(detail);
     },
     type: function() {
       const action = get(this.detail, "tags", []).filter(

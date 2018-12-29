@@ -43,7 +43,7 @@ export default {
         "send",
         "set_withdraw_address",
         "withdraw_delegation_rewards_all",
-        "delegator",
+        "delegate",
         "withdraw_delegation_reward",
         "withdraw_validator_rewards_all",
         "source-validato",
