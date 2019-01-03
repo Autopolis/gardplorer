@@ -4,10 +4,14 @@ import $ajax from '@/utils/ajax';
 
 const formatDetail = data => {
   if (!data) return null;
-  const tags = get(data, 'result.tags', []).map(item => ({
-    key: crypto.Base64.parse(item.key).toString(crypto.Utf8),
-    value: crypto.Base64.parse(item.value).toString(crypto.Utf8)
-  }));
+  const tags = get(data, 'result.tags', []).map(item => {
+    try {
+      return {
+        key: crypto.Base64.parse(item.key).toString(crypto.Utf8),
+        value: crypto.Base64.parse(item.value).toString(crypto.Utf8)
+      };
+    } catch (e) {}
+  });
   return {
     ...data,
     tags,
@@ -57,7 +61,7 @@ export default {
     }
   },
   actions: {
-    fetchTotalCount: async function(context, params) {
+    fetchTotalCount: async function(context, params = { action: 'send', page: 1 }) {
       context.commit('setLoad', true);
       const { data } = await $ajax.get('/api/txs', {
         params: { action: params.action || 'send', page: 1 }

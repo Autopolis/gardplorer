@@ -67,6 +67,11 @@ export default {
   computed: {
     ...mapState("transactions", ["lastList", "totalCount", "load"])
   },
+  watch: {
+    load: function() {
+      console.log(this.load);
+    }
+  },
   methods: {
     onPageChange: function(page) {
       const { pageSize, totalCount } = this;
