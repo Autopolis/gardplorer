@@ -100,34 +100,35 @@ export default {
       return Promise.resolve(data);
     },
     fetchLastList: async function(context, config = {}) {
-      //clear old data
-      context.commit('setLastList', []);
+      const PAGE_SIZE = 30;
 
-      // fetch totalCounot
-      const targetNum = config.targetNum || 20;
-      const totalCount = context.state.totalCount;
       const action = config.action || 'send';
+      const totalCount = context.state.totalCount;
+      const lastPage = Math.ceil(totalCount / PAGE_SIZE);
 
       let params = {
         action,
-        size: totalCount - targetNum,
-        page: 2
+        size: PAGE_SIZE,
+        page: lastPage
       };
-      if (totalCount - targetNum < targetNum) {
-        params = {
-          action,
-          size: totalCount,
-          page: 1
-        };
-      }
 
       context.commit('setLoad', true);
-      const { data } = await $ajax.get('/api/txs', { params });
-      context.commit('setLoad', false);
-      if (!isEmpty(data)) {
-        context.commit('setTotalCount', data.totalCount);
-        context.commit('setLastList', data.txs);
+      var { data } = await $ajax.get('/api/txs', { params });
+      if (isEmpty(data)) {
+        context.commit('setLoad', false);
+        return Promise.reject();
       }
+      let txs = data.txs;
+      const prePageParams = { ...params, page: lastPage - 1 };
+      var { data } = await $ajax.get('/api/txs', { params: prePageParams });
+      if (isEmpty(data)) {
+        context.commit('setLoad', false);
+        return Promise.reject();
+      }
+      context.commit('setLoad', false);
+      txs = txs.concat(data.txs);
+      context.commit('setTotalCount', data.totalCount);
+      context.commit('setLastList', txs);
       return Promise.resolve();
     }
   }
