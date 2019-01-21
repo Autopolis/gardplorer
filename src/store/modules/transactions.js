@@ -1,16 +1,16 @@
-import { get, isEmpty, map } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import { enc as crypto } from 'crypto-js';
 import $ajax from '@/utils/ajax';
 
-const formatDetail = data => {
+const formatDetail = (data) => {
   if (!data) return null;
-  const tags = get(data, 'result.tags', []).map(item => {
+  const tags = get(data, 'result.tags', []).map((item) => {
     try {
       return {
         key: crypto.Base64.parse(item.key).toString(crypto.Utf8),
         value: crypto.Base64.parse(item.value).toString(crypto.Utf8)
       };
-    } catch (e) {}
+    } catch (e) { return {}; }
   });
   return {
     ...data,
@@ -31,16 +31,14 @@ export default {
     list: [],
     details: {},
     lastList: [],
-    load: false
+    load: false,
   },
   getters: {
     lastList: state => state.list.slice(0, 10),
-    format: staet => data => {
-      return formatDetail(data);
-    }
+    format: () => data => formatDetail(data),
   },
   mutations: {
-    setTotalCount: function(state, data) {
+    setTotalCount(state, data) {
       state.totalCount = data;
     },
     setList: function(state, list) {
@@ -119,14 +117,16 @@ export default {
         return Promise.reject();
       }
       let txs = data.txs;
-      const prePageParams = { ...params, page: lastPage - 1 };
-      var { data } = await $ajax.get('/api/txs', { params: prePageParams });
-      if (isEmpty(data)) {
-        context.commit('setLoad', false);
-        return Promise.reject();
+      if (txs.length < PAGE_SIZE && totalCount > PAGE_SIZE) {
+        const prePageParams = { ...params, page: lastPage - 1 };
+        var { data } = await $ajax.get('/api/txs', { params: prePageParams });
+        if (isEmpty(data)) {
+          context.commit('setLoad', false);
+          return Promise.reject();
+        }
+        txs = txs.concat(data.txs);
       }
       context.commit('setLoad', false);
-      txs = txs.concat(data.txs);
       context.commit('setTotalCount', data.totalCount);
       context.commit('setLastList', txs);
       return Promise.resolve();
