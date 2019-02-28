@@ -2,15 +2,17 @@ import { get, isEmpty } from 'lodash';
 import { enc as crypto } from 'crypto-js';
 import $ajax from '@/utils/ajax';
 
-const formatDetail = (data) => {
+const formatDetail = data => {
   if (!data) return null;
-  const tags = get(data, 'result.tags', []).map((item) => {
+  const tags = get(data, 'result.tags', []).map(item => {
     try {
       return {
         key: crypto.Base64.parse(item.key).toString(crypto.Utf8),
         value: crypto.Base64.parse(item.value).toString(crypto.Utf8)
       };
-    } catch (e) { return {}; }
+    } catch (e) {
+      return {};
+    }
   });
   return {
     ...data,
@@ -31,11 +33,11 @@ export default {
     list: [],
     details: {},
     lastList: [],
-    load: false,
+    load: false
   },
   getters: {
     lastList: state => state.list.slice(0, 10),
-    format: () => data => formatDetail(data),
+    format: () => data => formatDetail(data)
   },
   mutations: {
     setTotalCount(state, data) {
@@ -102,7 +104,7 @@ export default {
 
       const action = config.action || 'send';
       const totalCount = context.state.totalCount;
-      const lastPage = Math.ceil(totalCount / PAGE_SIZE);
+      const lastPage = Math.ceil(totalCount / PAGE_SIZE) || 1;
 
       let params = {
         action,
