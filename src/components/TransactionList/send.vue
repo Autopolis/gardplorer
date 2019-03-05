@@ -54,9 +54,9 @@
       </template>
     </el-table-column>
 
-    <el-table-column label="GAS">
+    <el-table-column label="GAS USED">
       <template slot-scope="scope">
-        {{ scope.row.fee.gas }}
+        {{ scope.row.gas_used }}
       </template>
     </el-table-column>
 

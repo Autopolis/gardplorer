@@ -39,9 +39,9 @@ export default {
     },
     setDetails: function(state, data) {
       const details = state.details;
-      const { hash } = data;
-      if (isEmpty(details[hash])) {
-        state.details = Object.assign({}, state.details, { [hash]: data });
+      const { txhash } = data;
+      if (isEmpty(details[txhash])) {
+        state.details = Object.assign({}, state.details, { [txhash]: data });
       }
     },
     setLoad: function(state, load) {
@@ -62,7 +62,7 @@ export default {
       return Promise.resolve();
     },
     fetchList: async function(context, params = { action: 'send', page: 1 }) {
-      params.size = context.state.pageSize;
+      params.limit = context.state.pageSize;
       context.commit('setLoad', true);
       const { data } = await $ajax.get('/api/txs', { params });
       context.commit('setLoad', false);

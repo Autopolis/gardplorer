@@ -7,7 +7,7 @@
     >
       <data-area title="Transaction Information">
         <data-item label="TxHash">
-          <span>{{ detail.hash }}</span>
+          <span>{{ detail.txhash }}</span>
         </data-item>
         <data-item label="Block">
           <hg-link
@@ -21,14 +21,14 @@
         <data-item label="From">
           <hg-link
             type="address"
-            :content="get(detail, 'input.address')"
+            :content="get(detail, 'from_addr')"
             :ellipsis="false"
           />
         </data-item>
         <data-item label="To">
           <hg-link
             type="address"
-            :content="get(detail, 'output.address')"
+            :content="get(detail, 'to_addr')"
             :ellipsis="false"
           />
         </data-item>
@@ -36,12 +36,8 @@
           {{ get(detail, 'coin.amount') }}
           {{ get(detail, 'coin.denom') }}
         </data-item>
-        <data-item label="Fee">
-          {{ get(detail, 'fee.amount') }}
-          {{ get(detail, 'fee.denom', '') }}
-        </data-item>
         <data-item label="Gas Used">
-          <span>{{ get(detail, 'result.gas_used') }}</span>
+          <span>{{ get(detail, 'gas_used') }}</span>
         </data-item>
         <data-item label="Memo">
           <span>{{ get(detail, 'tx.value.memo') || '-' }}</span>

@@ -4,15 +4,12 @@
     :data="list"
   >
     <el-table-column
-      class="operator-address"
-      label="OPERATOR ADDRESS"
+      class="consensus-address"
+      label="CONSENSUS ADDRESS"
       prop="address"
     >
       <template slot-scope="record">
-        <hg-link
-          type="validator"
-          :content="record.row.address"
-        />
+        {{record.row.address}}
       </template>
     </el-table-column>
     <el-table-column
