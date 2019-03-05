@@ -1,26 +1,14 @@
 import { get, isEmpty } from 'lodash';
-import { enc as crypto } from 'crypto-js';
 import $ajax from '@/utils/ajax';
 
 const formatDetail = data => {
   if (!data) return null;
-  const tags = get(data, 'result.tags', []).map(item => {
-    try {
-      return {
-        key: crypto.Base64.parse(item.key).toString(crypto.Utf8),
-        value: crypto.Base64.parse(item.value).toString(crypto.Utf8)
-      };
-    } catch (e) {
-      return {};
-    }
-  });
   return {
     ...data,
-    tags,
-    input: get(data, 'tx.value.msg.0.value.inputs.0'),
-    output: get(data, 'tx.value.msg.0.value.outputs.0'),
-    coin: get(data, 'tx.value.msg.0.value.inputs.0.coins.0'),
-    fee: get(data, 'tx.value.fee.amount.0')
+    from_addr: get(data, 'tx.value.msg.0.value.from_address'),
+    to_addr: get(data, 'tx.value.msg.0.value.to_address'),
+    coin: get(data, 'tx.value.msg.0.value.amount.0'),
+    fee: get(data, 'tx.value.fee')
   };
 };
 
@@ -108,7 +96,7 @@ export default {
 
       let params = {
         action,
-        size: PAGE_SIZE,
+        limit: PAGE_SIZE,
         page: lastPage
       };
 

@@ -61,8 +61,8 @@
     </el-table-column>
     <el-table-column
       class="bond-height"
-      label="BOND HEIGHT"
-      prop="bond_height"
+      label="UNBONDING HEIGHT"
+      prop="unbonding_height"
     />
   </el-table>
 

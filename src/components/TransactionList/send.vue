@@ -15,7 +15,7 @@
       <template slot-scope="scope">
         <hg-link
           type="tx"
-          :content="scope.row.hash"
+          :content="scope.row.txhash"
         />
       </template>
     </el-table-column>
@@ -33,7 +33,7 @@
       <template slot-scope="scope">
         <hg-link
           type="address"
-          :content="scope.row.input.address"
+          :content="scope.row.from_addr"
         />
       </template>
     </el-table-column>
@@ -42,7 +42,7 @@
       <template slot-scope="scope">
         <hg-link
           type="address"
-          :content="scope.row.output.address"
+          :content="scope.row.to_addr"
         />
       </template>
     </el-table-column>
@@ -54,9 +54,9 @@
       </template>
     </el-table-column>
 
-    <el-table-column label="FEE">
+    <el-table-column label="GAS">
       <template slot-scope="scope">
-        {{ scope.row.fee.amount }}
+        {{ scope.row.fee.gas }}
       </template>
     </el-table-column>
 

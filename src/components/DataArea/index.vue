@@ -5,7 +5,6 @@
   >
     <slot />
   </card>
-  </div>
 </template>
 
 <script>

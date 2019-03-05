@@ -37,7 +37,7 @@
             <span>TX:</span>
             <hg-link
               type="tx"
-              :content="item.hash"
+              :content="item.txhash"
             />
           </p>
           <p class="block">Block:
@@ -46,7 +46,7 @@
               :content="item.height"
             />
           </p>
-          <p class="gas">Gas Used: {{ item.result.gasUsed }}</p>
+          <p class="gas">Gas Used: {{ item.gas_used }}</p>
         </li>
       </ul>
     </Card>

@@ -15,7 +15,7 @@
       <template slot-scope="scope">
         <hg-link
           type="tx"
-          :content="scope.row.hash"
+          :content="scope.row.txhash"
         />
       </template>
     </el-table-column>
@@ -61,7 +61,7 @@
 
     <el-table-column label="FEE">
       <template slot-scope="scope">
-        {{ scope.row.fee.amount }}
+        {{ scope.row.fee.gas }}
       </template>
     </el-table-column>
 

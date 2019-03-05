@@ -46,7 +46,7 @@ export default {
         "delegate",
         "withdraw_delegation_reward",
         "withdraw_validator_rewards_all",
-        "source-validato",
+        "source-validator",
         "unjail",
         "proposal-dropped",
         "proposal-passed",
