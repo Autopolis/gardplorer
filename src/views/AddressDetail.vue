@@ -1,6 +1,9 @@
 <template>
   <div class="address-detail-container">
-    <sub-title :title="`ADDRESS ${address}`"></sub-title>
+    <sub-title
+      title="ADDRESS"
+      :sub="address"
+    />
     <div
       class="address-detail-content"
       v-if="info"

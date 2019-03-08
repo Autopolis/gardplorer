@@ -1,16 +1,5 @@
-import { get, isEmpty } from 'lodash';
+import { isEmpty } from 'lodash';
 import $ajax from '@/utils/ajax';
-
-const formatDetail = data => {
-  if (!data) return null;
-  return {
-    ...data,
-    from_addr: get(data, 'tx.value.msg.0.value.from_address'),
-    to_addr: get(data, 'tx.value.msg.0.value.to_address'),
-    coin: get(data, 'tx.value.msg.0.value.amount.0'),
-    fee: get(data, 'tx.value.fee')
-  };
-};
 
 export default {
   namespaced: true,
@@ -24,8 +13,7 @@ export default {
     load: false
   },
   getters: {
-    lastList: state => state.list.slice(0, 10),
-    format: () => data => formatDetail(data)
+    lastList: state => state.list.slice(0, 10)
   },
   mutations: {
     setTotalCount(state, data) {
@@ -49,18 +37,6 @@ export default {
     }
   },
   actions: {
-    fetchTotalCount: async function(context, params = { action: 'send', page: 1 }) {
-      context.commit('setLoad', true);
-      const { data } = await $ajax.get('/api/txs', {
-        params: { action: params.action || 'send', page: 1 }
-      });
-      context.commit('setLoad', false);
-      if (isEmpty(data)) {
-        return Promise.reject();
-      }
-      context.commit('setTotalCount', Number(data.totalCount));
-      return Promise.resolve();
-    },
     fetchList: async function(context, params = { action: 'send', page: 1 }) {
       params.limit = context.state.pageSize;
       context.commit('setLoad', true);
@@ -89,7 +65,6 @@ export default {
     },
     fetchLastList: async function(context, config = {}) {
       const PAGE_SIZE = 30;
-
       const action = config.action || 'send';
       const totalCount = context.state.totalCount;
       const lastPage = Math.ceil(totalCount / PAGE_SIZE) || 1;

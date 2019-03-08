@@ -71,7 +71,6 @@ export default {
     }
   },
   mounted: async function() {
-    await this.$store.dispatch("transactions/fetchTotalCount");
     this.fetchData();
     this.interval = setInterval(() => {
       this.fetchData();

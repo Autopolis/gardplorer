@@ -29,28 +29,21 @@
       </template>
     </el-table-column>
 
-    <el-table-column label="FROM">
+    <el-table-column label="VALIDATOR">
       <template slot-scope="scope">
         <hg-link
-          type="address"
-          :content="get(scope.row, 'tx.value.msg.0.value.from_address')"
+          type="validator"
+          :content="get(scope.row, 'tx.value.msg.0.value.validator_addr')"
         />
       </template>
     </el-table-column>
 
-    <el-table-column label="TO">
+    <el-table-column label="DELEGATOR">
       <template slot-scope="scope">
         <hg-link
           type="address"
-          :content="get(scope.row, 'tx.value.msg.0.value.to_address')"
+          :content="get(scope.row, 'tx.value.msg.0.value.delegator_addr')"
         />
-      </template>
-    </el-table-column>
-
-    <el-table-column label="AMOUNT">
-      <template slot-scope="scope">
-        {{ get(scope.row, 'tx.value.msg.0.value.amount.0.amount') }}
-        {{ get(scope.row, 'tx.value.msg.0.value.amount.0.denom') }}
       </template>
     </el-table-column>
 

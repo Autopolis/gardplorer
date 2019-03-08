@@ -1,6 +1,9 @@
 <template>
   <div class="validator-detail-container">
-    <sub-title :title="`VALIDATOR ${address}`" />
+    <sub-title
+      title="VALIDATOR"
+      :sub="address"
+    />
     <div class="content">
       <data-area
         title="Validator Profile"

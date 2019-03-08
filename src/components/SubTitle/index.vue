@@ -1,13 +1,16 @@
 <template>
   <div class="sub-title-container">
     <span>{{ title }}</span>
+    <span class="sub-title">{{ sub }}</span>
   </div>
 </template>
+
 
 <script>
 export default {
   props: {
-    title: String
+    title: String,
+    sub: String
   }
 };
 </script>
@@ -19,6 +22,11 @@ export default {
   background: white;
   padding: 0 $basic-padding;
   font-weight: bold;
+}
+.sub-title {
+  margin-left: 16px;
+  color: #606266;
+  font-weight: normal;
 }
 </style>
 

@@ -1,7 +1,7 @@
 <template>
   <el-table
     class="table"
-    :data="formated"
+    :data="list"
     v-loading="load"
     style="width: 100%"
   >
@@ -29,6 +29,15 @@
       </template>
     </el-table-column>
 
+    <el-table-column label="VALIDATOR">
+      <template slot-scope="scope">
+        <hg-link
+          type="validator"
+          :content="get(scope.row, 'tx.value.msg.0.value.validator_addr')"
+        />
+      </template>
+    </el-table-column>
+
     <el-table-column label="DELEGATOR">
       <template slot-scope="scope">
         <hg-link
@@ -38,19 +47,10 @@
       </template>
     </el-table-column>
 
-    <el-table-column label="VALIDATOR">
-      <template slot-scope="scope">
-        <hg-link
-          type="address"
-          :content="get(scope.row, 'tx.value.msg.0.value.validator_addr')"
-        />
-      </template>
-    </el-table-column>
-
     <el-table-column label="DELEGATION">
       <template slot-scope="scope">
-        {{ get(scope.row, 'tx.value.msg.0.value.delegation.amount') }}
-        {{ get(scope.row, 'tx.value.msg.0.value.delegation.denom') }}
+        {{ get(scope.row, 'tx.value.msg.0.value.value.amount') }}
+        {{ get(scope.row, 'tx.value.msg.0.value.value.denom') }}
       </template>
     </el-table-column>
 
@@ -83,16 +83,7 @@ export default {
   },
   methods: { get },
   computed: {
-    ...mapState("blocks", ["details"]),
-    ...mapGetters("transactions", ["format"]),
-
-    formated: function() {
-      const { list } = this;
-      if (isEmpty(list)) {
-        return [];
-      }
-      return list.map(item => this.format(item));
-    }
+    ...mapState("blocks", ["details"])
   },
   watch: {
     list: function() {

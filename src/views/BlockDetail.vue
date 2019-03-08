@@ -3,7 +3,10 @@
     class="block-detail-container"
     v-if="detail"
   >
-    <sub-title :title="`BLOCK #${height}`" />
+    <sub-title
+      title="BLOCK"
+      :sub="`#${height}`"
+    />
     <div class="block-detail-content">
       <data-area title="Block Information">
         <data-item label="Height">

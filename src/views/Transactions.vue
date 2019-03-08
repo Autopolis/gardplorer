@@ -41,23 +41,23 @@ export default {
       selected: "send",
       actions: [
         "send",
+        "delegate",
+        "create_validator",
+        "edit_validator",
         "set_withdraw_address",
         "withdraw_delegation_rewards_all",
-        "delegate",
         "withdraw_delegation_reward",
         "withdraw_validator_rewards_all",
-        "source-validator",
+        "source_validator",
         "unjail",
-        "proposal-dropped",
-        "proposal-passed",
-        "proposal-rejected",
+        "proposal_dropped",
+        "proposal_passed",
+        "proposal_rejected",
         "vote",
         "submit_proposal",
         "deposit",
-        "complete-unbonding",
-        "complete-redelegation",
-        "create_validator",
-        "edit_validator",
+        "complete_unbonding",
+        "complete_redelegation",
         "begin_unbonding",
         "begin_redelegate"
       ]
@@ -70,16 +70,12 @@ export default {
   methods: {
     onPageChange: function(page) {
       const { pageSize, totalCount } = this;
-      this.$store.dispatch("transactions/fetchList", { action: "send", page });
     },
     onSelect: function(value) {
       this.selected = value;
       this.fetchData();
     },
     fetchData: async function() {
-      await this.$store.dispatch("transactions/fetchTotalCount", {
-        action: this.selected
-      });
       this.$store.dispatch("transactions/fetchLastList", {
         action: this.selected,
         targetNum: 100

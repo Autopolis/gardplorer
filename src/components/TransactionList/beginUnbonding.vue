@@ -1,7 +1,7 @@
 <template>
   <el-table
     class="table"
-    :data="formated"
+    :data="list"
     v-loading="load"
     style="width: 100%"
   >
@@ -82,16 +82,7 @@ export default {
   },
   methods: { get },
   computed: {
-    ...mapState("blocks", ["details"]),
-    ...mapGetters("transactions", ["format"]),
-
-    formated: function() {
-      const { list } = this;
-      if (isEmpty(list)) {
-        return [];
-      }
-      return list.map(item => this.format(item));
-    }
+    ...mapState("blocks", ["details"])
   },
   watch: {
     list: function() {

@@ -9,6 +9,16 @@
     :load="load"
     v-else-if="type==='delegate'"
   />
+  <create-validator-list
+    :list="list"
+    :load="load"
+    v-else-if="type==='create_validator'"
+  />
+  <withdraw-delegation-reward-list
+    :list="list"
+    :load="load"
+    v-else-if="type==='withdraw_delegation_reward'"
+  />
   <unjail-list
     :list="list"
     :load="load"
@@ -35,6 +45,8 @@
 import { isEmpty, get } from "lodash";
 import send from "./send.vue";
 import delegate from "./delegate.vue";
+import createValidator from "./createValidator.vue";
+import withdrawDelegationReward from "./withdrawDelegationReward.vue";
 import unjail from "./unjail.vue";
 import vote from "./vote.vue";
 import submitProposal from "./submitProposal.vue";
@@ -44,6 +56,8 @@ export default {
   components: {
     "send-list": send,
     "delegate-list": delegate,
+    "create-validator-list": createValidator,
+    "withdraw-delegation-reward-list": withdrawDelegationReward,
     "unjail-list": unjail,
     "vote-list": vote,
     "submit-proposal-list": submitProposal,
