@@ -19,25 +19,30 @@
     :load="load"
     v-else-if="type==='withdraw_delegation_reward'"
   />
+  <begin-unbonding-list
+    :list="list"
+    :load="load"
+    v-else-if="type==='begin_unbonding'"
+  />
   <unjail-list
     :list="list"
     :load="load"
     v-else-if="type==='unjail'"
-  />
-  <vote-list
-    :list="list"
-    :load="load"
-    v-else-if="type==='vote'"
   />
   <submit-proposal-list
     :list="list"
     :load="load"
     v-else-if="type==='submit_proposal'"
   />
-  <begin-unbonding-list
+  <deposit-list
     :list="list"
     :load="load"
-    v-else-if="type==='begin_unbonding'"
+    v-else-if="type==='deposit'"
+  />
+  <vote-list
+    :list="list"
+    :load="load"
+    v-else-if="type==='vote'"
   />
 </template>
 
@@ -50,6 +55,7 @@ import withdrawDelegationReward from "./withdrawDelegationReward.vue";
 import unjail from "./unjail.vue";
 import vote from "./vote.vue";
 import submitProposal from "./submitProposal.vue";
+import deposit from "./deposit.vue";
 import beginUnbonding from "./beginUnbonding.vue";
 
 export default {
@@ -61,6 +67,7 @@ export default {
     "unjail-list": unjail,
     "vote-list": vote,
     "submit-proposal-list": submitProposal,
+    "deposit-list": deposit,
     "begin-unbonding-list": beginUnbonding
   },
   props: {

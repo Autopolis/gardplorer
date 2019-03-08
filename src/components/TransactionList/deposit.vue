@@ -29,27 +29,18 @@
       </template>
     </el-table-column>
 
-    <el-table-column label="DELEGATOR">
+    <el-table-column label="PROPOSAL">
       <template slot-scope="scope">
-        <hg-link
-          type="address"
-          :content="get(scope.row, 'tx.value.msg.0.value.delegator_addr')"
-        />
+        {{ get(scope.row, 'tx.value.msg.0.value.proposal_id') }}
       </template>
     </el-table-column>
 
-    <el-table-column label="VALIDATOR">
+    <el-table-column label="DEPOSITOR">
       <template slot-scope="scope">
         <hg-link
           type="address"
-          :content="get(scope.row, 'tx.value.msg.0.value.validator_addr')"
+          :content="get(scope.row, 'tx.value.msg.0.value.depositor')"
         />
-      </template>
-    </el-table-column>
-
-    <el-table-column label="SHARES AMOUNT">
-      <template slot-scope="scope">
-        {{ get(scope.row, 'tx.value.msg.0.value.shares_amount') }}
       </template>
     </el-table-column>
 
@@ -72,7 +63,6 @@
 </template>
 
 <script>
-import { txTypes } from "@/constants";
 import { get, isEmpty } from "lodash";
 import { mapGetters, mapState } from "vuex";
 

@@ -13,10 +13,10 @@
           @change="onSelect"
         >
           <el-option
-            v-for="item in actions"
-            :key="item"
-            :value="item"
-            :label="item"
+            v-for="key in Object.keys(actions)"
+            :key="key"
+            :value="key"
+            :label="actions[key]"
           />
         </el-select>
       </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { txTypes } from "@/constants";
 import Card from "@/components/Card";
 import TransactionList from "@/components/TransactionList";
 import { mapGetters, mapState } from "vuex";
@@ -39,28 +40,7 @@ export default {
   data: function() {
     return {
       selected: "send",
-      actions: [
-        "send",
-        "delegate",
-        "create_validator",
-        "edit_validator",
-        "set_withdraw_address",
-        "withdraw_delegation_rewards_all",
-        "withdraw_delegation_reward",
-        "withdraw_validator_rewards_all",
-        "source_validator",
-        "unjail",
-        "proposal_dropped",
-        "proposal_passed",
-        "proposal_rejected",
-        "vote",
-        "submit_proposal",
-        "deposit",
-        "complete_unbonding",
-        "complete_redelegation",
-        "begin_unbonding",
-        "begin_redelegate"
-      ]
+      actions: txTypes
     };
   },
   components: { Card, "transaction-list": TransactionList },
