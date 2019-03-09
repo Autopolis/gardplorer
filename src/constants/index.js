@@ -17,8 +17,5 @@ export const txTypes = {
   // proposal & vote
   submit_proposal: 'Submit Proposal',
   deposit: 'Deposit',
-  vote: 'Vote',
-  proposal_dropped: 'Proposal Dropped',
-  proposal_passed: 'Proposal Passed',
-  proposal_rejected: 'Proposal Rejected'
+  vote: 'Vote'
 };

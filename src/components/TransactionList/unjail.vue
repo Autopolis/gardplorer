@@ -15,7 +15,7 @@
       <template slot-scope="scope">
         <hg-link
           type="tx"
-          :content="scope.row.hash"
+          :content="scope.row.txhash"
         />
       </template>
     </el-table-column>
@@ -32,7 +32,7 @@
     <el-table-column label="ADDRESS">
       <template slot-scope="scope">
         <hg-link
-          type="address"
+          type="validator"
           :content="get(scope.row, 'tx.value.msg.0.value.address')"
         />
       </template>
