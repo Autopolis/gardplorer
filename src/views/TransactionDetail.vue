@@ -9,17 +9,32 @@
       v-if="detail"
     >
       <data-area title="Transaction Information">
-        <data-item label="TxHash">
-          <span>{{ detail.txhash }}</span>
+        <data-item
+          v-for="item in fields[type]"
+          :key="item.name"
+          :label="item.name"
+        >
+          <hg-link
+            v-if="item.linkType"
+            :type="item.linkType"
+            :content="get(detail, item.field)"
+            :ellipsis="false"
+          />
+          <span v-if="!item.linkType">
+            {{ item.field instanceof Array ? item.field.map(i => get(detail, i)).join(' ') : get(detail, item.field) || '-'}}
+          </span>
         </data-item>
-        <data-item label="Block">
+        <!-- <data-item label="Block">
           <hg-link
             type="block"
             :content="detail.height"
           />
         </data-item>
         <data-item label="Type">
-          <span>{{ type }}</span>
+          <span>
+            
+        {{ get(details, [scope.row.height, 'block', 'header', 'time']) | formatTime }}
+          </span>
         </data-item>
         <data-item
           label="From"
@@ -73,7 +88,7 @@
         </data-item>
         <data-item label="Memo">
           <span>{{ get(detail, 'tx.value.memo') || '-' }}</span>
-        </data-item>
+        </data-item> -->
       </data-area>
     </div>
   </div>
@@ -83,7 +98,12 @@
 import { isEmpty, get } from "lodash";
 import { mapGetters, mapState } from "vuex";
 
+import { txFieldsMap } from "@/constants";
+
 export default {
+  data: function() {
+    return { fields: txFieldsMap };
+  },
   methods: {
     get
   },

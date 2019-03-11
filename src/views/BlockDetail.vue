@@ -28,7 +28,11 @@
         </data-item>
       </data-area>
       <data-area title="Transactions">
-        <transaction-list :list="transactionList" />
+        <transaction-list
+          :fields="send.filter(i => i.isInTable)"
+          :load="load"
+          :list="transactionList"
+        />
       </data-area>
       <data-area
         title="Validators"
@@ -50,10 +54,13 @@ import sha256 from "crypto-js/sha256";
 import hmacSHA512 from "crypto-js/hmac-sha512";
 import Base64 from "crypto-js/enc-base64";
 
+import { txFieldsMap } from "@/constants";
+
 export default {
   data: function() {
     return {
-      height: this.$route.params.id
+      height: this.$route.params.id,
+      send: txFieldsMap.send
     };
   },
   computed: {
@@ -61,7 +68,10 @@ export default {
       blockDetails: "details",
       validatorsets: "validatorsets"
     }),
-    ...mapState("transactions", { transactionDetails: "details" }),
+    ...mapState("transactions", {
+      transactionDetails: "details",
+      load: "load"
+    }),
 
     detail: function() {
       const { height, blockDetails } = this;

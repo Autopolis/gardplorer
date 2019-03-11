@@ -1,79 +1,64 @@
 <template>
-  <send-list
-    :list="list"
-    :load="load"
-    v-if="type==='send'"
-  />
-  <delegate-list
-    :list="list"
-    :load="load"
-    v-else-if="type==='delegate'"
-  />
-  <create-validator-list
-    :list="list"
-    :load="load"
-    v-else-if="type==='create_validator'"
-  />
-  <withdraw-delegation-reward-list
-    :list="list"
-    :load="load"
-    v-else-if="type==='withdraw_delegation_reward'"
-  />
-  <begin-unbonding-list
-    :list="list"
-    :load="load"
-    v-else-if="type==='begin_unbonding'"
-  />
-  <unjail-list
-    :list="list"
-    :load="load"
-    v-else-if="type==='unjail'"
-  />
-  <submit-proposal-list
-    :list="list"
-    :load="load"
-    v-else-if="type==='submit_proposal'"
-  />
-  <deposit-list
-    :list="list"
-    :load="load"
-    v-else-if="type==='deposit'"
-  />
-  <vote-list
-    :list="list"
-    :load="load"
-    v-else-if="type==='vote'"
-  />
+
+  <el-table
+    class="table"
+    :data="list"
+    v-loading="load"
+    style="width: 100%"
+  >
+    <el-table-column
+      v-for="item in fields"
+      :key="item.name"
+      :label="item.name"
+    >
+      <template slot-scope="scope">
+        <hg-link
+          v-if="item.linkType"
+          :type="item.linkType"
+          :content="get(scope.row, item.field)"
+        />
+        <span v-if="!item.linkType">
+          {{ item.field instanceof Array ? item.field.map(i => get(scope.row, i)).join(' ') : get(scope.row, item.field) || '-' }}
+        </span>
+      </template>
+    </el-table-column>
+
+    <el-table-column
+      prop="header.num_txs"
+      label="TIME"
+    >
+      <template slot-scope="scope">
+        {{ get(details, [scope.row.height, 'block', 'header', 'time']) | formatTime }}
+      </template>
+    </el-table-column>
+
+  </el-table>
 </template>
 
 <script>
 import { isEmpty, get } from "lodash";
-import send from "./send.vue";
-import delegate from "./delegate.vue";
-import createValidator from "./createValidator.vue";
-import withdrawDelegationReward from "./withdrawDelegationReward.vue";
-import unjail from "./unjail.vue";
-import vote from "./vote.vue";
-import submitProposal from "./submitProposal.vue";
-import deposit from "./deposit.vue";
-import beginUnbonding from "./beginUnbonding.vue";
+import { mapGetters, mapState } from "vuex";
 
 export default {
-  components: {
-    "send-list": send,
-    "delegate-list": delegate,
-    "create-validator-list": createValidator,
-    "withdraw-delegation-reward-list": withdrawDelegationReward,
-    "unjail-list": unjail,
-    "vote-list": vote,
-    "submit-proposal-list": submitProposal,
-    "deposit-list": deposit,
-    "begin-unbonding-list": beginUnbonding
-  },
   props: {
     list: Array,
+    fields: Array,
     type: { type: String, default: "send" },
     load: { type: Boolean, default: false }
+  },
+  methods: { get },
+  computed: {
+    ...mapState("blocks", ["details"])
+  },
+  watch: {
+    list: function() {
+      if (isEmpty(this.list)) {
+        return false;
+      }
+      this.list.forEach(item => {
+        this.$store.dispatch("blocks/fetchDetail", get(item, "height"));
+      });
+    }
   }
 };
 </script>

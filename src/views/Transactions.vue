@@ -24,6 +24,7 @@
     </div>
     <transaction-list
       :list="lastList"
+      :fields="fields.filter(i => !i.hideInTable)"
       :type="selected"
       :load="load"
     />
@@ -31,10 +32,10 @@
 </template>
 
 <script>
-import { txTypes } from "@/constants";
+import { mapGetters, mapState } from "vuex";
 import Card from "@/components/Card";
 import TransactionList from "@/components/TransactionList";
-import { mapGetters, mapState } from "vuex";
+import { txTypes, txFieldsMap } from "@/constants";
 
 export default {
   data: function() {
@@ -45,7 +46,11 @@ export default {
   },
   components: { Card, "transaction-list": TransactionList },
   computed: {
-    ...mapState("transactions", ["lastList", "totalCount", "load"])
+    ...mapState("transactions", ["lastList", "totalCount", "load"]),
+
+    fields: function() {
+      return txFieldsMap[this.selected];
+    }
   },
   methods: {
     onPageChange: function(page) {
@@ -56,9 +61,11 @@ export default {
       this.fetchData();
     },
     fetchData: async function() {
+      await this.$store.dispatch("transactions/fetchTotalCount", {
+        action: this.selected
+      });
       this.$store.dispatch("transactions/fetchLastList", {
-        action: this.selected,
-        targetNum: 100
+        action: this.selected
       });
     }
   },

@@ -4,7 +4,7 @@ import $ajax from '@/utils/ajax';
 export default {
   namespaced: true,
   state: {
-    pageSize: 20,
+    pageSize: 30,
     currentPage: 1,
     totalCount: 0,
     list: [],
@@ -37,6 +37,18 @@ export default {
     }
   },
   actions: {
+    fetchTotalCount: async function(context, params = { action: 'send', page: 1 }) {
+      context.commit('setLoad', true);
+      const { data } = await $ajax.get('/api/txs', {
+        params: { action: params.action || 'send', page: 1 }
+      });
+      context.commit('setLoad', false);
+      if (isEmpty(data)) {
+        return Promise.reject();
+      }
+      context.commit('setTotalCount', Number(data.totalCount));
+      return Promise.resolve();
+    },
     fetchList: async function(context, params = { action: 'send', page: 1 }) {
       params.limit = context.state.pageSize;
       context.commit('setLoad', true);
@@ -64,7 +76,7 @@ export default {
       return Promise.resolve(data);
     },
     fetchLastList: async function(context, config = {}) {
-      const PAGE_SIZE = 30;
+      const PAGE_SIZE = context.state.pageSize;
       const action = config.action || 'send';
       const totalCount = context.state.totalCount;
       const lastPage = Math.ceil(totalCount / PAGE_SIZE) || 1;

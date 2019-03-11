@@ -20,7 +20,11 @@
         title="Transaction List"
         v-if="!isEmpty(transactionList)"
       >
-        <transaction-list :list="transactionList" />
+        <transaction-list
+          :fields="send.filter(i => !i.hideInTable)"
+          :load="load"
+          :list="transactionList"
+        />
       </data-area>
     </div>
   </div>
@@ -30,12 +34,17 @@
 import { get, isEmpty } from "lodash";
 import { mapState, mapGetters } from "vuex";
 
+import { txFieldsMap } from "@/constants";
+
 export default {
+  data: function() {
+    return txFieldsMap;
+  },
   methods: { get, isEmpty },
 
   computed: {
     ...mapState("address", ["info"]),
-    ...mapState("transactions", { transactionList: "list" }),
+    ...mapState("transactions", { transactionList: "list", load: "load" }),
     address: function() {
       return this.$route.params.address;
     }
