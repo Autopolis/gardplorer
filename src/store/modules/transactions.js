@@ -1,4 +1,4 @@
-import { isEmpty } from 'lodash';
+import { set, isEmpty } from 'lodash';
 import $ajax from '@/utils/ajax';
 
 export default {
@@ -94,6 +94,37 @@ export default {
       context.commit('setLoad', false);
       context.commit('setTotalCount', data.totalCount);
       context.commit('setLastList', txs);
+      return Promise.resolve();
+    },
+    fetchAddressTxList: async function(context, params = { action: 'send', page: 1 }) {
+      params.limit = context.state.pageSize;
+      context.commit('setLoad', true);
+
+      // 1. query txs as sender
+      const senderData = await $ajax.get('/api/txs', { params });
+      if (isEmpty(senderData.data)) {
+        context.commit('setLoad', false);
+        return Promise.reject();
+      }
+
+      // 2. query txs as recipient
+      params.recipient = params.sender;
+      delete params.sender;
+      const recipientData = await $ajax.get('/api/txs', { params });
+      if (isEmpty(recipientData.data)) {
+        context.commit('setLoad', false);
+        return Promise.reject();
+      }
+      // show action as receive in address page
+      const recipientList = recipientData.data.txs.map(i => {
+        set(i, 'tags.0.value', 'receive');
+        return i;
+      });
+      const list = [...senderData.data.txs, ...recipientList];
+
+      list.sort((a, b) => a.height - b.height);
+      context.commit('setLoad', false);
+      context.commit('setList', list);
       return Promise.resolve();
     }
   }

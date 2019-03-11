@@ -44,7 +44,7 @@ export default {
   beforeRouteUpdate(to, from, next) {
     const address = to.params.address;
     this.$store.dispatch("address/fetch", address);
-    this.$store.dispatch("transactions/fetchList", {
+    this.$store.dispatch("transactions/fetchAddressTxList", {
       action: "send",
       sender: address
     });
@@ -53,7 +53,7 @@ export default {
 
   mounted() {
     this.$store.dispatch("address/fetch", this.address);
-    this.$store.dispatch("transactions/fetchList", {
+    this.$store.dispatch("transactions/fetchAddressTxList", {
       action: "send",
       sender: this.address
     });
