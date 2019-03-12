@@ -94,15 +94,15 @@ export default {
         return Promise.reject();
       }
       let txs = data.txs;
-      if (txs.length < PAGE_SIZE && totalCount > PAGE_SIZE) {
-        const prePageParams = { ...params, page: lastPage - 1 };
-        var { data } = await $ajax.get('/api/txs', { params: prePageParams });
-        if (isEmpty(data)) {
-          context.commit('setLoad', false);
-          return Promise.reject();
-        }
-        txs = txs.concat(data.txs);
-      }
+      // if (txs.length < PAGE_SIZE && totalCount > PAGE_SIZE) {
+      //   const prePageParams = { ...params, page: lastPage - 1 };
+      //   var { data } = await $ajax.get('/api/txs', { params: prePageParams });
+      //   if (isEmpty(data)) {
+      //     context.commit('setLoad', false);
+      //     return Promise.reject();
+      //   }
+      //   txs = txs.concat(data.txs);
+      // }
       context.commit('setLoad', false);
       context.commit('setTotalCount', data.totalCount);
       context.commit('setLastList', txs);
