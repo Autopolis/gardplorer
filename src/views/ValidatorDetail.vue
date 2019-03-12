@@ -15,6 +15,9 @@
         <data-item label="Name">
           <span>{{ detail.description.moniker }}</span>
         </data-item>
+        <data-item label="Comission Rate">
+          <span>{{ Number(get(detail, 'commission.rate')) * 100 }} %</span>
+        </data-item>
 
         <data-item label="Website">
           <span>{{ detail.description.website || '-' }}</span>
@@ -61,6 +64,9 @@ export default {
     return {
       address: this.$route.params.address
     };
+  },
+  methods: {
+    get
   },
   computed: {
     ...mapState("validators", ["details"]),
