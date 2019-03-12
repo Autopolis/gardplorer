@@ -3,19 +3,8 @@
     title="blocks"
     class="blocks-card"
   >
-    <div class="page">
+    <div class="card-header">
       <p>TOTAL AMOUNT: {{ lastHeight }}</P>
-      <el-pagination
-        class="pagination"
-        background
-        layout="prev, pager, next"
-        :current-page="currentPage"
-        :page-size="pageSize"
-        :total="lastHeight"
-        @prev-click="onPageChange"
-        @next-click="onPageChange"
-        @current-change="onPageChange"
-      />
     </div>
     <el-table
       class="table"
@@ -60,6 +49,19 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="card-footer">
+      <el-pagination
+        class="pagination"
+        background
+        layout="prev, pager, next"
+        :current-page="currentPage"
+        :page-size="pageSize"
+        :total="lastHeight"
+        @prev-click="onPageChange"
+        @next-click="onPageChange"
+        @current-change="onPageChange"
+      />
+    </div>
   </Card>
 </template>
 
@@ -72,12 +74,7 @@ export default {
   components: { Card },
   computed: {
     ...mapGetters("blocks", ["list"]),
-    ...mapState("blocks", [
-      "lastHeight",
-      "currentPage",
-      "lastHeight",
-      "pageSize"
-    ])
+    ...mapState("blocks", ["lastHeight", "currentPage", "pageSize"])
   },
   methods: {
     get,
@@ -114,11 +111,13 @@ export default {
     padding: 16px 32px;
   }
 
-  .page {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .card-header {
     margin-bottom: 24px;
+  }
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
   }
 }
 </style>

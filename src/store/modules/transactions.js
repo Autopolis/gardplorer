@@ -4,7 +4,7 @@ import $ajax from '@/utils/ajax';
 export default {
   namespaced: true,
   state: {
-    pageSize: 30,
+    pageSize: 20,
     currentPage: 1,
     totalCount: 0,
     list: [],

@@ -3,7 +3,7 @@
     title="transactions"
     class="transactions-card"
   >
-    <div class="page">
+    <div class="card-header">
       <div class="select-action">
         <el-select
           :disabled="load"
@@ -23,11 +23,24 @@
       <p>TOTAL AMOUNT: {{ totalCount }}</P>
     </div>
     <transaction-list
-      :list="lastList"
+      :list="list"
       :fields="fields.filter(i => !i.hideInTable)"
       :type="selected"
       :load="load"
     />
+    <div class="card-footer">
+      <el-pagination
+        class="pagination"
+        background
+        layout="prev, pager, next"
+        :current-page="currentPage"
+        :page-size="pageSize"
+        :total="Number(totalCount)"
+        @prev-click="onPageChange"
+        @next-click="onPageChange"
+        @current-change="onPageChange"
+      />
+    </div>
   </Card>
 </template>
 
@@ -46,15 +59,26 @@ export default {
   },
   components: { Card, "transaction-list": TransactionList },
   computed: {
-    ...mapState("transactions", ["lastList", "totalCount", "load"]),
+    ...mapState("transactions", [
+      "list",
+      "totalCount",
+      "currentPage",
+      "pageSize",
+      "load"
+    ]),
 
     fields: function() {
       return txFieldsMap[this.selected];
     }
   },
   methods: {
-    onPageChange: function(page) {
+    onPageChange: function(currentPage) {
       const { pageSize, totalCount } = this;
+      const page = Math.ceil(totalCount / pageSize) - currentPage + 1;
+      this.$store.dispatch("transactions/fetchList", {
+        action: this.selected,
+        page
+      });
     },
     onSelect: function(value) {
       this.selected = value;
@@ -64,8 +88,11 @@ export default {
       await this.$store.dispatch("transactions/fetchTotalCount", {
         action: this.selected
       });
-      this.$store.dispatch("transactions/fetchLastList", {
-        action: this.selected
+      const { pageSize, totalCount } = this;
+      const page = Math.ceil(totalCount / pageSize);
+      this.$store.dispatch("transactions/fetchList", {
+        action: this.selected,
+        page
       });
     }
   },
@@ -88,11 +115,15 @@ export default {
     padding: 16px 32px;
   }
 
-  .page {
+  .card-header {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     margin-bottom: 24px;
+  }
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
   }
 
   .select-action {
