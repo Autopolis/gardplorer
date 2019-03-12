@@ -25,7 +25,6 @@
     <transaction-list
       :list="list"
       :fields="fields.filter(i => !i.hideInTable)"
-      :type="selected"
       :load="load"
     />
     <div class="card-footer">
@@ -89,7 +88,7 @@ export default {
         action: this.selected
       });
       const { pageSize, totalCount } = this;
-      const page = Math.ceil(totalCount / pageSize);
+      const page = Math.ceil(totalCount / pageSize) || 1;
       this.$store.dispatch("transactions/fetchList", {
         action: this.selected,
         page
@@ -109,10 +108,6 @@ export default {
 
   .height {
     color: $blue;
-  }
-
-  > .content {
-    padding: 16px 32px;
   }
 
   .card-header {

@@ -107,10 +107,6 @@ export default {
     color: $blue;
   }
 
-  > .content {
-    padding: 16px 32px;
-  }
-
   .card-header {
     margin-bottom: 24px;
   }

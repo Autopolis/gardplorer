@@ -29,7 +29,7 @@
       </data-area>
       <data-area title="Transactions">
         <transaction-list
-          :fields="send.filter(i => i.isInTable)"
+          :fields="fields"
           :load="load"
           :list="transactionList"
         />
@@ -60,7 +60,7 @@ export default {
   data: function() {
     return {
       height: this.$route.params.id,
-      send: txFieldsMap.send
+      fields: txFieldsMap.all
     };
   },
   computed: {

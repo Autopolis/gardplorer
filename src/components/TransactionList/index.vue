@@ -43,7 +43,6 @@ export default {
   props: {
     list: Array,
     fields: Array,
-    type: { type: String, default: "send" },
     load: { type: Boolean, default: false }
   },
   methods: { get },

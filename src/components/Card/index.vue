@@ -28,7 +28,7 @@ export default {
 <style lang="scss" scoped>
 .card-container {
   position: relative;
-  padding: 0 0 20px 0;
+  padding: 0;
   border-radius: 2px;
   color: rgba(0, 0, 0, 0.65);
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.15);
@@ -56,6 +56,7 @@ export default {
 }
 .content {
   min-height: 50px;
+  padding: $basic-padding;
 }
 </style>
 
