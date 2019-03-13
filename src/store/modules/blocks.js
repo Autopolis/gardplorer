@@ -1,5 +1,6 @@
 import { get, isEmpty } from 'lodash';
 import $ajax from '@/utils/ajax';
+import Codec from '@/utils/cdec';
 
 export default {
   namespaced: true,
@@ -9,6 +10,7 @@ export default {
     lastHeight: 0,
     list: [],
     details: {},
+    proposers: {},
     validatorsets: {}
   },
   getters: {
@@ -40,6 +42,9 @@ export default {
     },
     setDetails: function(state, data) {
       state.details = Object.assign({}, data, state.details);
+    },
+    setProposers: function(state, data) {
+      state.proposers = Object.assign({}, data, state.proposers);
     },
     setValidatorsets: function(state, data) {
       state.validatorsets = Object.assign({}, data, state.validatorsets);
@@ -75,6 +80,13 @@ export default {
       const { data } = await $ajax.get(`/api/validatorsets/${height}`);
       if (!isEmpty(data)) {
         context.commit('setValidatorsets', { [height]: data });
+
+        // find proposer of this block
+        const block = context.state.details[height];
+        const cons_hex = get(block, 'block.header.proposer_address');
+        const cons_addr = Codec.Bech32.toBech32('gardvalcons', cons_hex);
+        const proposer = data.validators.find(v => v.address === cons_addr);
+        context.commit('setProposers', { [height]: proposer });
       }
     },
     fetchDetail: async function(context, height) {

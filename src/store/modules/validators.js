@@ -6,6 +6,7 @@ export default {
 
   state: {
     list: [],
+    consPubMap: {},
     latest: null,
     details: {}
   },
@@ -16,6 +17,9 @@ export default {
     },
     setDetail: function(state, data) {
       state.details = Object.assign({}, state.details, data);
+    },
+    setConsPubMap: function(state, data) {
+      state.consPubMap = Object.assign({}, state.consPubMap, data);
     }
   },
 
@@ -24,6 +28,9 @@ export default {
       const { data } = await $ajax.get(`/api/staking/validators`);
       if (!isEmpty(data)) {
         context.commit('setList', data);
+        data.forEach(i => {
+          context.commit('setConsPubMap', { [i.consensus_pubkey]: i });
+        });
       }
     },
     fetchDetail: async function(context, address) {

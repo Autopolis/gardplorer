@@ -21,6 +21,14 @@
         <data-item label="Transactions number">
           <span>{{ detail.header.num_txs }}</span>
         </data-item>
+        <data-item label="Proposer Address">
+          <hg-link
+            type="validator"
+            :content="get(consPubMap, [get(proposers, [height, 'pub_key']), 'operator_address'])"
+            :ellipsis="false"
+          />
+        </data-item>
+
       </data-area>
       <data-area title="Last Block">
         <data-item label="Last Block Hash">
@@ -66,12 +74,14 @@ export default {
   computed: {
     ...mapState("blocks", {
       blockDetails: "details",
+      proposers: "proposers",
       validatorsets: "validatorsets"
     }),
     ...mapState("transactions", {
       transactionDetails: "details",
       load: "load"
     }),
+    ...mapState("validators", ["consPubMap"]),
 
     detail: function() {
       const { height, blockDetails } = this;
@@ -100,12 +110,17 @@ export default {
     }
   },
   methods: {
+    get,
     decodeTx: function(tx) {
       return sha256(Base64.parse(tx))
         .toString()
         .toUpperCase();
     },
     fetchData: async function() {
+      if (isEmpty(this.consPubMap)) {
+        this.$store.dispatch("validators/fetchAll");
+      }
+
       const height = this.height;
       const data = await this.$store.dispatch("blocks/fetchDetail", height);
       const txs = data.block.data.txs;
