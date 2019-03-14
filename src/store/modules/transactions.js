@@ -76,7 +76,7 @@ export default {
       return Promise.resolve(data);
     },
     fetchLastList: async function(context, config = {}) {
-      const PAGE_SIZE = context.state.pageSize;
+      const PAGE_SIZE = 10;
       const action = config.action || 'send';
       const totalCount = context.state.totalCount;
       const lastPage = Math.ceil(totalCount / PAGE_SIZE) || 1;

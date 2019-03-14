@@ -64,7 +64,7 @@ export default {
       const lastHeight = get(result, 'last_height');
 
       page && context.commit('setCurrentPage', page);
-      context.commit('setList', list);
+      context.commit('setList', list.slice(0, 10));
       context.commit('setLastHeight', lastHeight);
 
       list.forEach(item => {

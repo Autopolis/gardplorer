@@ -53,6 +53,7 @@
       <el-pagination
         class="pagination"
         background
+        pager-count="3"
         layout="prev, pager, next"
         :current-page="currentPage"
         :page-size="pageSize"

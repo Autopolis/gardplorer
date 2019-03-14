@@ -34,6 +34,7 @@ export default {
   box-shadow: $shadow;
   border: 1px solid rgba(0, 0, 0, 0.03);
   background: white;
+  margin-bottom: 24px;
 }
 
 .header {

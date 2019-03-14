@@ -1,55 +1,67 @@
 <template>
   <div class="home-container">
-    <Card
-      title="blocks"
-      link="/block"
-      class="card"
-    >
-      <ul>
-        <li
-          v-for="(item, index) in blocksLastList"
-          :key="index"
-          class="item block"
+    <el-row :gutter="24">
+      <el-col
+        :xs="24"
+        :sm="12"
+      >
+        <Card
+          title="blocks"
+          link="/block"
+          class="card"
         >
-          <p class="height">
-            <RouterLink
-              :to="`/block/${item.header.height}`"
-              class="link"
-            >{{ item.header.height }}</RouterLink>
-          </p>
-          <p class="time">{{ item.header.time | formatTime }}</p>
-          <p class="txn">Txn: {{ item.header.num_txs }}</p>
-        </li>
-      </ul>
-    </Card>
-    <Card
-      title="transactions"
-      link="/tx"
-      class="card"
-    >
-      <ul>
-        <li
-          v-for="(item, index) in transactionsLastList"
-          :key="index"
-          class="item transactions"
+          <ul>
+            <li
+              v-for="(item, index) in blocksLastList"
+              :key="index"
+              class="item block"
+            >
+              <p class="height">
+                <RouterLink
+                  :to="`/block/${item.header.height}`"
+                  class="link"
+                >{{ item.header.height }}</RouterLink>
+              </p>
+              <p class="time">{{ item.header.time | formatTime }}</p>
+              <p class="txn">Txn: {{ item.header.num_txs }}</p>
+            </li>
+          </ul>
+        </Card>
+      </el-col>
+      <el-col
+        :xs="24"
+        :sm="12"
+      >
+        <Card
+          title="transactions"
+          link="/tx"
+          class="card"
         >
-          <p class="hash">
-            <span>TX:</span>
-            <hg-link
-              type="tx"
-              :content="item.txhash"
-            />
-          </p>
-          <p class="block">Block:
-            <hg-link
-              type="block"
-              :content="item.height"
-            />
-          </p>
-          <p class="gas">Gas Used: {{ item.gas_used }}</p>
-        </li>
-      </ul>
-    </Card>
+          <ul>
+            <li
+              v-for="(item, index) in transactionsLastList"
+              :key="index"
+              class="item transactions"
+            >
+              <p class="hash">
+                <span>TX:</span>
+                <hg-link
+                  type="tx"
+                  :content="item.txhash"
+                />
+              </p>
+              <p class="block">Block:
+                <hg-link
+                  type="block"
+                  :content="item.height"
+                />
+              </p>
+              <p class="gas">Gas Used: {{ item.gas_used }}</p>
+            </li>
+          </ul>
+        </Card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -86,8 +98,6 @@ export default {
 
 <style lang="scss" scoped>
 .home-container {
-  display: flex;
-  justify-content: center;
   margin: $basic-margin;
 }
 
@@ -103,7 +113,7 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 16px 32px;
+  padding: 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 14px;
 
