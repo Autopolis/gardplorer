@@ -28,12 +28,11 @@ export default new Router({
     },
     {
       path: '/block',
-      name: 'blocks',
       component: View,
       children: [
         {
           path: '',
-          name: 'blockIndex',
+          name: 'blocks',
           component: Blocks
         },
         {
@@ -45,12 +44,11 @@ export default new Router({
     },
     {
       path: '/tx',
-      name: 'transactions',
       component: View,
       children: [
         {
           path: '',
-          name: 'transactionIndex',
+          name: 'transactions',
           component: Transactions
         },
         {
@@ -67,12 +65,11 @@ export default new Router({
     },
     {
       path: '/validator',
-      name: 'validators',
       component: View,
       children: [
         {
           path: '',
-          name: 'validatorIndex',
+          name: 'validators',
           component: Validators
         },
         {

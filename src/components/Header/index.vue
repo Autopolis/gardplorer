@@ -25,7 +25,7 @@
     <div class="search-container">
       <input
         class="search-inner"
-        placeholder="Search by Address/Txhash/Block/"
+        placeholder="Search by Address/Txhash/Block"
         suffix-icon="el-icon-search"
         v-model.trim="value"
         @keyup.enter="onSearch"
@@ -110,7 +110,6 @@ svg {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  width: 480px;
   height: 32px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
@@ -118,13 +117,14 @@ svg {
   .search-inner {
     flex: 1 1 auto;
     height: 100%;
+    width: 400px;
     padding: 0 36px 0 12px;
     border: 0;
     box-shadow: none;
     background: transparent;
   }
 
-  .search-inner::focus {
+  .search-inner:focus {
     outline: none;
   }
 

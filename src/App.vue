@@ -19,7 +19,6 @@ import { mapState } from "vuex";
 /**
  * TODO:
  * 1. styles fix to fit mobile display
- * 2. add crypto libs to decode validator address
  */
 
 export default {
