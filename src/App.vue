@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header :name="name" />
+    <Header :netName="netName" />
     <Menu />
     <div class="main">
       <RouterView />
@@ -25,7 +25,7 @@ export default {
   components: { Header, Menu, Footer },
   computed: {
     ...mapState({
-      name: store => store.basic.name
+      netName: store => store.basic.name
     })
   }
 };

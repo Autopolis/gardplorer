@@ -104,7 +104,7 @@ export default {
     validatorList: function() {
       const { height, validatorsets, consPubMap } = this;
       const validatorset = get(validatorsets, [height, "validators"]);
-      if (isEmpty(validatorset)) {
+      if (isEmpty(validatorset) || isEmpty(consPubMap)) {
         return [];
       }
       return validatorset.map(i => get(consPubMap, [i.pub_key]));

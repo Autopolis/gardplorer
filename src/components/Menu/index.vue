@@ -5,40 +5,15 @@
     mode="horizontal"
   >
     <el-menu-item
-      index="1"
+      v-for="(item, i) in menu"
+      :key="item.name"
+      :index="i"
       class="item"
     >
       <RouterLink
-        to="/home"
+        :to="item.link"
         class="link"
-      >HOME</RouterLink>
-    </el-menu-item>
-    <el-menu-item
-      index="2"
-      class="item"
-    >
-      <RouterLink
-        to="/block"
-        class="link"
-      >BLOCKS</RouterLink>
-    </el-menu-item>
-    <el-menu-item
-      index="3"
-      class="item"
-    >
-      <RouterLink
-        to="/tx"
-        class="link"
-      >TRANSACTIONS</RouterLink>
-    </el-menu-item>
-    <el-menu-item
-      index="4"
-      class="item"
-    >
-      <RouterLink
-        to="/validator"
-        class="link"
-      >VALIDATORS</RouterLink>
+      >{{item.name.toUpperCase()}}</RouterLink>
     </el-menu-item>
     <el-menu-item
       index="5"
@@ -54,10 +29,13 @@
 </template>
 
 <script>
+import { menu } from "@/constants";
+
 export default {
   data() {
     return {
-      activeIndex: "0"
+      activeIndex: "0",
+      menu
     };
   }
 };
@@ -69,12 +47,6 @@ export default {
   height: 64px;
   background: $blue;
   border-bottom: none;
-  // box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-  //   0 3px 1px -2px rgba(0, 0, 0, 0.2);
-
-  // &::after {
-  //   @extend %shadow;
-  // }
 
   > .item {
     height: 100%;
@@ -101,6 +73,12 @@ export default {
 
   a {
     text-decoration: none;
+  }
+}
+
+@include responsive($sm) {
+  .menu-container {
+    display: none;
   }
 }
 </style>
