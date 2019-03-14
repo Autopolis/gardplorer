@@ -1,27 +1,5 @@
 <template>
-  <el-table
-    v-if="type === 'brief'"
-    :data="list"
-  >
-    <el-table-column
-      class="consensus-address"
-      label="CONSENSUS ADDRESS"
-      prop="address"
-    >
-      <template slot-scope="record">
-        {{record.row.address}}
-      </template>
-    </el-table-column>
-    <el-table-column
-      class="voting_power"
-      label="voting_power"
-      prop="voting_power"
-    />
-  </el-table>
-  <el-table
-    :data="list"
-    v-else
-  >
+  <el-table :data="list">
     <el-table-column
       class="jailed-status"
       label="ACTIVE"

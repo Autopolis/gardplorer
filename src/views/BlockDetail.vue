@@ -46,10 +46,7 @@
         title="Validators"
         v-if="validatorList"
       >
-        <validator-list
-          :list="validatorList"
-          type="brief"
-        />
+        <validator-list :list="validatorList" />
       </data-area>
     </div>
   </div>
@@ -105,8 +102,12 @@ export default {
     },
 
     validatorList: function() {
-      const { height, validatorsets } = this;
-      return get(validatorsets, [height, "validators"]);
+      const { height, validatorsets, consPubMap } = this;
+      const validatorset = get(validatorsets, [height, "validators"]);
+      if (isEmpty(validatorset)) {
+        return [];
+      }
+      return validatorset.map(i => get(consPubMap, [i.pub_key]));
     }
   },
   methods: {
