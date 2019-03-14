@@ -157,7 +157,6 @@ svg {
     height: 100%;
     padding: 0 36px 0 12px;
     border: 0;
-    box-shadow: none;
     background: transparent;
   }
 
@@ -187,6 +186,10 @@ svg {
 }
 
 @include responsive($sm) {
+  .header-container {
+    border-bottom: 1px solid $grey;
+  }
+
   .search-container {
     margin-top: $basic-padding;
   }

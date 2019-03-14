@@ -16,11 +16,6 @@ import Footer from "@/components/Footer/index.vue";
 
 import { mapState } from "vuex";
 
-/**
- * TODO:
- * 1. styles fix to fit mobile display
- */
-
 export default {
   components: { Header, Menu, Footer },
   computed: {

@@ -1,16 +1,18 @@
 <template>
   <div class="data-item">
     <p class="label">{{ label }}</p>
-    <p class="content"><slot/></p>
-  </div> 
+    <p class="content">
+      <slot />
+    </p>
+  </div>
 </template>
 
 <script>
 export default {
   props: {
     label: String
-  } 
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -18,9 +20,7 @@ $height: 36px;
 
 .data-item {
   display: flex;
-  height: $height;
-  line-height: $height;
-  // border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  margin-bottom: 12px;
 
   > .label {
     display: inline-block;
@@ -30,10 +30,14 @@ $height: 36px;
 
   > .content {
     color: rgba(0, 0, 0, 0.65);
+    width: 100%;
+    overflow: hidden;
   }
 }
 
-.data-item:last-child {
-  border-bottom: none;
+@include responsive($sm) {
+  .data-item {
+    flex-direction: column;
+  }
 }
 </style>

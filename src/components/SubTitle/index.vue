@@ -22,6 +22,9 @@ export default {
   background: white;
   padding: 0 $basic-padding;
   font-weight: bold;
+  box-shadow: $shadow;
+  width: 100%;
+  overflow: hidden;
 }
 .sub-title {
   margin-left: 16px;

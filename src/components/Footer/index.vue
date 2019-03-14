@@ -26,5 +26,13 @@ export default {};
     margin-right: $basic-margin;
   }
 }
+
+@include responsive($sm) {
+  .footer-container {
+    > img {
+      display: none;
+    }
+  }
+}
 </style>
 

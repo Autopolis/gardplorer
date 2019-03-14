@@ -31,7 +31,7 @@ export default {
   padding: 0;
   border-radius: 2px;
   color: rgba(0, 0, 0, 0.65);
-  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: $shadow;
   border: 1px solid rgba(0, 0, 0, 0.03);
   background: white;
 }
