@@ -1,8 +1,5 @@
 <template>
-  <card
-    title="validators"
-    class="validator-list-container"
-  >
+  <card title="validators">
     <validator-list :list='list' />
   </card>
 </template>
@@ -12,32 +9,10 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState("validators", ["list"]),
-    height: function() {
-      return this.$route.params.height;
-    },
-    data: function() {
-      const height = this.$route.params.height;
-      // if (height) {
-      //   return getValidator(height);
-      // }
-      return latest;
-    }
+    ...mapState("validators", ["list"])
   },
   mounted: function() {
-    const { $store } = this;
-    $store.dispatch("validators/fetchAll");
+    this.$store.dispatch("validators/fetchAll");
   }
 };
 </script>
-
-<style lang="scss">
-.validator-list-container {
-  margin: $basic-margin;
-  background: #fff;
-
-  .content {
-    padding: $basic-padding;
-  }
-}
-</style>

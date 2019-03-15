@@ -1,8 +1,5 @@
 <template>
-  <card
-    title="transactions"
-    class="transactions-card"
-  >
+  <card title="transactions">
     <div class="card-header">
       <div class="select-action">
         <el-select
@@ -103,29 +100,24 @@ export default {
 </script>
 
 <style lang="scss">
-.transactions-card {
-  margin: 32px;
-  background: #fff;
+.height {
+  color: $blue;
+}
 
-  .height {
-    color: $blue;
-  }
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
 
-  .card-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
-  }
-  .card-footer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 24px;
-  }
-
-  .select-action {
-    font-size: 16px;
-    margin-right: 16px;
-  }
+.select-action {
+  font-size: 16px;
+  margin-right: 16px;
 }
 </style>
 

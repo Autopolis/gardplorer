@@ -1,14 +1,11 @@
 <template>
-  <div
-    class="block-detail-container"
-    v-if="detail"
-  >
+  <div v-if="detail">
     <sub-title
       title="BLOCK"
       :sub="`#${height}`"
     />
     <div class="block-detail-content">
-      <data-area title="Block Information">
+      <card title="Block Information">
         <data-item label="Height">
           <span>{{ detail.header.height }}</span>
         </data-item>
@@ -28,26 +25,25 @@
             :ellipsis="false"
           />
         </data-item>
-
-      </data-area>
-      <data-area title="Last Block">
+      </card>
+      <card title="Last Block">
         <data-item label="Last Block Hash">
           {{ detail.last_commit.block_id.hash }}
         </data-item>
-      </data-area>
-      <data-area title="Transactions">
+      </card>
+      <card title="Transactions">
         <transaction-list
           :fields="fields"
           :load="load"
           :list="transactionList"
         />
-      </data-area>
-      <data-area
-        title="Validators"
+      </card>
+      <card
         v-if="validatorList"
+        title="Validators"
       >
         <validator-list :list="validatorList" />
-      </data-area>
+      </card>
     </div>
   </div>
 </template>
@@ -138,12 +134,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.block-detail-container {
-  width: 100%;
-}
-.block-detail-content {
-  padding: $basic-padding;
-}
-</style>

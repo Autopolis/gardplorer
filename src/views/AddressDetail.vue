@@ -1,5 +1,5 @@
 <template>
-  <div class="address-detail-container">
+  <div>
     <sub-title
       title="ADDRESS"
       :sub="address"
@@ -8,24 +8,24 @@
       class="address-detail-content"
       v-if="info"
     >
-      <data-area title="Address Information">
+      <card title="Address Information">
         <data-item label="Balance">
           <span> {{ get(info, [0, 'amount']) }} {{ get(info, [0, 'denom']) }} </span>
         </data-item>
         <data-item label="Address">
           <span>{{ address }}</span>
         </data-item>
-      </data-area>
-      <data-area
-        title="Transaction List"
+      </card>
+      <card
         v-if="!isEmpty(transactionList)"
+        title="Transaction List"
       >
         <transaction-list
           :fields="send.filter(i => !i.hideInTable)"
           :load="load"
           :list="transactionList"
         />
-      </data-area>
+      </card>
     </div>
   </div>
 </template>
@@ -69,12 +69,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.address-detail-container {
-  width: 100%;
-}
-.address-detail-content {
-  padding: $basic-padding;
-}
-</style>

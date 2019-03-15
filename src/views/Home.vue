@@ -8,7 +8,6 @@
         <Card
           title="blocks"
           link="/block"
-          class="card"
         >
           <ul>
             <li
@@ -35,7 +34,6 @@
         <Card
           title="transactions"
           link="/tx"
-          class="card"
         >
           <ul>
             <li
@@ -97,23 +95,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home-container {
-  margin: $basic-margin;
-}
-
-.home-container > .card {
-  flex: 1;
-  background: #fff;
-}
-.home-container > .card:nth-child(1) {
-  margin-right: $basic-margin;
-}
-
 .home-container .item {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 16px;
+  padding: 16px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   font-size: 14px;
 

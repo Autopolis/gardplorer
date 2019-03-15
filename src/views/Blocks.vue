@@ -1,8 +1,5 @@
 <template>
-  <card
-    title="blocks"
-    class="blocks-card"
-  >
+  <card title="blocks">
     <div class="card-header">
       <p>TOTAL AMOUNT: {{ lastHeight }}</P>
     </div>
@@ -100,22 +97,17 @@ export default {
 </script>
 
 <style lang="scss">
-.blocks-card {
-  margin: $basic-margin;
-  background: #fff;
+.height {
+  color: $blue;
+}
 
-  .height {
-    color: $blue;
-  }
-
-  .card-header {
-    margin-bottom: 24px;
-  }
-  .card-footer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 24px;
-  }
+.card-header {
+  margin-bottom: 24px;
+}
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
 }
 </style>
 

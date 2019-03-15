@@ -20,16 +20,25 @@ export default {
   height: 64px;
   line-height: 64px;
   background: white;
-  padding: 0 $basic-padding;
   font-weight: bold;
   box-shadow: $shadow;
   width: 100%;
   overflow: hidden;
+  box-sizing: content-box;
+  padding: 0 $basic-padding;
+  margin: 0 -24px;
 }
 .sub-title {
   margin-left: 16px;
   color: #606266;
   font-weight: normal;
+}
+
+@include responsive($sm) {
+  .sub-title-container {
+    padding: 0 16px;
+    margin: 0 -16px;
+  }
 }
 </style>
 

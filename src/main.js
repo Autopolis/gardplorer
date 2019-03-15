@@ -12,7 +12,6 @@ import Link from '@/components/Link';
 import TransactionList from '@/components/TransactionList';
 import ValidatorList from '@/components/ValidatorList';
 import SubTitle from '@/components/SubTitle';
-import DataArea from '@/components/DataArea/index.vue';
 import DataItem from '@/components/DataArea/item.vue';
 
 Vue.config.productionTip = false;
@@ -32,7 +31,6 @@ Vue.component('hg-link', Link);
 Vue.component('transaction-list', TransactionList);
 Vue.component('validator-list', ValidatorList);
 Vue.component('sub-title', SubTitle);
-Vue.component('data-area', DataArea);
 Vue.component('data-item', DataItem);
 
 new Vue({

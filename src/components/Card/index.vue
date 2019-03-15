@@ -34,7 +34,7 @@ export default {
   box-shadow: $shadow;
   border: 1px solid rgba(0, 0, 0, 0.03);
   background: white;
-  margin-bottom: 24px;
+  margin: 24px 0;
 }
 
 .header {
@@ -58,6 +58,12 @@ export default {
 .content {
   min-height: 50px;
   padding: $basic-padding;
+}
+
+@include responsive($sm) {
+  .content {
+    padding: 16px;
+  }
 }
 </style>
 

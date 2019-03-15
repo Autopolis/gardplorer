@@ -1,11 +1,11 @@
 <template>
-  <div class="validator-detail-container">
+  <div>
     <sub-title
       title="VALIDATOR"
       :sub="address"
     />
     <div class="content">
-      <data-area
+      <card
         title="Validator Profile"
         v-if="detail"
       >
@@ -30,8 +30,9 @@
         <data-item label="Identity">
           <span>{{ detail.description.Identity || '-' }}</span>
         </data-item>
-      </data-area>
-      <data-area
+      </card>
+
+      <card
         title="Current Status"
         v-if="detail"
       >
@@ -41,16 +42,13 @@
         <data-item label="Jailed">
           <span>{{ detail.jailed ? 'True' : 'False' }}</span>
         </data-item>
-        <!-- <data-item label="Bond Height">
-          <hg-link type="block" :content="detail.bond_height"/>
-        </data-item> -->
         <data-item label="Unbonding Height">
           <span>{{ detail.unbonding_height || '-' }}</span>
         </data-item>
         <data-item label="Unbonding Time">
           <span>{{ detail.unbonding_time | formatTime }}</span>
         </data-item>
-      </data-area>
+      </card>
     </div>
   </div>
 </template>
@@ -79,11 +77,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.validator-detail-container .content {
-  padding: $basic-padding;
-}
-</style>
-
-

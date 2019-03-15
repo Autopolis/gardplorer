@@ -1,5 +1,5 @@
 <template>
-  <div class="transaction-detail-container">
+  <div>
     <sub-title
       title="TRANSACTION"
       :sub="hash"
@@ -8,7 +8,7 @@
       class="transaction-detail-content"
       v-if="detail"
     >
-      <data-area title="Transaction Information">
+      <card title="Transaction Information">
         <data-item
           v-for="item in fields[type]"
           :key="item.name"
@@ -24,7 +24,7 @@
             {{ item.field instanceof Array ? item.field.map(i => get(detail, i)).join(' ') : get(detail, item.field) || '-'}}
           </span>
         </data-item>
-      </data-area>
+      </card>
     </div>
   </div>
 </template>
@@ -64,15 +64,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.transaction-detail-container {
-  width: 100%;
-}
-
-.transaction-detail-content {
-  padding: $basic-padding;
-}
-</style>
-
-
