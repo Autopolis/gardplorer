@@ -109,7 +109,7 @@ export default {
       return Promise.resolve();
     },
     fetchAddressTxList: async function(context, params = { action: 'send', page: 1 }) {
-      params.limit = context.state.pageSize;
+      params.limit = 100;
       context.commit('setLoad', true);
 
       // 1. query txs as sender
