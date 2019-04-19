@@ -6,6 +6,7 @@ import BlockDetail from './views/BlockDetail.vue';
 import Transactions from './views/Transactions.vue';
 import TransactionDetail from './views/TransactionDetail.vue';
 import AddressDetail from './views/AddressDetail.vue';
+import Proposals from './views/Proposals.vue';
 import Validators from './views/Validators.vue';
 import ValidatorDetail from './views/ValidatorDetail.vue';
 import NotFound from './views/NotFound.vue';
@@ -62,6 +63,22 @@ export default new Router({
       path: '/address/:address',
       name: 'addressDetail',
       component: AddressDetail
+    },
+    {
+      path: '/proposal',
+      component: View,
+      children: [
+        {
+          path: '',
+          name: 'proposals',
+          component: Proposals
+        }
+        // {
+        //   path: ':id',
+        //   name: 'proposalDetail',
+        //   component: ProposalDetail
+        // }
+      ]
     },
     {
       path: '/validator',
