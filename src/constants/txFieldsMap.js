@@ -36,8 +36,9 @@ export const txFieldsMap = {
     },
     {
       name: 'Amount',
-      field: ['tx.value.msg.0.value.amount.0.amount', 'tx.value.msg.0.value.amount.0.denom'],
-      linkType: ''
+      field: 'tx.value.msg.0.value.amount',
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Gas Used',

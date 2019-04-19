@@ -21,7 +21,12 @@
             :ellipsis="false"
           />
           <span v-if="!item.linkType">
-            {{ item.field instanceof Array ? item.field.map(i => get(detail, i)).join(' ') : get(detail, item.field) || '-'}}
+            <span v-if="item.name === 'Amount'">
+              {{get(detail, item.field) | amount}}
+            </span>
+            <span v-else>
+              {{ item.field instanceof Array ? item.field.map(i => get(detail, i)).join(' ') : get(detail, item.field) || '-'}}
+            </span>
           </span>
         </data-item>
       </card>
