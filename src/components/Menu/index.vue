@@ -15,16 +15,6 @@
         class="link"
       >{{item.name.toUpperCase()}}</RouterLink>
     </el-menu-item>
-    <el-menu-item
-      index="5"
-      class="item"
-    >
-      <a
-        href="https://www.hashgard.pro"
-        target="_blank"
-        class="link"
-      >FAUCET</a>
-    </el-menu-item>
   </el-menu>
 </template>
 
