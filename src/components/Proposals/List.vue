@@ -1,19 +1,22 @@
 <template>
   <el-table :data="list">
-    <el-table-column
-      label="ID"
-      prop="value.proposal_id"
-    >
+    <el-table-column label="ID">
+      <template slot-scope="scope">
+        <hg-link
+          type="proposal"
+          :content="scope.row.value.proposal_id"
+        />
+      </template>
     </el-table-column>
     <el-table-column
       label="TITLE"
       prop="value.title"
     >
     </el-table-column>
-    <el-table-column label="TYPE">
-      <template slot-scope="scope">
-        {{ scope.row.type.split('/')[1] }}
-      </template>
+    <el-table-column
+      label="TYPE"
+      prop="value.proposal_type"
+    >
     </el-table-column>
     <el-table-column
       label="STATUS"

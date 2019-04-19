@@ -7,6 +7,7 @@ import Transactions from './views/Transactions.vue';
 import TransactionDetail from './views/TransactionDetail.vue';
 import AddressDetail from './views/AddressDetail.vue';
 import Proposals from './views/Proposals.vue';
+import ProposalDetail from './components/Proposals/Detail.vue';
 import Validators from './views/Validators.vue';
 import ValidatorDetail from './views/ValidatorDetail.vue';
 import NotFound from './views/NotFound.vue';
@@ -72,12 +73,12 @@ export default new Router({
           path: '',
           name: 'proposals',
           component: Proposals
+        },
+        {
+          path: ':id',
+          name: 'proposalDetail',
+          component: ProposalDetail
         }
-        // {
-        //   path: ':id',
-        //   name: 'proposalDetail',
-        //   component: ProposalDetail
-        // }
       ]
     },
     {

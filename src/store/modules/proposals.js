@@ -30,7 +30,7 @@ export default {
       context.commit('setList', data);
       return Promise.resolve();
     },
-    fetch: async function(context, id) {
+    fetchDetail: async function(context, id) {
       // check if existed;
       if (!isEmpty(context.state.details[id])) {
         return Promise.resolve();

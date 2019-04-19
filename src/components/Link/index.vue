@@ -15,6 +15,10 @@
     v-else-if="type === 'block'"
   >{{ content }}</router-link>
   <router-link
+    :to="`/proposal/${content}`"
+    v-else-if="type === 'proposal'"
+  >{{ content }}</router-link>
+  <router-link
     :to="`/validator/${content}`"
     :class="`${ellipsis ? 'ellipsis' : ''}`"
     v-else-if="type === 'validator'"
@@ -27,7 +31,7 @@ export default {
     content: String,
     ellipsis: { type: Boolean, default: true }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
