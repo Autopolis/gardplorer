@@ -7,7 +7,7 @@
     <el-menu-item
       v-for="(item, i) in menu"
       :key="item.name"
-      :index="i"
+      :index="`${i}`"
       class="item"
     >
       <RouterLink
