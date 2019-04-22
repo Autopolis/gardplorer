@@ -52,13 +52,6 @@
             >
               {{item.name}}
             </el-dropdown-item>
-            <el-dropdown-item>
-              <a
-                href="https://www.hashgard.pro"
-                target="_blank"
-                style="color:#606266"
-              >Faucet</a>
-            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
