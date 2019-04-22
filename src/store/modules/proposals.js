@@ -22,7 +22,7 @@ export default {
   actions: {
     fetchList: async function(context) {
       context.commit('setLoad', true);
-      const { data } = await $ajax.get('/gov/proposals');
+      const { data } = await $ajax.get('/api/gov/proposals');
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
@@ -36,7 +36,7 @@ export default {
         return Promise.resolve();
       }
       context.commit('setLoad', true);
-      const { data } = await $ajax.get(`/gov/proposals/${id}`);
+      const { data } = await $ajax.get(`/api/gov/proposals/${id}`);
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
