@@ -58,11 +58,6 @@ export const txFieldsMap = {
   delegate: [
     ...defaultFields,
     {
-      name: 'Validator',
-      field: 'tx.value.msg.0.value.validator_addr',
-      linkType: 'validator'
-    },
-    {
       name: 'Delegator',
       field: 'tags.1.value',
       linkType: 'address'
@@ -109,7 +104,8 @@ export const txFieldsMap = {
     {
       name: 'End Time',
       field: 'tags.4.value',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Gas Used',
@@ -138,7 +134,8 @@ export const txFieldsMap = {
     {
       name: 'End Time',
       field: 'tags.4.value',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Gas Used',
@@ -167,27 +164,31 @@ export const txFieldsMap = {
     {
       name: 'Moniker',
       field: 'tags.2.value',
-      linkType: '',
+      linkType: ''
     },
     {
       name: 'Commission Rate',
       field: 'tx.value.msg.0.value.commission',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Min Self Delegation',
       field: 'tx.value.msg.0.value.min_self_delegation',
       linkType: '',
+      hideInTable: true
     },
     {
       name: 'Identity',
       field: 'tags.3.value',
       linkType: '',
+      hideInTable: true
     },
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.description',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Gas Used',
@@ -200,43 +201,43 @@ export const txFieldsMap = {
     ...defaultFields,
     {
       name: 'Validator',
-      field: 'tx.value.msg.0.value.validator_address',
+      field: 'tx.value.msg.0.value.address',
       linkType: 'validator'
     },
     {
-      name: 'Owner',
-      field: 'tx.value.msg.0.value.delegator_address',
-      linkType: 'address'
-    },
-    {
       name: 'Moniker',
-      field: 'tx.value.msg.0.value.moniker',
-      linkType: '',
+      field: 'tx.value.msg.0.value.Description.moniker',
+      linkType: ''
     },
     {
       name: 'Identity',
-      field: 'tx.value.msg.0.value.identity',
+      field: 'tx.value.msg.0.value.Description.identity',
       linkType: '',
+      hideInTable: true
     },
     {
       name: 'Website',
-      field: 'tx.value.msg.0.value.website',
+      field: 'tx.value.msg.0.value.Description.website',
       linkType: '',
+      hideInTable: true
     },
     {
       name: 'Details',
-      field: 'tx.value.msg.0.value.details',
+      field: 'tx.value.msg.0.value.Description.details',
       linkType: '',
+      hideInTable: true
     },
     {
       name: 'Commission Rate',
       field: 'tx.value.msg.0.value.commission_rate',
       linkType: '',
+      hideInTable: true
     },
     {
       name: 'Min Self Delegation',
       field: 'tx.value.msg.0.value.min_self_delegation',
       linkType: '',
+      hideInTable: true
     },
     {
       name: 'Gas Used',
@@ -534,12 +535,8 @@ export const txFieldsMap = {
     {
       name: 'Owner',
       field: 'tx.value.msg.0.value.owner',
-      linkType: 'address'
-    },
-    {
-      name: 'Issue Time',
-      field: 'tx.value.msg.0.value.issue_time',
-      linkType: ''
+      linkType: 'address',
+      hideInTable: true
     },
     {
       name: 'Token Name',
@@ -549,7 +546,8 @@ export const txFieldsMap = {
     {
       name: 'Issue Time',
       field: 'tx.value.msg.0.value.issue_time',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Token Symbol',
@@ -559,37 +557,44 @@ export const txFieldsMap = {
     {
       name: 'Total Supply',
       field: 'tx.value.msg.0.value.total_supply',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Decimals',
       field: 'tx.value.msg.0.value.decimals',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.description',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Burning Off Function',
       field: 'tx.value.msg.0.value.burning_off',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Burning From Off Function',
       field: 'tx.value.msg.0.value.burning_from_off',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Burning Any Off Function',
       field: 'tx.value.msg.0.value.burning_any_off',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Minting Finished Function',
       field: 'tx.value.msg.0.value.minting_finished',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Memo',
@@ -649,7 +654,8 @@ export const txFieldsMap = {
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.description',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Memo',
@@ -684,12 +690,14 @@ export const txFieldsMap = {
     {
       name: 'Decimals',
       field: 'tx.value.msg.0.value.decimals',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'To',
       field: 'tx.value.msg.0.value.to',
-      linkType: 'address'
+      linkType: 'address',
+      hideInTable: true
     },
     {
       name: 'Memo',
