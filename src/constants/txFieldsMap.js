@@ -88,17 +88,17 @@ export const txFieldsMap = {
     ...defaultFields,
     {
       name: 'Validator From',
-      field: 'tx.value.msg.0.value.validator_src_addr',
+      field: 'tx.value.msg.0.value.validator_src_address',
       linkType: 'validator'
     },
     {
       name: 'Validator To',
-      field: 'tx.value.msg.0.value.validator_dst_addr',
+      field: 'tx.value.msg.0.value.validator_dst_address',
       linkType: 'validator'
     },
     {
       name: 'Delegator',
-      field: 'tx.value.msg.0.value.delegator_addr',
+      field: 'tx.value.msg.0.value.delegator_address',
       linkType: 'address'
     },
     {
@@ -122,12 +122,12 @@ export const txFieldsMap = {
     ...defaultFields,
     {
       name: 'Validator',
-      field: 'tx.value.msg.0.value.validator_addr',
+      field: 'tx.value.msg.0.value.validator_address',
       linkType: 'validator'
     },
     {
       name: 'Delegator',
-      field: 'tx.value.msg.0.value.delegator_addr',
+      field: 'tx.value.msg.0.value.delegator_address',
       linkType: 'address'
     },
     {
