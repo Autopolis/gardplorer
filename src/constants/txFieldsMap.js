@@ -524,75 +524,69 @@ export const txFieldsMap = {
     ...defaultFields,
     {
       name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
+      field: 'tags.2.value',
       linkType: ''
     },
     {
       name: 'Issuer',
-      field: 'tx.value.msg.0.value.issuer',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.issuer',
       linkType: 'address'
     },
     {
       name: 'Owner',
-      field: 'tx.value.msg.0.value.owner',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.owner',
       linkType: 'address',
       hideInTable: true
     },
     {
       name: 'Token Name',
-      field: 'tx.value.msg.0.value.name',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.name',
       linkType: ''
     },
     {
-      name: 'Issue Time',
-      field: 'tx.value.msg.0.value.issue_time',
-      linkType: '',
-      hideInTable: true
-    },
-    {
       name: 'Token Symbol',
-      field: 'tx.value.msg.0.value.symbol',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.symbol',
       linkType: ''
     },
     {
       name: 'Total Supply',
-      field: 'tx.value.msg.0.value.total_supply',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.total_supply',
       linkType: '',
       hideInTable: true
     },
     {
       name: 'Decimals',
-      field: 'tx.value.msg.0.value.decimals',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.decimals',
       linkType: '',
       hideInTable: true
     },
     {
       name: 'Description',
-      field: 'tx.value.msg.0.value.description',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.description',
       linkType: '',
       hideInTable: true
     },
     {
       name: 'Burning Off Function',
-      field: 'tx.value.msg.0.value.burning_off',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.burning_off',
       linkType: '',
       hideInTable: true
     },
     {
       name: 'Burning From Off Function',
-      field: 'tx.value.msg.0.value.burning_from_off',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.burning_from_off',
       linkType: '',
       hideInTable: true
     },
     {
       name: 'Burning Any Off Function',
-      field: 'tx.value.msg.0.value.burning_any_off',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.burning_any_off',
       linkType: '',
       hideInTable: true
     },
     {
       name: 'Minting Finished Function',
-      field: 'tx.value.msg.0.value.minting_finished',
+      field: 'tx.value.msg.0.value.CoinIssueInfo.minting_finished',
       linkType: '',
       hideInTable: true
     },
@@ -757,7 +751,8 @@ export const txFieldsMap = {
     {
       name: 'Burn From',
       field: 'tx.value.msg.0.value.from',
-      linkType: 'address'
+      linkType: 'address',
+      hideInTable: true
     },
     {
       name: 'Amount',
