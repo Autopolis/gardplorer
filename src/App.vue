@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <Header :netName="netName" />
-    <Menu />
     <div class="main">
       <RouterView />
     </div>
@@ -11,13 +10,12 @@
 
 <script>
 import Header from "@/components/Header/index.vue";
-import Menu from "@/components/Menu/index.vue";
 import Footer from "@/components/Footer/index.vue";
 
 import { mapState } from "vuex";
 
 export default {
-  components: { Header, Menu, Footer },
+  components: { Header, Footer },
   computed: {
     ...mapState({
       netName: store => store.basic.name
@@ -37,7 +35,7 @@ body {
   font-family: "PingFangSC", Microsoft YaHei, "Helvetica Neue", Helvetica, Arial,
     STHeiTi, sans-serif;
   color: black(0.85);
-  background: #f0f2f5;
+  background: $background;
 }
 
 #app {

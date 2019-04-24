@@ -14,7 +14,7 @@ export default {
     validatorsets: {}
   },
   getters: {
-    lastList: state => state.list.slice(0, 20),
+    lastList: state => state.list.slice(0, 5),
     list: state => {
       const { list, details, validatorsets } = state;
       return list.map(item => {
@@ -64,7 +64,7 @@ export default {
       const lastHeight = get(result, 'last_height');
 
       page && context.commit('setCurrentPage', page);
-      context.commit('setList', list.slice(0, 10));
+      context.commit('setList', list);
       context.commit('setLastHeight', lastHeight);
 
       list.forEach(item => {

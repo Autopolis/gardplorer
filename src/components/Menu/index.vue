@@ -1,19 +1,20 @@
 <template>
   <el-menu
-    :default-active="activeIndex"
+    :default-active="$route.path"
+    @select="handleSelect"
     class="menu-container"
     mode="horizontal"
+    background-color="transparent"
+    text-color="rgba(255,255,255,0.8)"
+    active-text-color="#00fffb"
   >
     <el-menu-item
-      v-for="(item, i) in menu"
-      :key="item.name"
-      :index="`${i}`"
+      v-for="item in menu"
+      :key="item.link"
+      :index="item.link"
       class="item"
     >
-      <RouterLink
-        :to="item.link"
-        class="link"
-      >{{item.name.toUpperCase()}}</RouterLink>
+      {{item.name.toUpperCase()}}
     </el-menu-item>
   </el-menu>
 </template>
@@ -24,41 +25,28 @@ import { menu } from "@/constants";
 export default {
   data() {
     return {
-      activeIndex: "0",
       menu
     };
+  },
+  methods: {
+    handleSelect(key) {
+      this.$router.push(key);
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .menu-container {
-  width: 100%;
-  height: 64px;
-  background: $blue;
   border-bottom: none;
+  padding-right: 40px;
 
-  > .item {
-    height: 100%;
-    padding: 0;
-    border-bottom: none;
-    font-size: 16px;
-  }
-
-  > .item .link {
-    display: block;
-    height: 100%;
-    padding: 0 28px;
-    background: $blue;
-    color: rgba(255, 255, 255, 0.8);
-    transition: all 350ms ease-in-out;
-  }
-
-  > .item .link:hover,
-  > .item .router-link-active {
-    color: #fff;
-    background: $deepBlue;
-    border-right: none;
+  .item {
+    transition: $trans;
+    &:hover {
+      background-color: transparent !important;
+      color: #00fffb !important;
+    }
   }
 
   a {

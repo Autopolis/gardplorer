@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import '@/styles/element-variables.scss';
 import App from './App.vue';
 import router from './router';
 import * as filters from '@/utils/filters.js';
