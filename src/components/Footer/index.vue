@@ -19,8 +19,6 @@ export default {};
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.8);
-  // background: $deepBlue;
-  margin-top: $basic-margin;
 
   > img {
     margin-right: $basic-margin;

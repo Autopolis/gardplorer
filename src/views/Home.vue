@@ -160,7 +160,7 @@ export default {
   .home-panel {
     text-align: center;
     padding: 24px 0;
-    margin-top: 16px;
+    margin-top: 24px;
     height: 146px;
     overflow: hidden;
     background: white;
