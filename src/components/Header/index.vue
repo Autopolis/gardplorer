@@ -25,7 +25,7 @@
       </el-select>
 
       <div
-        v-if="$route.path !== '/home'"
+        v-if="!isMobile && $route.path !== '/home'"
         :class="`search ${expandSearch?'show':''}`"
       >
         <InputSearch
@@ -57,10 +57,14 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-    <div v-if="$route.path === '/home'">
-      <div class="header-title">Blockchain Explorer</div>
-      <InputSearch class="title-search" />
-    </div>
+    <div
+      v-if="$route.path === '/home'"
+      class="header-title"
+    >Blockchain Explorer</div>
+    <InputSearch
+      v-if="isMobile || $route.path === '/home'"
+      class="title-search"
+    />
   </div>
 </template>
 
@@ -75,6 +79,7 @@ export default {
   data() {
     return {
       expandSearch: false,
+      isMobile: !!navigator.userAgent.match(/iPad|iPhone|Android/),
       menu,
       menuIcon: `<svg class="icon" fill="#fff" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1605"><path d="M981.333333 554.666667 42.666667 554.666667c-23.466667 0-42.666667-19.2-42.666667-42.666667 0-23.466667 19.2-42.666667 42.666667-42.666667l938.666667 0c23.466667 0 42.666667 19.2 42.666667 42.666667C1024 535.466667 1004.8 554.666667 981.333333 554.666667zM981.333333 213.333333 42.666667 213.333333c-23.466667 0-42.666667-19.2-42.666667-42.666667s19.2-42.666667 42.666667-42.666667l938.666667 0c23.466667 0 42.666667 19.2 42.666667 42.666667S1004.8 213.333333 981.333333 213.333333zM42.666667 810.666667l938.666667 0c23.466667 0 42.666667 19.2 42.666667 42.666667 0 23.466667-19.2 42.666667-42.666667 42.666667L42.666667 896c-23.466667 0-42.666667-19.2-42.666667-42.666667C0 829.866667 19.2 810.666667 42.666667 810.666667z" p-id="1606"></path></svg>`
     };
@@ -101,7 +106,7 @@ export default {
   padding: 0px 40px;
 
   .header {
-    height: 64px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -130,7 +135,7 @@ export default {
   }
   .title-search {
     max-width: 640px;
-    margin: 80px auto;
+    margin: 64px auto 100px;
   }
 }
 
@@ -143,7 +148,11 @@ export default {
 @include responsive($sm) {
   .header-container {
     padding: 0px 24px;
-    border-bottom: 1px solid $grey;
+    // border-bottom: 1px solid $grey;
+    .header-title,
+    .title-search {
+      margin: 16px auto 32px;
+    }
   }
 
   .menuBtn {

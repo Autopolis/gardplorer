@@ -1,9 +1,9 @@
 <template>
   <div class="footer-container">
-    <img
+    <!-- <img
       class="logo"
       src="~@/assets/logo-white.png"
-    />
+    /> -->
     <p>POWERED BY GARDPLORER.IO</p>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {};
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.8);
-  background: $deepBlue;
+  // background: $deepBlue;
   margin-top: $basic-margin;
 
   > img {

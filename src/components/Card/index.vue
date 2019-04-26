@@ -1,7 +1,7 @@
 <template>
   <div class="card-container">
     <div class="header">
-      <p>{{ title.toUpperCase() }}</p>
+      <p v-if="title">{{ title | upper }}</p>
       <RouterLink
         :to="link"
         class="link"
@@ -29,7 +29,7 @@ export default {
 .card-container {
   position: relative;
   padding: 0;
-  border-radius: 2px;
+  border-radius: 8px;
   color: rgba(0, 0, 0, 0.65);
   box-shadow: $shadow;
   border: 1px solid rgba(0, 0, 0, 0.03);

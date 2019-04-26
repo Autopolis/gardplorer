@@ -1,5 +1,44 @@
 <template>
   <div class="home-container">
+    <el-row :gutter="16">
+      <el-col
+        :xs="12"
+        :sm="6"
+      >
+        <div class="home-panel">
+          <p>Block Height</p>
+          <span>{{get(blocksLastList, `0.header.height`)}}</span>
+        </div>
+      </el-col>
+      <el-col
+        :xs="12"
+        :sm="6"
+      >
+        <div class="home-panel">
+          <p>Avg Block Time</p>
+          <span>{{blockTime}}</span> S
+        </div>
+      </el-col>
+      <el-col
+        :xs="12"
+        :sm="6"
+      >
+        <div class="home-panel">
+          <p>Validators</p>
+          <span>{{validatorOnlineList.length}} / {{validatorList.length}}</span>
+        </div>
+      </el-col>
+      <el-col
+        :xs="12"
+        :sm="6"
+      >
+        <div class="home-panel">
+          <p>Bonded Tokens</p>
+          <span>{{bonded}}</span>
+        </div>
+      </el-col>
+    </el-row>
+
     <el-row :gutter="24">
       <el-col
         :xs="24"
@@ -37,7 +76,7 @@
         >
           <ul>
             <li
-              v-for="(item, index) in transactionsLastList"
+              v-for="(item, index) in txLastList"
               :key="index"
               class="item transactions"
             >
@@ -65,18 +104,36 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
+import moment from "dayjs";
 import { get } from "lodash";
 
 export default {
   name: "Home",
   interval: null,
   computed: {
+    ...mapState("blocks", { blockList: "list" }),
+    ...mapState("validators", { validatorList: "list" }),
+    ...mapGetters("validators", { validatorOnlineList: "onlineList" }),
     ...mapGetters("blocks", { blocksLastList: "lastList" }),
-    ...mapState("transactions", { transactionsLastList: "lastList" })
+    ...mapGetters("transactions", { txLastList: "lastList" }),
+    blockTime() {
+      if (!this.blockList.length) return 0;
+      const first = moment(this.blockList[0].header.time).unix();
+      const last = moment(
+        this.blockList[this.blockList.length - 1].header.time
+      ).unix();
+      return ((first - last) / this.blockList.length).toFixed(2);
+    },
+    bonded() {
+      const v = this.validatorList.reduce((a, b) => b.tokens - 0 + a, 0);
+      return (v / 1000 / 1000).toFixed(2) + "M";
+    }
   },
   methods: {
+    get,
     fetchData: function() {
       this.$store.dispatch("blocks/fetchList");
+      this.$store.dispatch("validators/fetchAll");
       this.$store.dispatch("transactions/fetchLastList");
     }
   },
@@ -95,19 +152,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home-container .item {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 14px;
+.home-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 
-  > p {
-    margin-bottom: 10px;
+  .home-panel {
+    text-align: center;
+    padding: 24px 0;
+    margin-top: 16px;
+    height: 146px;
+    overflow: hidden;
+    background: white;
+    border-radius: 8px;
+    box-shadow: $shadow;
+    font-size: 1.2em;
+
+    p {
+      margin-bottom: 16px;
+    }
+    span {
+      font-size: 36px;
+    }
   }
-  > p:last-child {
-    margin-bottom: 0;
+  .item {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+
+    > p {
+      margin-bottom: 10px;
+    }
+    > p:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 

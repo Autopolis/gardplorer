@@ -11,6 +11,10 @@ export default {
     details: {}
   },
 
+  getters: {
+    onlineList: state => state.list.filter(i => !i.jailed)
+  },
+
   mutations: {
     setList: function(state, data) {
       set(state, 'list', data);

@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: {
     mini: Boolean,
@@ -27,6 +28,9 @@ export default {
     return {
       value: ""
     };
+  },
+  computed: {
+    ...mapGetters("blocks", { blocksLastList: "lastList" })
   },
   methods: {
     expandSearch() {
@@ -46,6 +50,10 @@ export default {
       // jump to block detail page;
       const numberPattern = /^\d+$/g;
       if (numberPattern.test(value)) {
+        if (value - 0 > this.blocksLastList[0].header.height - 0) {
+          this.$router.push("/notFound");
+          return false;
+        }
         this.$router.push({ path: "/block/" + value });
         return false;
       }
