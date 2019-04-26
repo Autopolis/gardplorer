@@ -10,7 +10,7 @@
     >
       <card title="Address Information">
         <data-item label="Balance">
-          <span> {{ get(info, [0, 'amount']) }} {{ get(info, [0, 'denom']) }} </span>
+          <span> {{ info | amount }}</span>
         </data-item>
         <data-item label="Address">
           <span>{{ address }}</span>
