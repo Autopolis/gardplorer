@@ -19,7 +19,7 @@ export default {
 .sub-title-container {
   height: 64px;
   line-height: 64px;
-  background: rgba(255, 255, 255, 0.86);
+  background: white;
   font-weight: bold;
   box-shadow: $shadow;
   width: 100%;
