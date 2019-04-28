@@ -8,6 +8,8 @@ import TransactionDetail from './views/TransactionDetail.vue';
 import AddressDetail from './views/AddressDetail.vue';
 import Proposals from './views/Proposals.vue';
 import ProposalDetail from './components/Proposals/Detail.vue';
+import Tokens from './views/Tokens.vue';
+import TokenDetail from './components/Tokens/Detail.vue';
 import Validators from './views/Validators.vue';
 import ValidatorDetail from './views/ValidatorDetail.vue';
 import NotFound from './views/NotFound.vue';
@@ -78,6 +80,22 @@ export default new Router({
           path: ':id',
           name: 'proposalDetail',
           component: ProposalDetail
+        }
+      ]
+    },
+    {
+      path: '/token',
+      component: View,
+      children: [
+        {
+          path: '',
+          name: 'tokens',
+          component: Tokens
+        },
+        {
+          path: ':id',
+          name: 'tokenDetail',
+          component: TokenDetail
         }
       ]
     },

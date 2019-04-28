@@ -19,6 +19,10 @@
     v-else-if="type === 'proposal'"
   >{{ content }}</router-link>
   <router-link
+    :to="`/token/${content}`"
+    v-else-if="type === 'token'"
+  >{{ content }}</router-link>
+  <router-link
     :to="`/validator/${content}`"
     :class="`${ellipsis ? 'ellipsis' : ''}`"
     v-else-if="type === 'validator'"
