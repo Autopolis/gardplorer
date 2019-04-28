@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import TokenList from "@/components/Tokens/List.vue";
 
 export default {
@@ -29,14 +29,13 @@ export default {
   },
   methods: {
     onPageChange: function(currentPage) {
-      const { pageSize, totalCount } = this;
-      const page = Math.ceil(totalCount / pageSize) - currentPage + 1;
       this.$store.dispatch("tokens/fetchList", {
-        page
+        page: currentPage
       });
     }
   },
-  mounted: function() {
+  mounted: async function() {
+    await this.$store.dispatch("tokens/fetchTotalCount");
     this.$store.dispatch("tokens/fetchList");
   }
 };

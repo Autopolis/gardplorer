@@ -5,6 +5,7 @@ export default {
   namespaced: true,
   state: {
     pageSize: 20,
+    currentPage: 1,
     totalCount: 0,
     list: [],
     details: {},
@@ -25,15 +26,32 @@ export default {
     }
   },
   actions: {
+    fetchTotalCount: async function(context, params = { action: 'send', page: 1 }) {
+      context.commit('setLoad', true);
+      const { data } = await $ajax.get('/api/issue/list', { params: { limit: 1 } });
+      context.commit('setLoad', false);
+      if (isEmpty(data)) {
+        return Promise.reject();
+      }
+      const total = (parseInt(data[0].issue_id.slice(4), 16) + '').slice(1) - 0 + 1;
+      context.commit('setTotalCount', total);
+      return Promise.resolve();
+    },
     fetchList: async function(context, params = { page: 1 }) {
-      params.limit = context.state.pageSize;
+      const { pageSize, totalCount } = context.state;
+      params.limit = pageSize;
+
+      // change page to start-issue-id
+      const startId = `coin${(1e11 + totalCount - pageSize * (params.page - 1)).toString(16)}`;
+      params.start_issue_id = startId;
+      delete params.page;
+
       context.commit('setLoad', true);
       const { data } = await $ajax.get('/api/issue/list', { params });
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
       }
-      context.commit('setTotalCount', Number(data.totalCount));
       context.commit('setList', data);
       return Promise.resolve();
     },
