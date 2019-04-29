@@ -1,15 +1,18 @@
 <template>
   <div :class="`search-container ${mini && !expand?'mini':''}`">
-    <input
+    <el-autocomplete
       ref="input"
       class="search-inner"
-      placeholder="Search by Address/Txhash/Block"
-      suffix-icon="el-icon-search"
+      placeholder="Token ID/ Token Symbol/ Address/ Txhash/ Block"
       v-model.trim="value"
+      :fetch-suggestions="querySearch"
+      :trigger-on-focus="false"
       @keyup.enter="onSearch"
       @blur="onBlur"
+      @select="handleSelect"
+      :clearable="!mini"
       autofocus
-    />
+    ></el-autocomplete>
     <i
       class="el-icon-search search-icon"
       @click="expandSearch"
@@ -19,6 +22,8 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { isEmpty } from "lodash";
+
 export default {
   props: {
     mini: Boolean,
@@ -44,6 +49,26 @@ export default {
         this.$emit("blur");
       }
     },
+    querySearch: async function(queryString, cb) {
+      cb([]);
+      if (isEmpty(queryString)) {
+        return;
+      }
+      const data = await this.$store.dispatch("tokens/search", {
+        symbol: queryString
+      });
+      if (isEmpty(data)) {
+        return;
+      }
+      const res = data.map(i => {
+        i.value = `${i.symbol} ( ${i.name} ${i.issue_id} )`;
+        return i;
+      });
+      cb(res);
+    },
+    handleSelect(v) {
+      this.$router.push(`/token/${v.issue_id}`);
+    },
     onSearch() {
       let { value } = this;
       value = value.replace(/ /g, "");
@@ -59,13 +84,27 @@ export default {
       }
 
       // jump to address detail page;
-      const addressPattern = /^gard.+$/g;
+      const addressPattern = /^gard.{39}$/;
       if (addressPattern.test(value)) {
         this.$router.push({ path: "/address/" + value });
         return false;
       }
 
-      this.$router.push({ path: "/tx/" + value });
+      // jump to token detail page;
+      const tokenPattern = /^coin.{10}$/;
+      if (tokenPattern.test(value)) {
+        this.$router.push({ path: "/token/" + value });
+        return false;
+      }
+
+      // jump to tx detail page;
+      const txPattern = /^[0-9A-F]{64}$/;
+      if (txPattern.test(value)) {
+        this.$router.push({ path: "/tx/" + value });
+        return false;
+      }
+
+      // query as token symbol
     }
   }
 };
@@ -85,27 +124,13 @@ export default {
 
   .search-inner {
     flex: 1 1 auto;
-    height: 100%;
-    padding: 0 36px 0 12px;
-    border: 0;
-    background: transparent;
-  }
-
-  .search-inner:focus {
-    outline: none;
-  }
-
-  .search-inner {
-    color: white;
-  }
-  .search-inner::placeholder {
-    color: rgba(255, 255, 255, 0.75);
   }
 
   .search-icon {
     margin-right: 24px;
     font-size: 18px;
     color: rgba(255, 255, 255, 0.75);
+    z-index: 9;
   }
 
   &.mini {
@@ -113,10 +138,10 @@ export default {
     border: none;
     .search-inner {
       width: 8px;
-      padding: 0 12px;
     }
 
     .search-icon {
+      margin-right: 0;
       cursor: pointer;
       &:hover {
         color: white;
