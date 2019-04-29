@@ -68,6 +68,12 @@ export default {
       }
       context.commit('setDetails', { [id]: data.value });
       return Promise.resolve(data);
+    },
+    search: async function(context, { symbol }) {
+      context.commit('setLoad', true);
+      const { data } = await $ajax.get(`/api/issue/search/${symbol}`);
+      context.commit('setLoad', false);
+      return Promise.resolve(data);
     }
   }
 };
