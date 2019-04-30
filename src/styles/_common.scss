@@ -7,9 +7,14 @@ a:active {
   text-decoration: none;
 }
 
-// .el-input__inner {
-//   height: 32px;
-// }
+.search-container {
+  .el-input__inner {
+    background: transparent;
+    border: none;
+    height: 48px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
 
 .select-net.el-select {
   .el-input__inner {
