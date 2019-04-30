@@ -34,7 +34,7 @@
         v-if="detail"
       >
         <data-item label="Total Supply">
-          <span>{{ detail.total_supply}}</span>
+          <span>{{ detail.total_supply / Math.pow(10, detail.decimals)}}</span>
         </data-item>
         <data-item label="Decimals">
           <span>{{ detail.decimals}}</span>
@@ -70,7 +70,7 @@
         v-if="detail"
       >
         <data-item label="Total Supply">
-          <span>{{ detail.total_supply}}</span>
+          <span>{{ detail.total_supply / Math.pow(10, detail.decimals)}}</span>
         </data-item>
         <data-item label="Minting">
           <span>{{ !detail.minting_finished }}</span>
