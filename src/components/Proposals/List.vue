@@ -8,10 +8,14 @@
         />
       </template>
     </el-table-column>
-    <el-table-column
-      label="TITLE"
-      prop="value.title"
-    >
+    <el-table-column label="TITLE">
+      <template slot-scope="scope">
+        <hg-link
+          type="proposal"
+          :content="scope.row.value.title"
+          :link="scope.row.value.proposal_id"
+        />
+      </template>
     </el-table-column>
     <el-table-column
       label="TYPE"

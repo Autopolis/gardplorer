@@ -1,37 +1,14 @@
 <template>
   <router-link
-    :to="`/tx/${content}`"
+    :to="`/${type}/${link || content}`"
     :class="`${ellipsis ? 'ellipsis' : ''}`"
-    v-if="type === 'tx'"
-  >{{ content }}</router-link>
-  <router-link
-    :to="`/address/${content}`"
-    :class="`${ellipsis ? 'ellipsis' : ''}`"
-    v-else-if="type === 'address'"
-  >{{ content }}</router-link>
-  <router-link
-    :to="`/block/${content}`"
-    :class="`${ellipsis ? 'ellipsis' : ''}`"
-    v-else-if="type === 'block'"
-  >{{ content }}</router-link>
-  <router-link
-    :to="`/proposal/${content}`"
-    v-else-if="type === 'proposal'"
-  >{{ content }}</router-link>
-  <router-link
-    :to="`/token/${content}`"
-    v-else-if="type === 'token'"
-  >{{ content }}</router-link>
-  <router-link
-    :to="`/validator/${content}`"
-    :class="`${ellipsis ? 'ellipsis' : ''}`"
-    v-else-if="type === 'validator'"
   >{{ content }}</router-link>
 </template>
 <script>
 export default {
   props: {
     type: String,
+    link: String,
     content: String,
     ellipsis: { type: Boolean, default: true }
   }
