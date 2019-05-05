@@ -5,7 +5,7 @@ export default {
   namespaced: true,
 
   state: {
-    info: {}
+    info: []
   },
 
   getters: {},
@@ -18,7 +18,7 @@ export default {
 
   actions: {
     fetch: async function(context, address) {
-      context.commit('setInfo', {});
+      context.commit('setInfo', []);
       const { data } = await ajax.get(`api/bank/balances/${address}`);
       if (isEmpty(data)) {
         return Promise.reject();

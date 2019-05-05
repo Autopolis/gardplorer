@@ -10,7 +10,7 @@
     >
       <card title="Address Information">
         <data-item label="Balance">
-          <span> {{ info | amount }}</span>
+          <data-amount :list="info" />
         </data-item>
         <data-item label="Address">
           <span>{{ address }}</span>

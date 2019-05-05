@@ -31,7 +31,7 @@
           <span>{{ detail.value.deposit_end_time | formatTime }}</span>
         </data-item>
         <data-item label="Total Deposit">
-          <span>{{ detail.value.total_deposit | amount }}</span>
+          <data-amount :list="detail.value.total_deposit" />
         </data-item>
       </card>
 
