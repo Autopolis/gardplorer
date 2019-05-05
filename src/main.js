@@ -13,6 +13,7 @@ import TransactionList from '@/components/TransactionList';
 import ValidatorList from '@/components/ValidatorList';
 import SubTitle from '@/components/SubTitle';
 import DataItem from '@/components/DataArea/item.vue';
+import Amount from '@/components/DataArea/Amount.vue';
 
 Vue.config.productionTip = false;
 
@@ -32,6 +33,7 @@ Vue.component('transaction-list', TransactionList);
 Vue.component('validator-list', ValidatorList);
 Vue.component('sub-title', SubTitle);
 Vue.component('data-item', DataItem);
+Vue.component('data-amount', Amount);
 
 new Vue({
   router,

@@ -34,7 +34,7 @@
         v-if="detail"
       >
         <data-item label="Total Supply">
-          <span>{{ detail.total_supply / Math.pow(10, detail.decimals)}}</span>
+          <span>{{ supply }}</span>
         </data-item>
         <data-item label="Decimals">
           <span>{{ detail.decimals}}</span>
@@ -70,7 +70,7 @@
         v-if="detail"
       >
         <data-item label="Total Supply">
-          <span>{{ detail.total_supply / Math.pow(10, detail.decimals)}}</span>
+          <span>{{ supply }}</span>
         </data-item>
         <data-item label="Minting">
           <span>{{ !detail.minting_finished }}</span>
@@ -90,7 +90,8 @@
 </template>
 
 <script>
-import { get } from "lodash";
+import { get, isEmpty } from "lodash";
+import Big from "big.js";
 import { mapGetters, mapState } from "vuex";
 
 export default {
@@ -109,6 +110,12 @@ export default {
     },
     description() {
       return this.detail.description ? JSON.parse(this.detail.description) : {};
+    },
+    supply() {
+      const { total_supply, decimals } = this.detail;
+      return isEmpty(total_supply)
+        ? 0
+        : Big(total_supply).div(Math.pow(10, decimals)) - 0;
     }
   },
   mounted: function() {
