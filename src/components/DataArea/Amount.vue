@@ -28,9 +28,7 @@ export default {
           const detail = this.details[i.denom];
           if (!isEmpty(detail)) {
             i.denom = detail.symbol;
-            i.amount = Big(detail.total_supply).div(
-              Math.pow(10, detail.decimals)
-            );
+            i.amount = Big(i.amount).div(Math.pow(10, detail.decimals));
           }
         } else {
           i.denom = i.denom.toUpperCase();
@@ -46,6 +44,7 @@ export default {
           this.$store.dispatch("tokens/fetchDetail", i.denom);
         }
       });
+      this.updateList();
     },
     details() {
       if (isEmpty(this.list)) {
@@ -53,9 +52,6 @@ export default {
       }
       this.updateList();
     }
-  },
-  mounted() {
-    this.updateList();
   }
 };
 </script>
