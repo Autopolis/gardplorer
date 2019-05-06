@@ -7,7 +7,7 @@
       v-model.trim="value"
       :fetch-suggestions="querySearch"
       :trigger-on-focus="false"
-      @keyup.enter="onSearch"
+      @keyup.enter.native="onSearch"
       @blur="onBlur"
       @select="handleSelect"
       :clearable="!mini"
