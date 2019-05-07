@@ -22,17 +22,20 @@
           />
           <span v-if="!item.linkType">
             <data-amount
-              v-if="get(detail, item.field) instanceof Array"
+              v-if="(get(detail, item.field) instanceof Array)"
               :list="get(detail, item.field)"
             />
             <data-amount
-              v-else-if="get(detail, item.field) instanceof Object"
+              v-else-if="(get(detail, item.field) instanceof Object)"
               :list="[get(detail, item.field)]"
             />
             <span v-else>
               {{ get(detail, item.field) || '-'}}
             </span>
           </span>
+        </data-item>
+        <data-item label="Time">
+          {{ get(blocks, [detail.height, 'block', 'header', 'time']) | formatTime }}
         </data-item>
       </card>
     </div>
@@ -54,6 +57,7 @@ export default {
   },
   computed: {
     ...mapState("transactions", ["details"]),
+    ...mapState("blocks", { blocks: "details" }),
 
     hash: function() {
       return this.$route.params.hash;
@@ -67,6 +71,23 @@ export default {
         item => item.key === "action"
       )[0];
       return action && action.value;
+    }
+  },
+  watch: {
+    detail() {
+      if (isEmpty(this.detail)) {
+        return false;
+      }
+      // 1. fetch block detail for tx time
+      this.$store.dispatch("blocks/fetchDetail", get(this.detail, "height"));
+
+      // 2. fetch token detail
+      const coins = get(this.detail, "tx.value.msg.0.value.amount");
+      coins.forEach(i => {
+        if (i.denom.match(/^coin.{10}$/)) {
+          this.$store.dispatch("tokens/fetchDetail", i.denom);
+        }
+      });
     }
   },
   mounted() {
