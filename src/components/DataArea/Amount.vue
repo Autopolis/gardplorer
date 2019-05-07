@@ -1,6 +1,6 @@
 <template>
   <span>
-    {{viewList.join(', ')}}
+    {{ viewList.join(' + ') }}
   </span>
 </template>
 
@@ -8,6 +8,7 @@
 import { mapState } from "vuex";
 import { get, isEmpty } from "lodash";
 import Big from "big.js";
+import numeral from "numeral";
 
 export default {
   props: {
@@ -28,12 +29,14 @@ export default {
           const detail = this.details[i.denom];
           if (!isEmpty(detail)) {
             i.denom = detail.symbol;
-            i.amount = Big(i.amount).div(Math.pow(10, detail.decimals));
+            const n = Big(i.amount).div(Math.pow(10, detail.decimals));
+            i.amount = numeral(n.toString()).format("0,0.[000000]");
           }
         } else {
           i.denom = i.denom.toUpperCase();
+          i.amount = numeral(i.amount).format("0,0.[000000]");
         }
-        return `${i.amount} ${i.denom}`;
+        return `${i.amount}${i.denom}`;
       });
     }
   },
@@ -52,6 +55,9 @@ export default {
       }
       this.updateList();
     }
+  },
+  mounted() {
+    this.updateList();
   }
 };
 </script>

@@ -92,6 +92,7 @@
 <script>
 import { get, isEmpty } from "lodash";
 import Big from "big.js";
+import numeral from "numeral";
 import { mapGetters, mapState } from "vuex";
 
 export default {
@@ -113,9 +114,11 @@ export default {
     },
     supply() {
       const { total_supply, decimals } = this.detail;
-      return isEmpty(total_supply)
-        ? 0
-        : Big(total_supply).div(Math.pow(10, decimals)) - 0;
+      if (isEmpty(total_supply)) {
+        return "0";
+      }
+      const n = Big(total_supply).div(Math.pow(10, decimals));
+      return numeral(n.toString()).format("0,0.[000000]");
     }
   },
   mounted: function() {

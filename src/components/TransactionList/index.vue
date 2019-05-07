@@ -18,7 +18,17 @@
           :content="get(scope.row, item.field)"
         />
         <span v-if="!item.linkType">
-          {{ item.field instanceof Array ? item.field.map(i => get(scope.row, i)).join(' ') : get(scope.row, item.field) || '-' }}
+          <data-amount
+            v-if="get(scope.row, item.field) instanceof Array"
+            :list="get(scope.row, item.field)"
+          />
+          <data-amount
+            v-else-if="get(scope.row, item.field) instanceof Object"
+            :list="[get(scope.row, item.field)]"
+          />
+          <span v-else>
+            {{ get(scope.row, item.field) || '-'}}
+          </span>
         </span>
       </template>
     </el-table-column>
