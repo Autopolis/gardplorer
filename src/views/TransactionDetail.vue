@@ -22,11 +22,15 @@
           />
           <span v-if="!item.linkType">
             <data-amount
-              v-if="item.name === 'Amount'"
+              v-if="get(detail, item.field) instanceof Array"
               :list="get(detail, item.field)"
             />
+            <data-amount
+              v-else-if="get(detail, item.field) instanceof Object"
+              :list="[get(detail, item.field)]"
+            />
             <span v-else>
-              {{ item.field instanceof Array ? item.field.map(i => get(detail, i)).join(' ') : get(detail, item.field) || '-'}}
+              {{ get(detail, item.field) || '-'}}
             </span>
           </span>
         </data-item>

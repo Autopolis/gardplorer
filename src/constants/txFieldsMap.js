@@ -69,7 +69,7 @@ export const txFieldsMap = {
     },
     {
       name: 'Delegation',
-      field: ['tx.value.msg.0.value.value.amount', 'tx.value.msg.0.value.value.denom'],
+      field: 'tx.value.msg.0.value.value',
       linkType: ''
     },
     {
@@ -158,7 +158,7 @@ export const txFieldsMap = {
     },
     {
       name: 'Self Bond',
-      field: ['tx.value.msg.0.value.value.amount', 'tx.value.msg.0.value.value.denom'],
+      field: 'tx.value.msg.0.value.value',
       linkType: ''
     },
     {
@@ -375,7 +375,7 @@ export const txFieldsMap = {
     },
     {
       name: 'Amount',
-      field: ['tx.value.msg.0.value.amount.0.amount', 'tx.value.msg.0.value.amount.0.denom'],
+      field: 'tx.value.msg.0.value.amount',
       linkType: ''
     },
     {
