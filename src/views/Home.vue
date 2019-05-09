@@ -133,12 +133,12 @@ export default {
     get,
     fetchData: function() {
       this.$store.dispatch("blocks/fetchList");
-      this.$store.dispatch("validators/fetchAll");
-      this.$store.dispatch("transactions/fetchLastList");
     }
   },
   mounted: async function() {
     await this.$store.dispatch("transactions/fetchTotalCount");
+    await this.$store.dispatch("validators/fetchAll");
+    await this.$store.dispatch("transactions/fetchLastList");
     this.fetchData();
     this.interval = setInterval(() => {
       this.fetchData();
