@@ -1,4 +1,5 @@
 import { get, isEmpty } from 'lodash';
+import axios from 'axios';
 import $ajax from '@/utils/ajax';
 import Codec from '@/utils/cdec';
 
@@ -53,7 +54,11 @@ export default {
   actions: {
     fetchList: async function(context, params = { page: 1 }) {
       const { minHeight, maxHeight, page } = params;
-      const { data } = await $ajax.get('/node/blockchain', {
+      let blockApiUri = 'https://www.gardplorer.io/testnet/node';
+      if (!location.hostname.match('www.gardplorer.io')) {
+        blockApiUri = 'http://node.hgdev.io';
+      }
+      const { data } = await axios.get(`${blockApiUri}/blockchain`, {
         params: { minHeight, maxHeight, random: new Date().getTime() }
       });
       const result = get(data, 'result');
@@ -77,7 +82,7 @@ export default {
       return Promise.resolve();
     },
     fetchValidatorset: async function(context, height) {
-      const { data } = await $ajax.get(`/api/validatorsets/${height}`);
+      const { data } = await $ajax.get(`/validatorsets/${height}`);
       if (!isEmpty(data)) {
         context.commit('setValidatorsets', { [height]: data });
 
@@ -93,7 +98,7 @@ export default {
       if (!isEmpty(context.state.details[height])) {
         return Promise.resolve(context.state.details[height]);
       }
-      const { data } = await $ajax.get(`/api/blocks/${height}`);
+      const { data } = await $ajax.get(`/blocks/${height}`);
       if (!isEmpty(data)) {
         context.dispatch('fetchValidatorset', height);
         context.commit('setDetails', { [height]: data });

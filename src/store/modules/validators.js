@@ -29,7 +29,7 @@ export default {
 
   actions: {
     fetchAll: async function(context) {
-      const { data } = await $ajax.get(`/api/staking/validators`);
+      const { data } = await $ajax.get(`/staking/validators`);
       if (!isEmpty(data)) {
         context.commit('setList', data);
         data.forEach(i => {
@@ -41,7 +41,7 @@ export default {
       if (!isEmpty(context.state.details[address])) {
         return Promise.resolve();
       }
-      const { data } = await $ajax.get(`/api/staking/validators/${address}`);
+      const { data } = await $ajax.get(`/staking/validators/${address}`);
       if (isEmpty(data)) {
         return Promise.reject();
       }
