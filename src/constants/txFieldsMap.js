@@ -299,19 +299,6 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  withdraw_validator_rewards_all: [
-    ...defaultFields,
-    {
-      name: 'Validator Address',
-      field: 'tx.value.msg.0.value.validator_address',
-      linkType: 'validator'
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: ''
-    }
-  ],
 
   // gov
   submit_proposal: [

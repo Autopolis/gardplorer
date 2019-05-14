@@ -28,7 +28,7 @@ export default {
   actions: {
     fetchTotalCount: async function(context, params = { action: 'send', page: 1 }) {
       context.commit('setLoad', true);
-      const { data } = await $ajax.get('/api/issue/list', { params: { limit: 1 } });
+      const { data } = await $ajax.get('/issue/list', { params: { limit: 1 } });
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
@@ -47,7 +47,7 @@ export default {
       delete params.page;
 
       context.commit('setLoad', true);
-      const { data } = await $ajax.get('/api/issue/list', { params });
+      const { data } = await $ajax.get('/issue/list', { params });
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
@@ -61,7 +61,7 @@ export default {
         return Promise.resolve();
       }
       context.commit('setLoad', true);
-      const { data } = await $ajax.get(`/api/issue/query/${id}`);
+      const { data } = await $ajax.get(`/issue/query/${id}`);
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
@@ -71,7 +71,7 @@ export default {
     },
     search: async function(context, { symbol }) {
       context.commit('setLoad', true);
-      const { data } = await $ajax.get(`/api/issue/search/${symbol}`);
+      const { data } = await $ajax.get(`/issue/search/${symbol}`);
       context.commit('setLoad', false);
       return Promise.resolve(data);
     }

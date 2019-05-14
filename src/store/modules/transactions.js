@@ -39,7 +39,7 @@ export default {
   actions: {
     fetchTotalCount: async function(context, params = { action: 'send', page: 1 }) {
       context.commit('setLoad', true);
-      const { data } = await $ajax.get('/api/txs', {
+      const { data } = await $ajax.get('/txs', {
         params: { action: params.action || 'send', page: 1 }
       });
       context.commit('setLoad', false);
@@ -52,7 +52,7 @@ export default {
     fetchList: async function(context, params = { action: 'send', page: 1 }) {
       params.limit = context.state.pageSize;
       context.commit('setLoad', true);
-      const { data } = await $ajax.get('/api/txs', { params });
+      const { data } = await $ajax.get('/txs', { params });
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
@@ -67,7 +67,7 @@ export default {
         return Promise.resolve();
       }
       context.commit('setLoad', true);
-      const { data } = await $ajax.get(`/api/txs/${hash}`);
+      const { data } = await $ajax.get(`/txs/${hash}`);
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
@@ -88,7 +88,7 @@ export default {
       };
 
       context.commit('setLoad', true);
-      var { data } = await $ajax.get('/api/txs', { params });
+      var { data } = await $ajax.get('/txs', { params });
       if (isEmpty(data)) {
         context.commit('setLoad', false);
         return Promise.reject();
@@ -96,7 +96,7 @@ export default {
       let txs = data.txs;
       if (txs.length < PAGE_SIZE && totalCount > PAGE_SIZE) {
         const prePageParams = { ...params, page: lastPage - 1 };
-        var { data } = await $ajax.get('/api/txs', { params: prePageParams });
+        var { data } = await $ajax.get('/txs', { params: prePageParams });
         if (isEmpty(data)) {
           context.commit('setLoad', false);
           return Promise.reject();
@@ -113,7 +113,7 @@ export default {
       context.commit('setLoad', true);
 
       // 1. query txs as sender
-      const senderData = await $ajax.get('/api/txs', { params });
+      const senderData = await $ajax.get('/txs', { params });
       if (isEmpty(senderData.data)) {
         context.commit('setLoad', false);
         return Promise.reject();
@@ -122,7 +122,7 @@ export default {
       // 2. query txs as recipient
       params.recipient = params.sender;
       delete params.sender;
-      const recipientData = await $ajax.get('/api/txs', { params });
+      const recipientData = await $ajax.get('/txs', { params });
       if (isEmpty(recipientData.data)) {
         context.commit('setLoad', false);
         return Promise.reject();

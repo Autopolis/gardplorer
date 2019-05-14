@@ -7,15 +7,14 @@ export const txTypes = {
   begin_redelegate: 'Redelegate',
   begin_unbonding: 'Unbond',
   create_validator: 'Create Validator',
-  edit_validator: 'Edit Validator',   // new
-  
+  edit_validator: 'Edit Validator', // new
+
   // slashing
   unjail: 'Unjail',
 
   // distribution
-  set_withdraw_address: 'Set Withdraw Address',   // new
-  withdraw_delegator_reward: 'Withdraw Delegation Reward',  // new
-  withdraw_validator_rewards_all: 'Withdraw Validator Rewards All', // new
+  set_withdraw_address: 'Set Withdraw Address', // new
+  withdraw_delegator_reward: 'Withdraw Delegation Reward', // new
 
   // gov
   submit_proposal: 'Submit Proposal',
@@ -38,5 +37,5 @@ export const txTypes = {
   issue_transfer_ownership: 'Issue Transfer Ownership', // new
   issue_burn_off: 'Issue Burn Off', // new
   issue_burn_from_off: 'Issue Burn From Off', // new
-  issue_burn_any_off: 'Issue Burn Any Off', // new
+  issue_burn_any_off: 'Issue Burn Any Off' // new
 };

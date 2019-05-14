@@ -19,7 +19,7 @@ export default {
   actions: {
     fetch: async function(context, address) {
       context.commit('setInfo', []);
-      const { data } = await ajax.get(`api/bank/balances/${address}`);
+      const { data } = await ajax.get(`/bank/balances/${address}`);
       if (isEmpty(data)) {
         return Promise.reject();
       }
