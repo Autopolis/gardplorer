@@ -1,8 +1,9 @@
 <template>
-  <card title="transactions">
+  <card :title="category">
     <div class="card-header">
       <div class="select-action">
         <el-select
+          v-if="Object.keys(actions).length > 1"
           :disabled="load"
           :value="selected"
           placeholder="Pls select action"
@@ -49,9 +50,9 @@ import { txTypes, txFieldsMap } from "@/constants";
 
 export default {
   data: function() {
+    const { category } = this.$route.params;
     return {
-      selected: "send",
-      actions: txTypes
+      selected: Object.keys(txTypes[category])[0]
     };
   },
   components: { Card, "transaction-list": TransactionList },
@@ -63,7 +64,12 @@ export default {
       "pageSize",
       "load"
     ]),
-
+    category: function() {
+      return this.$route.params.category;
+    },
+    actions: function() {
+      return txTypes[this.category];
+    },
     fields: function() {
       return txFieldsMap[this.selected];
     }
@@ -95,6 +101,12 @@ export default {
   },
   mounted: function() {
     this.fetchData();
+  },
+  watch: {
+    category() {
+      this.selected = Object.keys(txTypes[this.category])[0];
+      this.fetchData();
+    }
   }
 };
 </script>

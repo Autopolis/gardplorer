@@ -55,3 +55,9 @@ a:active {
   background: #3a2b7e;
   border: 1px solid #3a2b7e;
 }
+
+.el-menu--horizontal .el-menu .el-menu-item,
+.el-menu--horizontal .el-menu .el-submenu__title {
+  height: 52px;
+  padding: 8px;
+}
