@@ -4,12 +4,27 @@
     @select="handleSelect"
     class="menu-container"
     mode="horizontal"
-    background-color="transparent"
+    background-color="#3a2b7e"
     text-color="rgba(255,255,255,0.8)"
     active-text-color="#00fffb"
   >
+    <el-submenu
+      v-for="sub in subMenus"
+      :key="sub.name"
+      :index="sub.name"
+      class="item"
+    >
+      <template slot="title">{{sub.name.toUpperCase()}}</template>
+      <el-menu-item
+        v-for="i in sub.children"
+        :key="i.link"
+        :index="i.link"
+        class="item"
+      >{{i.name.toUpperCase()}}</el-menu-item>
+    </el-submenu>
+
     <el-menu-item
-      v-for="item in menu"
+      v-for="item in menus"
       :key="item.link"
       :index="item.link"
       class="item"
@@ -24,8 +39,18 @@ import { menu } from "@/constants";
 
 export default {
   data() {
+    const menus = [];
+    const subMenus = [];
+    menu.forEach(i => {
+      if (i.children) {
+        subMenus[subMenus.length] = i;
+      } else {
+        menus[menus.length] = i;
+      }
+    });
     return {
-      menu
+      menus,
+      subMenus
     };
   },
   methods: {

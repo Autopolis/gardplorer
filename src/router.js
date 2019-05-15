@@ -47,20 +47,14 @@ export default new Router({
       ]
     },
     {
-      path: '/tx',
-      component: View,
-      children: [
-        {
-          path: '',
-          name: 'transactions',
-          component: Transactions
-        },
-        {
-          path: ':hash',
-          name: 'transactionDetail',
-          component: TransactionDetail
-        }
-      ]
+      path: '/txs/:category',
+      name: 'transactions',
+      component: Transactions
+    },
+    {
+      path: '/tx/:hash',
+      name: 'transactionDetail',
+      component: TransactionDetail
     },
     {
       path: '/address/:address',
