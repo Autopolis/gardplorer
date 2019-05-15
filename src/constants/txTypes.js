@@ -1,30 +1,30 @@
 export const txTypes = {
-  transfer: {
+  transfers: {
     send: 'Send'
   },
-  declaration: {
+  declarations: {
     create_validator: 'Create Validator',
     edit_validator: 'Edit Validator',
     unjail: 'Unjail'
   },
-  staking: {
+  stakings: {
     delegate: 'Delegate',
     begin_redelegate: 'Redelegate',
     begin_unbonding: 'Unbond',
     set_withdraw_address: 'Set Withdraw Address',
     withdraw_delegator_reward: 'Withdraw Delegation Reward'
   },
-  proposal: {
+  governance: {
     submit_proposal: 'Submit Proposal',
     deposit: 'Deposit',
     vote: 'Vote'
   },
-  exchange: {
-    create_order: 'Create Order',
+  exchanges: {
+    create_order: 'Make Order',
     take_order: 'Take Order',
-    withdrawal_order: 'Withdrawal Order'
+    withdrawal_order: 'Cancel Order'
   },
-  issue: {
+  issuances: {
     issue: 'Issue',
     issue_mint: 'Issue Mint',
     issue_burn: 'Issue Burn',

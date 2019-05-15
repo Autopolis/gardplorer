@@ -2,12 +2,12 @@ export const menu = [
   {
     name: 'Transactions',
     children: [
-      { name: 'transfers', link: '/txs/transfer' },
-      { name: 'declarations', link: '/txs/declaration' },
-      { name: 'stakings', link: '/txs/staking' },
-      { name: 'governance', link: '/txs/proposal' },
-      { name: 'token exchanges', link: '/txs/exchange' },
-      { name: 'issuances', link: '/txs/issue' }
+      { name: 'transfers', link: '/txs/transfers' },
+      { name: 'declarations', link: '/txs/declarations' },
+      { name: 'stakings', link: '/txs/stakings' },
+      { name: 'governance', link: '/txs/governance' },
+      { name: 'token exchanges', link: '/txs/exchanges' },
+      { name: 'issuances', link: '/txs/issuances' }
     ]
   },
   { name: 'Blocks', link: '/block' },
