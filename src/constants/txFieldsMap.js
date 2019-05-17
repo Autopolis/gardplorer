@@ -18,6 +18,17 @@ const defaultFields = [
     name: 'Block',
     field: 'height',
     linkType: 'block'
+  },
+  {
+    name: 'Gas Used',
+    field: 'gas_used',
+    linkType: ''
+  },
+  {
+    name: 'Memo',
+    field: 'tx.value.memo',
+    linkType: '',
+    hideInTable: true
   }
 ];
 
@@ -41,17 +52,19 @@ export const txFieldsMap = {
       linkType: '',
       hideInTable: true
     },
+  ],
+  multisend: [
+    ...defaultFields,
     {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: ''
+      name: 'Inputs',
+      field: 'tx.value.msg.0.value.inputs',
+      linkType: 'address'
     },
     {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    }
+      name: 'Outputs',
+      field: 'tx.value.msg.0.value.outputs',
+      linkType: 'address'
+    },
   ],
 
   // staking
@@ -59,25 +72,19 @@ export const txFieldsMap = {
     ...defaultFields,
     {
       name: 'Delegator',
-      field: 'tags.1.value',
+      field: 'tx.value.msg.0.value.delegator_address',
       linkType: 'address'
     },
     {
       name: 'Destination Validator',
-      field: 'tags.2.value',
+      field: 'tx.value.msg.0.value.validator_address',
       linkType: 'validator'
     },
     {
       name: 'Delegation',
-      field: 'tx.value.msg.0.value.value',
+      field: 'tx.value.msg.0.value.amount',
       linkType: ''
     },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   begin_redelegate: [
     ...defaultFields,
@@ -98,21 +105,15 @@ export const txFieldsMap = {
     },
     {
       name: 'Shares Amount',
-      field: 'tx.value.msg.0.value.shares_amount',
+      field: 'tx.value.msg.0.value.amount',
       linkType: ''
     },
     {
       name: 'End Time',
-      field: 'tags.4.value',
+      field: 'tags.5.value',
       linkType: '',
       hideInTable: true
     },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   begin_unbonding: [
     ...defaultFields,
@@ -127,8 +128,8 @@ export const txFieldsMap = {
       linkType: 'address'
     },
     {
-      name: 'Shares Amount',
-      field: 'tx.value.msg.0.value.shares_amount',
+      name: 'Amount',
+      field: 'tx.value.msg.0.value.amount',
       linkType: ''
     },
     {
@@ -137,12 +138,6 @@ export const txFieldsMap = {
       linkType: '',
       hideInTable: true
     },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   create_validator: [
     ...defaultFields,
@@ -162,11 +157,6 @@ export const txFieldsMap = {
       linkType: ''
     },
     {
-      name: 'Moniker',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
       name: 'Commission Rate',
       field: 'tx.value.msg.0.value.commission',
       linkType: '',
@@ -179,20 +169,8 @@ export const txFieldsMap = {
       hideInTable: true
     },
     {
-      name: 'Identity',
-      field: 'tags.3.value',
-      linkType: '',
-      hideInTable: true
-    },
-    {
       name: 'Description',
       field: 'tx.value.msg.0.value.description',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
       linkType: '',
       hideInTable: true
     }
@@ -239,12 +217,6 @@ export const txFieldsMap = {
       linkType: '',
       hideInTable: true
     },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
 
   // slashing
@@ -255,11 +227,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.address',
       linkType: 'validator'
     },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: ''
-    }
   ],
 
   // distribution
@@ -275,11 +242,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.withdraw_address',
       linkType: 'address'
     },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: ''
-    }
   ],
   withdraw_delegator_reward: [
     ...defaultFields,
@@ -294,10 +256,23 @@ export const txFieldsMap = {
       linkType: 'validator'
     },
     {
-      name: 'Gas Used',
-      field: 'gas_used',
+      name: 'Rewards',
+      field: 'tags.4.value',
+      linkType: 'validator'
+    },
+  ],
+  withdraw_validator_rewards_all:  [
+    ...defaultFields,
+    {
+      name: 'Validator Address',
+      field: 'tags.2.value',
+      linkType: 'validator'
+    },
+    {
+      name: 'Commission',
+      field: 'tags.3.value',
       linkType: ''
-    }
+    },
   ],
 
   // gov
@@ -305,7 +280,7 @@ export const txFieldsMap = {
     ...defaultFields,
     {
       name: 'Proposal Id',
-      field: 'tags.2.value',
+      field: 'tags.1.value',
       linkType: ''
     },
     {
@@ -335,18 +310,6 @@ export const txFieldsMap = {
       linkType: '',
       hideInTable: true
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   deposit: [
     ...defaultFields,
@@ -365,18 +328,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.amount',
       linkType: ''
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   vote: [
     ...defaultFields,
@@ -395,18 +346,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.voter',
       linkType: 'address'
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
 
   // exchange
@@ -427,18 +366,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.target',
       linkType: ''
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   withdrawal_order: [
     ...defaultFields,
@@ -454,21 +381,9 @@ export const txFieldsMap = {
     },
     {
       name: 'Status',
-      field: 'tags.3.value',
+      field: 'tags.4.value',
       linkType: ''
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   take_order: [
     ...defaultFields,
@@ -489,21 +404,9 @@ export const txFieldsMap = {
     },
     {
       name: 'Status',
-      field: 'tags.3.value',
+      field: 'tags.4.value',
       linkType: ''
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
 
   // issue
@@ -577,18 +480,6 @@ export const txFieldsMap = {
       linkType: '',
       hideInTable: true
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   issue_transfer_ownership: [
     ...defaultFields,
@@ -607,18 +498,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.to',
       linkType: 'address'
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   issue_description: [
     ...defaultFields,
@@ -638,18 +517,6 @@ export const txFieldsMap = {
       linkType: '',
       hideInTable: true
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   issue_mint: [
     ...defaultFields,
@@ -680,18 +547,6 @@ export const txFieldsMap = {
       linkType: 'address',
       hideInTable: true
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   issue_burn: [
     ...defaultFields,
@@ -710,18 +565,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.amount',
       linkType: ''
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   issue_burn: [
     ...defaultFields,
@@ -746,18 +589,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.amount',
       linkType: ''
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   issue_burn_any: [
     ...defaultFields,
@@ -781,18 +612,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.amount',
       linkType: ''
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   issue_burn_off: [
     ...defaultFields,
@@ -806,20 +625,8 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.operator',
       linkType: 'address'
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
-  issue_burn_from_off: [
+issue_burn_from_off: [
     ...defaultFields,
     {
       name: 'Issue ID',
@@ -831,18 +638,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.operator',
       linkType: 'address'
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   issue_burn_any_off: [
     ...defaultFields,
@@ -856,18 +651,6 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.operator',
       linkType: 'address'
     },
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
   ],
   issue_finish_minting: [
     ...defaultFields,
@@ -881,19 +664,201 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.operator',
       linkType: 'address'
     },
+  ],
+
+  // box
+  box_create_lock: [
+    ...defaultFields,
     {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: '',
-      hideInTable: true
+      name: 'Box ID',
+      field: 'tags.2.value',
+      linkType: ''
     },
     {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: '',
-      hideInTable: true
-    }
+      name: 'Sender',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: 'address'
+    },
+    {
+      name: 'Box Name',
+      field: 'tx.value.msg.0.value.name',
+      linkType: ''
+    },
+    {
+      name: 'Total Amount',
+      field: 'tx.value.msg.0.value.total_amount',
+      linkType: ''
+    },
+    {
+      name: 'Description',
+      field: 'tx.value.msg.0.value.description',
+      linkType: ''
+    },
+    {
+      name: 'Lock',
+      field: 'tx.value.msg.0.value.lock',
+      linkType: ''
+    },
   ],
+  box_create_deposit: [
+    ...defaultFields,
+    {
+      name: 'Box ID',
+      field: 'tags.2.value',
+      linkType: ''
+    },
+    {
+      name: 'Sender',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: 'address'
+    },
+    {
+      name: 'Box Name',
+      field: 'tx.value.msg.0.value.name',
+      linkType: ''
+    },
+    {
+      name: 'Total Amount',
+      field: 'tx.value.msg.0.value.total_amount',
+      linkType: ''
+    },
+    {
+      name: 'Description',
+      field: 'tx.value.msg.0.value.description',
+      linkType: ''
+    },
+    {
+      name: 'Trade Disabled',
+      field: 'tx.value.msg.0.value.trade_disabled',
+      linkType: ''
+    },
+    {
+      name: 'Deposit',
+      field: 'tx.value.msg.0.value.deposit',
+      linkType: ''
+    },
+  ],
+  box_create_future: [
+    ...defaultFields,
+    {
+      name: 'Box ID',
+      field: 'tags.2.value',
+      linkType: ''
+    },
+    {
+      name: 'Sender',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: 'address'
+    },
+    {
+      name: 'Box Name',
+      field: 'tx.value.msg.0.value.name',
+      linkType: ''
+    },
+    {
+      name: 'Total Amount',
+      field: 'tx.value.msg.0.value.total_amount',
+      linkType: ''
+    },
+    {
+      name: 'Description',
+      field: 'tx.value.msg.0.value.description',
+      linkType: ''
+    },
+    {
+      name: 'Trade Disabled',
+      field: 'tx.value.msg.0.value.trade_disabled',
+      linkType: ''
+    },
+    {
+      name: 'Future',
+      field: 'tx.value.msg.0.value.future',
+      linkType: ''
+    },
+  ],
+  box_interest: [
+    ...defaultFields,
+    {
+      name: 'Box ID',
+      field: 'tx.value.msg.0.value.box_id',
+      linkType: ''
+    },
+    {
+      name: 'Sender',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: 'address'
+    },
+    {
+      name: 'Interest',
+      field: 'tx.value.msg.0.value.interest',
+      linkType: ''
+    },
+    {
+      name: 'Operation',
+      field: 'tx.value.msg.0.value.operation',
+      linkType: ''
+    },
+  ],
+  box_deposit: [
+    ...defaultFields,
+    {
+      name: 'Box ID',
+      field: 'tx.value.msg.0.value.box_id',
+      linkType: ''
+    },
+    {
+      name: 'Sender',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: 'address'
+    },
+    {
+      name: 'Deposit',
+      field: 'tx.value.msg.0.value.deposit',
+      linkType: ''
+    },
+    {
+      name: 'Operation',
+      field: 'tx.value.msg.0.value.operation',
+      linkType: ''
+    },
+  ],
+  box_description: [
+    ...defaultFields,
+    {
+      name: 'Box ID',
+      field: 'tx.value.msg.0.value.box_id',
+      linkType: ''
+    },
+    {
+      name: 'Sender',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: 'address'
+    },
+    {
+      name: 'Description',
+      field: 'tx.value.msg.0.value.description',
+      linkType: ''
+    },
+  ],
+  box_disable_feature: [
+    ...defaultFields,
+    {
+      name: 'Box ID',
+      field: 'tx.value.msg.0.value.box_id',
+      linkType: ''
+    },
+    {
+      name: 'Sender',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: 'address'
+    },
+    {
+      name: 'Feature',
+      field: 'tx.value.msg.0.value.feature',
+      linkType: ''
+    },
+  ],
+  
   all: [
     ...defaultFields,
     {
