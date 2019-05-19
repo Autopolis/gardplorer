@@ -7,7 +7,8 @@ export const menu = [
       { name: 'stakings', link: '/txs/stakings' },
       { name: 'governance', link: '/txs/governance' },
       { name: 'token exchanges', link: '/txs/exchanges' },
-      { name: 'issuances', link: '/txs/issuances' }
+      { name: 'issuances', link: '/txs/issuances' },
+      { name: 'token boxs', link: '/txs/tokenBoxs' }
     ]
   },
   { name: 'Blocks', link: '/block' },

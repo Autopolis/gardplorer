@@ -36,5 +36,14 @@ export const txTypes = {
     issue_burn_off: 'Issue Burn Off',
     issue_burn_from_off: 'Issue Burn From Off',
     issue_burn_any_off: 'Issue Burn Any Off'
+  },
+  tokenBoxs: {
+    box_create_lock: 'Create LockBox',
+    box_create_future: 'Create FutureBox',
+    box_create_deposit: 'Create DepositBox',
+    box_interest: 'Deposit Interests',
+    box_deposit: 'Deposit Capital',
+    box_description: 'Box Description',
+    box_disable_feature: 'Desable Feature'
   }
 };
