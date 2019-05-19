@@ -22,7 +22,8 @@ const defaultFields = [
   {
     name: 'Gas Used',
     field: 'gas_used',
-    linkType: ''
+    linkType: '',
+    hideInTable: true
   },
   {
     name: 'Memo',
@@ -51,7 +52,7 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.amount',
       linkType: '',
       hideInTable: true
-    },
+    }
   ],
   multisend: [
     ...defaultFields,
@@ -64,7 +65,7 @@ export const txFieldsMap = {
       name: 'Outputs',
       field: 'tx.value.msg.0.value.outputs',
       linkType: 'address'
-    },
+    }
   ],
 
   // staking
@@ -84,7 +85,7 @@ export const txFieldsMap = {
       name: 'Delegation',
       field: 'tx.value.msg.0.value.amount',
       linkType: ''
-    },
+    }
   ],
   begin_redelegate: [
     ...defaultFields,
@@ -113,7 +114,7 @@ export const txFieldsMap = {
       field: 'tags.5.value',
       linkType: '',
       hideInTable: true
-    },
+    }
   ],
   begin_unbonding: [
     ...defaultFields,
@@ -137,7 +138,7 @@ export const txFieldsMap = {
       field: 'tags.4.value',
       linkType: '',
       hideInTable: true
-    },
+    }
   ],
   create_validator: [
     ...defaultFields,
@@ -216,7 +217,7 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.min_self_delegation',
       linkType: '',
       hideInTable: true
-    },
+    }
   ],
 
   // slashing
@@ -226,7 +227,7 @@ export const txFieldsMap = {
       name: 'Validator',
       field: 'tx.value.msg.0.value.address',
       linkType: 'validator'
-    },
+    }
   ],
 
   // distribution
@@ -241,7 +242,7 @@ export const txFieldsMap = {
       name: 'Withdraw Address',
       field: 'tx.value.msg.0.value.withdraw_address',
       linkType: 'address'
-    },
+    }
   ],
   withdraw_delegator_reward: [
     ...defaultFields,
@@ -259,9 +260,9 @@ export const txFieldsMap = {
       name: 'Rewards',
       field: 'tags.4.value',
       linkType: 'validator'
-    },
+    }
   ],
-  withdraw_validator_rewards_all:  [
+  withdraw_validator_rewards_all: [
     ...defaultFields,
     {
       name: 'Validator Address',
@@ -272,7 +273,7 @@ export const txFieldsMap = {
       name: 'Commission',
       field: 'tags.3.value',
       linkType: ''
-    },
+    }
   ],
 
   // gov
@@ -309,7 +310,7 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.initial_deposit',
       linkType: '',
       hideInTable: true
-    },
+    }
   ],
   deposit: [
     ...defaultFields,
@@ -327,7 +328,7 @@ export const txFieldsMap = {
       name: 'Amount',
       field: 'tx.value.msg.0.value.amount',
       linkType: ''
-    },
+    }
   ],
   vote: [
     ...defaultFields,
@@ -345,7 +346,7 @@ export const txFieldsMap = {
       name: 'Voter',
       field: 'tx.value.msg.0.value.voter',
       linkType: 'address'
-    },
+    }
   ],
 
   // exchange
@@ -365,7 +366,7 @@ export const txFieldsMap = {
       name: 'Target',
       field: 'tx.value.msg.0.value.target',
       linkType: ''
-    },
+    }
   ],
   withdrawal_order: [
     ...defaultFields,
@@ -383,7 +384,7 @@ export const txFieldsMap = {
       name: 'Status',
       field: 'tags.4.value',
       linkType: ''
-    },
+    }
   ],
   take_order: [
     ...defaultFields,
@@ -406,7 +407,7 @@ export const txFieldsMap = {
       name: 'Status',
       field: 'tags.4.value',
       linkType: ''
-    },
+    }
   ],
 
   // issue
@@ -479,7 +480,7 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.CoinIssueInfo.minting_finished',
       linkType: '',
       hideInTable: true
-    },
+    }
   ],
   issue_transfer_ownership: [
     ...defaultFields,
@@ -497,7 +498,7 @@ export const txFieldsMap = {
       name: 'New Owner',
       field: 'tx.value.msg.0.value.to',
       linkType: 'address'
-    },
+    }
   ],
   issue_description: [
     ...defaultFields,
@@ -516,7 +517,7 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.description',
       linkType: '',
       hideInTable: true
-    },
+    }
   ],
   issue_mint: [
     ...defaultFields,
@@ -546,7 +547,7 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.to',
       linkType: 'address',
       hideInTable: true
-    },
+    }
   ],
   issue_burn: [
     ...defaultFields,
@@ -564,7 +565,7 @@ export const txFieldsMap = {
       name: 'Amount',
       field: 'tx.value.msg.0.value.amount',
       linkType: ''
-    },
+    }
   ],
   issue_burn: [
     ...defaultFields,
@@ -588,7 +589,7 @@ export const txFieldsMap = {
       name: 'Amount',
       field: 'tx.value.msg.0.value.amount',
       linkType: ''
-    },
+    }
   ],
   issue_burn_any: [
     ...defaultFields,
@@ -611,7 +612,7 @@ export const txFieldsMap = {
       name: 'Amount',
       field: 'tx.value.msg.0.value.amount',
       linkType: ''
-    },
+    }
   ],
   issue_burn_off: [
     ...defaultFields,
@@ -624,9 +625,9 @@ export const txFieldsMap = {
       name: 'Operator',
       field: 'tx.value.msg.0.value.operator',
       linkType: 'address'
-    },
+    }
   ],
-issue_burn_from_off: [
+  issue_burn_from_off: [
     ...defaultFields,
     {
       name: 'Issue ID',
@@ -637,7 +638,7 @@ issue_burn_from_off: [
       name: 'Operator',
       field: 'tx.value.msg.0.value.operator',
       linkType: 'address'
-    },
+    }
   ],
   issue_burn_any_off: [
     ...defaultFields,
@@ -650,7 +651,7 @@ issue_burn_from_off: [
       name: 'Operator',
       field: 'tx.value.msg.0.value.operator',
       linkType: 'address'
-    },
+    }
   ],
   issue_finish_minting: [
     ...defaultFields,
@@ -663,7 +664,7 @@ issue_burn_from_off: [
       name: 'Operator',
       field: 'tx.value.msg.0.value.operator',
       linkType: 'address'
-    },
+    }
   ],
 
   // box
@@ -687,18 +688,20 @@ issue_burn_from_off: [
     {
       name: 'Total Amount',
       field: 'tx.value.msg.0.value.total_amount',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.description',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Lock',
       field: 'tx.value.msg.0.value.lock',
       linkType: ''
-    },
+    }
   ],
   box_create_deposit: [
     ...defaultFields,
@@ -720,23 +723,26 @@ issue_burn_from_off: [
     {
       name: 'Total Amount',
       field: 'tx.value.msg.0.value.total_amount',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.description',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Trade Disabled',
       field: 'tx.value.msg.0.value.trade_disabled',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Deposit',
       field: 'tx.value.msg.0.value.deposit',
       linkType: ''
-    },
+    }
   ],
   box_create_future: [
     ...defaultFields,
@@ -758,12 +764,14 @@ issue_burn_from_off: [
     {
       name: 'Total Amount',
       field: 'tx.value.msg.0.value.total_amount',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.description',
-      linkType: ''
+      linkType: '',
+      hideInTable: true
     },
     {
       name: 'Trade Disabled',
@@ -774,7 +782,7 @@ issue_burn_from_off: [
       name: 'Future',
       field: 'tx.value.msg.0.value.future',
       linkType: ''
-    },
+    }
   ],
   box_interest: [
     ...defaultFields,
@@ -797,7 +805,7 @@ issue_burn_from_off: [
       name: 'Operation',
       field: 'tx.value.msg.0.value.operation',
       linkType: ''
-    },
+    }
   ],
   box_deposit: [
     ...defaultFields,
@@ -820,7 +828,7 @@ issue_burn_from_off: [
       name: 'Operation',
       field: 'tx.value.msg.0.value.operation',
       linkType: ''
-    },
+    }
   ],
   box_description: [
     ...defaultFields,
@@ -838,7 +846,7 @@ issue_burn_from_off: [
       name: 'Description',
       field: 'tx.value.msg.0.value.description',
       linkType: ''
-    },
+    }
   ],
   box_disable_feature: [
     ...defaultFields,
@@ -856,9 +864,9 @@ issue_burn_from_off: [
       name: 'Feature',
       field: 'tx.value.msg.0.value.feature',
       linkType: ''
-    },
+    }
   ],
-  
+
   all: [
     ...defaultFields,
     {

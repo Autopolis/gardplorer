@@ -33,8 +33,14 @@ export default {
             i.amount = numeral(n.toString()).format("0,0.[000000]");
           }
         } else {
-          i.denom = i.denom.toUpperCase();
-          i.amount = numeral(i.amount).format("0,0.[000000]");
+          if (i.denom === "agard") {
+            const n = Big(i.amount).div(Math.pow(10, 18));
+            i.amount = numeral(n.toString()).format("0,0.[000000]");
+            i.denom = "GARD";
+          } else {
+            i.amount = numeral(i.amount).format("0,0.[000000]");
+            i.denom = i.denom.toUpperCase();
+          }
         }
         return `${i.amount}${i.denom}`;
       });

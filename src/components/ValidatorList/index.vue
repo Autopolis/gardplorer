@@ -28,10 +28,10 @@
     <el-table-column
       class="voting-power"
       label="VOTING POWER"
-      prop="delegator_shares"
+      prop="tokens"
     >
       <template slot-scope="record">
-        {{ parseInt(record.row.delegator_shares) }}
+        {{ record.row.tokens | formatAGARD }}
       </template>
     </el-table-column>
     <el-table-column

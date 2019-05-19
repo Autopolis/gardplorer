@@ -37,7 +37,7 @@
         v-if="detail"
       >
         <data-item label="Voting Power">
-          <span>{{ detail.delegator_shares || '-' }}</span>
+          <span>{{ detail.tokens | formatAGARD }}</span>
         </data-item>
         <data-item label="Jailed">
           <span>{{ detail.jailed ? 'True' : 'False' }}</span>

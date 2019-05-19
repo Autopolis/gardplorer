@@ -126,7 +126,7 @@ export default {
     },
     bonded() {
       const v = this.validatorList.reduce((a, b) => b.tokens - 0 + a, 0);
-      return (v / 1000 / 1000).toFixed(2) + "M";
+      return (v / Math.pow(10, 24)).toFixed(2) + "M";
     }
   },
   methods: {
