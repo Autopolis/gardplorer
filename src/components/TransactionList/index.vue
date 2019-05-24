@@ -55,18 +55,26 @@ export default {
     fields: Array,
     load: { type: Boolean, default: false }
   },
-  methods: { get },
-  computed: {
-    ...mapState("blocks", ["details"])
-  },
-  watch: {
-    list: function() {
+  methods: {
+    get,
+    fetchBlockDetails() {
       if (isEmpty(this.list)) {
         return false;
       }
       this.list.forEach(item => {
         this.$store.dispatch("blocks/fetchDetail", get(item, "height"));
       });
+    }
+  },
+  computed: {
+    ...mapState("blocks", ["details"])
+  },
+  mounted() {
+    this.fetchBlockDetails();
+  },
+  watch: {
+    list: function() {
+      this.fetchBlockDetails();
     }
   }
 };
