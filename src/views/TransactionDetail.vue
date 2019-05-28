@@ -33,6 +33,9 @@
               v-else-if="item.name === 'Amount'"
               :list="[{denom: get(detail, fields[type].find(f => f.linkType === 'token').field), amount: get(detail, item.field)}]"
             />
+            <span v-else-if="item.name === 'Description'">
+              {{ description }}
+            </span>
             <span v-else>
               {{ get(detail, item.field) || '-'}}
             </span>
@@ -49,6 +52,8 @@
 <script>
 import { isEmpty, get } from "lodash";
 import { mapGetters, mapState } from "vuex";
+import Base64 from "crypto-js/enc-base64";
+import Utf8 from "crypto-js/enc-utf8";
 
 import { txFieldsMap } from "@/constants";
 
@@ -69,6 +74,16 @@ export default {
     detail: function() {
       const detail = this.details[this.hash];
       return isEmpty(detail) ? {} : detail;
+    },
+    description: function() {
+      const str = get(
+        this.detail,
+        this.fields[this.type].find(f => f.name === "Description").field
+      );
+      if (!str) {
+        return "-";
+      }
+      return Utf8.stringify(Base64.parse(str));
     },
     type: function() {
       const action = get(this.detail, "tags", []).filter(
