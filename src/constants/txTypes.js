@@ -39,8 +39,8 @@ export const txTypes = {
   },
   tokenBoxs: {
     box_create_lock: 'Create LockBox',
-    box_create_future: 'Create FutureBox',
     box_create_deposit: 'Create DepositBox',
+    box_create_future: 'Create FutureBox',
     box_interest: 'Deposit Interests',
     box_deposit: 'Deposit Capital',
     box_description: 'Box Description',

@@ -5,7 +5,12 @@ import { isEmpty } from 'lodash';
 
 export const upper = s => s.toUpperCase();
 
-export const formatTime = time => moment(time).format('YYYY-MM-DD HH:mm:ss');
+export const formatTime = time => {
+  if (time && time.length === 10) {
+    return moment.unix(time).format('YYYY-MM-DD HH:mm:ss');
+  }
+  return moment(time).format('YYYY-MM-DD HH:mm:ss');
+};
 
 export const formatAGARD = agard => {
   const n = Big(agard).div(Math.pow(10, 18));

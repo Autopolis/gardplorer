@@ -675,31 +675,31 @@ export const txFieldsMap = {
       linkType: ''
     },
     {
-      name: 'Sender',
-      field: 'tx.value.msg.0.value.sender',
+      name: 'Creator',
+      field: 'tx.value.msg.0.value.BoxLockParams.sender',
       linkType: 'address'
     },
     {
       name: 'Box Name',
-      field: 'tx.value.msg.0.value.name',
+      field: 'tx.value.msg.0.value.BoxLockParams.name',
       linkType: ''
     },
     {
       name: 'Total Amount',
-      field: 'tx.value.msg.0.value.total_amount',
-      linkType: '',
-      hideInTable: true
+      field: 'tx.value.msg.0.value.BoxLockParams.total_amount.token',
+      linkType: ''
     },
     {
       name: 'Description',
-      field: 'tx.value.msg.0.value.description',
+      field: 'tx.value.msg.0.value.BoxLockParams.description',
       linkType: '',
       hideInTable: true
     },
     {
-      name: 'Lock',
-      field: 'tx.value.msg.0.value.lock',
-      linkType: ''
+      name: 'Lock End',
+      field: 'tx.value.msg.0.value.BoxLockParams.lock.end_time',
+      linkType: '',
+      hideInTable: true
     }
   ],
   box_create_deposit: [
@@ -710,37 +710,31 @@ export const txFieldsMap = {
       linkType: ''
     },
     {
-      name: 'Sender',
-      field: 'tx.value.msg.0.value.sender',
+      name: 'Creator',
+      field: 'tx.value.msg.0.value.BoxDepositParams.sender',
       linkType: 'address'
     },
     {
       name: 'Box Name',
-      field: 'tx.value.msg.0.value.name',
+      field: 'tx.value.msg.0.value.BoxDepositParams.name',
       linkType: ''
     },
     {
       name: 'Total Amount',
-      field: 'tx.value.msg.0.value.total_amount',
-      linkType: '',
-      hideInTable: true
+      field: 'tx.value.msg.0.value.BoxDepositParams.total_amount.token',
+      linkType: ''
     },
     {
       name: 'Description',
-      field: 'tx.value.msg.0.value.description',
+      field: 'tx.value.msg.0.value.BoxDepositParams.description',
       linkType: '',
       hideInTable: true
     },
     {
       name: 'Trade Disabled',
-      field: 'tx.value.msg.0.value.trade_disabled',
+      field: 'tx.value.msg.0.value.BoxDepositParams.trade_disabled',
       linkType: '',
       hideInTable: true
-    },
-    {
-      name: 'Deposit',
-      field: 'tx.value.msg.0.value.deposit',
-      linkType: ''
     }
   ],
   box_create_future: [
@@ -751,36 +745,31 @@ export const txFieldsMap = {
       linkType: ''
     },
     {
-      name: 'Sender',
-      field: 'tx.value.msg.0.value.sender',
+      name: 'Creator',
+      field: 'tx.value.msg.0.value.BoxFutureParams.sender',
       linkType: 'address'
     },
     {
       name: 'Box Name',
-      field: 'tx.value.msg.0.value.name',
+      field: 'tx.value.msg.0.value.BoxFutureParams.name',
       linkType: ''
     },
     {
       name: 'Total Amount',
-      field: 'tx.value.msg.0.value.total_amount',
-      linkType: '',
-      hideInTable: true
+      field: 'tx.value.msg.0.value.BoxFutureParams.total_amount.token',
+      linkType: ''
     },
     {
       name: 'Description',
-      field: 'tx.value.msg.0.value.description',
+      field: 'tx.value.msg.0.value.BoxFutureParams.description',
       linkType: '',
       hideInTable: true
     },
     {
       name: 'Trade Disabled',
-      field: 'tx.value.msg.0.value.trade_disabled',
-      linkType: ''
-    },
-    {
-      name: 'Future',
-      field: 'tx.value.msg.0.value.future',
-      linkType: ''
+      field: 'tx.value.msg.0.value.BoxFutureParams.trade_disabled',
+      linkType: '',
+      hideInTable: true
     }
   ],
   box_interest: [
@@ -837,7 +826,7 @@ export const txFieldsMap = {
       linkType: ''
     },
     {
-      name: 'Sender',
+      name: 'Operator',
       field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     },
@@ -855,7 +844,7 @@ export const txFieldsMap = {
       linkType: ''
     },
     {
-      name: 'Sender',
+      name: 'Operator',
       field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     },

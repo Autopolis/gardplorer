@@ -33,6 +33,9 @@
               v-else-if="item.name === 'Amount'"
               :list="[{denom: get(detail, fields[type].find(f => f.linkType === 'token').field), amount: get(detail, item.field)}]"
             />
+            <span v-else-if="item.name === 'Lock End'">
+              {{ get(detail, item.field) | formatTime }}
+            </span>
             <span v-else-if="item.name === 'Description'">
               {{ description }}
             </span>
@@ -105,7 +108,9 @@ export default {
       if (action.match("issue")) {
         const denom = get(this.detail, "tx.value.msg.0.value.issue_id");
         this.$store.dispatch("tokens/fetchDetail", denom);
-      } else {
+        return;
+      }
+      if (action.match("send")) {
         const coins = get(this.detail, "tx.value.msg.0.value.amount");
         coins.forEach(i => {
           if (i.denom.match(/^coin.{10}$/)) {
