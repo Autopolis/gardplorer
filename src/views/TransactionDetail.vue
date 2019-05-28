@@ -29,6 +29,10 @@
               v-else-if="(get(detail, item.field) instanceof Object)"
               :list="[get(detail, item.field)]"
             />
+            <data-amount
+              v-else-if="item.name === 'Amount'"
+              :list="[{denom: get(detail, fields[type].find(f => f.linkType === 'token').field), amount: get(detail, item.field)}]"
+            />
             <span v-else>
               {{ get(detail, item.field) || '-'}}
             </span>
@@ -82,12 +86,18 @@ export default {
       this.$store.dispatch("blocks/fetchDetail", get(this.detail, "height"));
 
       // 2. fetch token detail
-      const coins = get(this.detail, "tx.value.msg.0.value.amount");
-      coins.forEach(i => {
-        if (i.denom.match(/^coin.{10}$/)) {
-          this.$store.dispatch("tokens/fetchDetail", i.denom);
-        }
-      });
+      const action = get(this.detail, "tags.0.value");
+      if (action.match("issue")) {
+        const denom = get(this.detail, "tx.value.msg.0.value.issue_id");
+        this.$store.dispatch("tokens/fetchDetail", denom);
+      } else {
+        const coins = get(this.detail, "tx.value.msg.0.value.amount");
+        coins.forEach(i => {
+          if (i.denom.match(/^coin.{10}$/)) {
+            this.$store.dispatch("tokens/fetchDetail", i.denom);
+          }
+        });
+      }
     }
   },
   mounted() {

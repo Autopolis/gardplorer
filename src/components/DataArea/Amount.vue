@@ -24,6 +24,9 @@ export default {
   },
   methods: {
     updateList() {
+      if (this.list.find(i => !i.denom)) {
+        return false;
+      }
       this.viewList = this.list.map(i => {
         if (i.denom.match(/^coin.{10}$/)) {
           const detail = this.details[i.denom];
@@ -48,6 +51,9 @@ export default {
   },
   watch: {
     list() {
+      if (this.list.find(i => !i.denom)) {
+        return false;
+      }
       this.list.forEach(i => {
         if (i.denom.match(/^coin.{10}$/) && isEmpty(this.details[i.denom])) {
           this.$store.dispatch("tokens/fetchDetail", i.denom);

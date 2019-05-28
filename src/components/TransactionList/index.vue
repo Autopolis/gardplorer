@@ -19,12 +19,16 @@
         />
         <span v-if="!item.linkType">
           <data-amount
-            v-if="get(scope.row, item.field) instanceof Array"
+            v-if="(get(scope.row, item.field) instanceof Array)"
             :list="get(scope.row, item.field)"
           />
           <data-amount
-            v-else-if="get(scope.row, item.field) instanceof Object"
+            v-else-if="(get(scope.row, item.field) instanceof Object)"
             :list="[get(scope.row, item.field)]"
+          />
+          <data-amount
+            v-else-if="item.name === 'Amount'"
+            :list="[{denom: get(scope.row, fields.find(f => f.linkType === 'token').field), amount: get(scope.row, item.field)}]"
           />
           <span v-else>
             {{ get(scope.row, item.field) || '-'}}

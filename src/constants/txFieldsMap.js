@@ -416,7 +416,7 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tags.2.value',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Issuer',
@@ -487,11 +487,11 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     },
     {
@@ -505,11 +505,11 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     },
     {
@@ -524,11 +524,11 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     },
     {
@@ -554,11 +554,11 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     },
     {
@@ -567,23 +567,22 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  issue_burn: [
+  issue_burn_from: [
     ...defaultFields,
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     },
     {
       name: 'Burn From',
-      field: 'tx.value.msg.0.value.from',
-      linkType: 'address',
-      hideInTable: true
+      field: 'tx.value.msg.0.value.holder',
+      linkType: 'address'
     },
     {
       name: 'Amount',
@@ -596,11 +595,11 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     },
     {
@@ -619,11 +618,11 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     }
   ],
@@ -632,11 +631,11 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     }
   ],
@@ -645,11 +644,11 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     }
   ],
@@ -658,11 +657,11 @@ export const txFieldsMap = {
     {
       name: 'Issue ID',
       field: 'tx.value.msg.0.value.issue_id',
-      linkType: ''
+      linkType: 'token'
     },
     {
       name: 'Operator',
-      field: 'tx.value.msg.0.value.operator',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     }
   ],
