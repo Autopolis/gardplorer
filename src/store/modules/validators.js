@@ -28,9 +28,9 @@ export default {
   },
 
   actions: {
-    fetchAll: async function(context) {
-      const { data } = await $ajax.get(`/staking/validators`);
-      if (!isEmpty(data)) {
+    fetchAll: async function(context, status) {
+      const { data } = await $ajax.get(`/staking/validators?status=${status}`);
+      if (data) {
         context.commit('setList', data);
         data.forEach(i => {
           context.commit('setConsPubMap', { [i.consensus_pubkey]: i });
