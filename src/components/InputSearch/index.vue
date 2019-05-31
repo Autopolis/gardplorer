@@ -90,6 +90,13 @@ export default {
         return false;
       }
 
+      // jump to validator detail page;
+      const valPattern = /^gardvaloper.{39}$/;
+      if (valPattern.test(value)) {
+        this.$router.push({ path: "/validator/" + value });
+        return false;
+      }
+
       // jump to token detail page;
       const tokenPattern = /^coin.{10}$/;
       if (tokenPattern.test(value)) {
@@ -104,7 +111,8 @@ export default {
         return false;
       }
 
-      // query as token symbol
+      // else show 404
+      this.$router.push({ path: "/404" });
     }
   }
 };
