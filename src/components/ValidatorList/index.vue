@@ -35,6 +35,10 @@
       </template>
     </el-table-column>
     <el-table-column
+      label="RANKING"
+      prop="number"
+    />
+    <el-table-column
       class="bond-height"
       label="UNBONDING HEIGHT"
       prop="unbonding_height"
