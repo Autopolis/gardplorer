@@ -39,13 +39,13 @@
             <span v-else-if="item.name === 'Description'">
               {{ description }}
             </span>
+            <span v-else-if="item.name === 'Time'">
+              {{ get(detail, item.field) | formatTime }}
+            </span>
             <span v-else>
               {{ get(detail, item.field) || '-'}}
             </span>
           </span>
-        </data-item>
-        <data-item label="Time">
-          {{ get(blocks, [detail.height, 'block', 'header', 'time']) | formatTime }}
         </data-item>
       </card>
     </div>
@@ -69,8 +69,6 @@ export default {
   },
   computed: {
     ...mapState("transactions", ["details"]),
-    ...mapState("blocks", { blocks: "details" }),
-
     hash: function() {
       return this.$route.params.hash;
     },
@@ -86,7 +84,11 @@ export default {
       if (!str) {
         return "-";
       }
-      return Utf8.stringify(Base64.parse(str));
+      try {
+        return Utf8.stringify(Base64.parse(str));
+      } catch (e) {
+        return str;
+      }
     },
     type: function() {
       const action = get(this.detail, "tags", []).filter(
@@ -100,13 +102,10 @@ export default {
       if (isEmpty(this.detail)) {
         return false;
       }
-      // 1. fetch block detail for tx time
-      this.$store.dispatch("blocks/fetchDetail", get(this.detail, "height"));
-
-      // 2. fetch token detail
+      // fetch token detail
       const action = get(this.detail, "tags.0.value");
       if (action.match("issue")) {
-        const denom = get(this.detail, "tx.value.msg.0.value.issue_id");
+        const denom = get(this.detail, "tags.2.value");
         this.$store.dispatch("tokens/fetchDetail", denom);
         return;
       }

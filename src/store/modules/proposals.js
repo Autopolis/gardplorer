@@ -24,11 +24,8 @@ export default {
       context.commit('setLoad', true);
       const { data } = await $ajax.get('/gov/proposals');
       context.commit('setLoad', false);
-      if (isEmpty(data)) {
-        return Promise.reject();
-      }
       context.commit('setList', data);
-      return Promise.resolve();
+      return Promise.resolve(data);
     },
     fetchDetail: async function(context, id) {
       // check if existed;

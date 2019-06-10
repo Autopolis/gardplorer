@@ -4,6 +4,11 @@
  */
 const defaultFields = [
   {
+    name: 'Time',
+    field: 'timestamp',
+    linkType: ''
+  },
+  {
     name: 'Action',
     field: 'tags.0.value',
     linkType: '',
