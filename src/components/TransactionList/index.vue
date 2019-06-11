@@ -30,22 +30,15 @@
             v-else-if="item.name === 'Amount'"
             :list="[{denom: get(scope.row, fields.find(f => f.linkType === 'token').field), amount: get(scope.row, item.field)}]"
           />
+          <span v-else-if="item.name === 'Time'">
+            {{ get(scope.row, item.field) | formatTime }}
+          </span>
           <span v-else>
             {{ get(scope.row, item.field) || '-'}}
           </span>
         </span>
       </template>
     </el-table-column>
-
-    <el-table-column
-      prop="header.num_txs"
-      label="TIME"
-    >
-      <template slot-scope="scope">
-        {{ get(details, [scope.row.height, 'block', 'header', 'time']) | formatTime }}
-      </template>
-    </el-table-column>
-
   </el-table>
 </template>
 
@@ -60,26 +53,7 @@ export default {
     load: { type: Boolean, default: false }
   },
   methods: {
-    get,
-    fetchBlockDetails() {
-      if (isEmpty(this.list)) {
-        return false;
-      }
-      this.list.forEach(item => {
-        this.$store.dispatch("blocks/fetchDetail", get(item, "height"));
-      });
-    }
-  },
-  computed: {
-    ...mapState("blocks", ["details"])
-  },
-  mounted() {
-    this.fetchBlockDetails();
-  },
-  watch: {
-    list: function() {
-      this.fetchBlockDetails();
-    }
+    get
   }
 };
 </script>

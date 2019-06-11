@@ -2,9 +2,9 @@ import axios from 'axios';
 import { Message } from 'element-ui';
 
 let baseURL = 'https://www.gardplorer.io/testnet/api';
-if (!location.hostname.match('gardplorer.io')) {
-  baseURL = 'http://api.hgdev.io';
-}
+// if (!location.hostname.match('gardplorer.io')) {
+//   baseURL = 'http://api.hgdev.io';
+// }
 const $ajax = axios.create({ baseURL });
 
 $ajax.interceptors.response.use(

@@ -53,12 +53,9 @@
       </template>
     </el-table-column>
 
-    <el-table-column
-      prop="header.num_txs"
-      label="TIME"
-    >
+    <el-table-column label="TIME">
       <template slot-scope="scope">
-        {{ get(details, [scope.row.height, 'block', 'header', 'time']) | formatTime }}
+        {{ scope.row.timestamp | formatTime }}
       </template>
     </el-table-column>
   </el-table>
@@ -74,20 +71,7 @@ export default {
     list: Array,
     load: { type: Boolean, default: true }
   },
-  methods: { get },
-  computed: {
-    ...mapState("blocks", ["details"])
-  },
-  watch: {
-    list: function() {
-      if (isEmpty(this.list)) {
-        return false;
-      }
-      this.list.forEach(item => {
-        this.$store.dispatch("blocks/fetchDetail", get(item, "height"));
-      });
-    }
-  }
+  methods: { get }
 };
 </script>
 
