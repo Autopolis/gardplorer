@@ -554,7 +554,7 @@ export const txFieldsMap = {
       hideInTable: true
     }
   ],
-  issue_burn: [
+  issue_burn_owner: [
     ...defaultFields,
     {
       name: 'Issue ID',
@@ -595,7 +595,7 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  issue_burn_any: [
+  issue_burn_holder: [
     ...defaultFields,
     {
       name: 'Issue ID',
@@ -605,11 +605,6 @@ export const txFieldsMap = {
     {
       name: 'Operator',
       field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Burn From',
-      field: 'tx.value.msg.0.value.from',
       linkType: 'address'
     },
     {
@@ -618,7 +613,7 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  issue_burn_off: [
+  issue_freeze: [
     ...defaultFields,
     {
       name: 'Issue ID',
@@ -629,9 +624,24 @@ export const txFieldsMap = {
       name: 'Operator',
       field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
+    },
+    {
+      name: 'Freeze Address',
+      field: 'tx.value.msg.0.value.accAddress',
+      linkType: 'address'
+    },
+    {
+      name: 'Freeze Type',
+      field: 'tx.value.msg.0.value.freeze_type',
+      linkType: ''
+    },
+    {
+      name: 'End Time',
+      field: 'tx.value.msg.0.value.end_time',
+      linkType: ''
     }
   ],
-  issue_burn_from_off: [
+  issue_unfreeze: [
     ...defaultFields,
     {
       name: 'Issue ID',
@@ -642,9 +652,19 @@ export const txFieldsMap = {
       name: 'Operator',
       field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
+    },
+    {
+      name: 'Unfreeze Address',
+      field: 'tx.value.msg.0.value.accAddress',
+      linkType: 'address'
+    },
+    {
+      name: 'Freeze Type',
+      field: 'tx.value.msg.0.value.freeze_type',
+      linkType: ''
     }
   ],
-  issue_burn_any_off: [
+  issue_disable_feature: [
     ...defaultFields,
     {
       name: 'Issue ID',
@@ -655,19 +675,11 @@ export const txFieldsMap = {
       name: 'Operator',
       field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
-    }
-  ],
-  issue_finish_minting: [
-    ...defaultFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
     },
     {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
+      name: 'Feature',
+      field: 'tx.value.msg.0.value.feature',
+      linkType: ''
     }
   ],
 

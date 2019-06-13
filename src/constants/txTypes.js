@@ -26,16 +26,15 @@ export const txTypes = {
   },
   issuances: {
     issue: 'Issue',
-    issue_mint: 'Issue Mint',
-    issue_burn: 'Issue Burn',
-    issue_burn_from: 'Issue Burn From',
-    issue_burn_any: 'Issue Burn Any',
-    issue_finish_minting: 'Issue Finish Minting',
-    issue_description: 'Issue Description',
-    issue_transfer_ownership: 'Issue Transfer Ownership',
-    issue_burn_off: 'Issue Burn Off',
-    issue_burn_from_off: 'Issue Burn From Off',
-    issue_burn_any_off: 'Issue Burn Any Off'
+    issue_mint: 'Mint',
+    issue_burn_owner: 'Burn',
+    issue_burn_from: 'Burn From',
+    issue_burn_holder: 'Holder Burn',
+    issue_freeze: 'Freeze',
+    issue_unfreeze: 'Unfreeze',
+    issue_description: 'Description',
+    issue_transfer_ownership: 'Transfer Ownership',
+    issue_disable_feature: 'Disable Feature'
   },
   tokenBoxs: {
     box_create_lock: 'Create LockBox',
