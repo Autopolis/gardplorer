@@ -30,7 +30,7 @@
             v-else-if="item.name === 'Amount'"
             :list="[{denom: get(scope.row, fields.find(f => f.linkType === 'token').field), amount: get(scope.row, item.field)}]"
           />
-          <span v-else-if="item.name === 'Time'">
+          <span v-else-if="item.name.match('Time')">
             {{ get(scope.row, item.field) | formatTime }}
           </span>
           <span v-else>

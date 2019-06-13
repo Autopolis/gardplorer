@@ -39,7 +39,7 @@
             <span v-else-if="item.name === 'Description'">
               {{ description }}
             </span>
-            <span v-else-if="item.name === 'Time'">
+            <span v-else-if="item.name.match('Time')">
               {{ get(detail, item.field) | formatTime }}
             </span>
             <span v-else>
