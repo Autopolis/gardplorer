@@ -115,7 +115,7 @@ export default {
     },
     fetchData: async function() {
       if (isEmpty(this.consPubMap)) {
-        this.$store.dispatch("validators/fetchAll");
+        this.$store.dispatch("validators/fetchAll", "bonded");
       }
 
       const height = this.height;
