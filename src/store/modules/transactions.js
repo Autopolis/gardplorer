@@ -40,7 +40,7 @@ export default {
     fetchTotalCount: async function(context, params = { action: 'send', page: 1 }) {
       context.commit('setLoad', true);
       const { data } = await $ajax.get('/txs', {
-        params: { action: params.action || 'send', page: 1 }
+        params
       });
       context.commit('setLoad', false);
       if (isEmpty(data)) {

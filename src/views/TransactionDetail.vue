@@ -79,7 +79,7 @@ export default {
     description: function() {
       const str = get(
         this.detail,
-        this.fields[this.type].find(f => f.name === "Description").field
+        get(this.fields[this.type].find(f => f.name === "Description"), "field")
       );
       if (!str) {
         return "-";
@@ -94,7 +94,10 @@ export default {
       const action = get(this.detail, "tags", []).filter(
         item => item.key === "action"
       )[0];
-      return action && action.value;
+      const category = get(this.detail, "tags", []).filter(
+        item => item.key === "category"
+      )[0];
+      return `${action && action.value}_${category && category.value}`;
     }
   },
   watch: {
@@ -116,6 +119,12 @@ export default {
             this.$store.dispatch("tokens/fetchDetail", i.denom);
           }
         });
+      }
+      if (action.match("inject")) {
+        const coin = get(this.detail, "tx.value.msg.0.value.amount");
+        if (coin.denom.match(/^coin.{10}$/)) {
+          this.$store.dispatch("tokens/fetchDetail", coin.denom);
+        }
       }
     }
   },

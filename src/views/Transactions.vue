@@ -5,7 +5,7 @@
         <el-select
           v-if="Object.keys(actions).length > 1"
           :disabled="load"
-          :value="selected"
+          :value="selected_key"
           placeholder="Pls select action"
           size='small'
           @change="onSelect"
@@ -46,13 +46,13 @@
 import { mapGetters, mapState } from "vuex";
 import Card from "@/components/Card";
 import TransactionList from "@/components/TransactionList";
-import { txTypes, txFieldsMap } from "@/constants";
+import { txTypes, txListFieldsMap } from "@/constants";
 
 export default {
   data: function() {
     const { category } = this.$route.params;
     return {
-      selected: Object.keys(txTypes[category])[0]
+      selected_key: Object.keys(txTypes[category])[0]
     };
   },
   components: { Card, "transaction-list": TransactionList },
@@ -71,7 +71,12 @@ export default {
       return txTypes[this.category];
     },
     fields: function() {
-      return txFieldsMap[this.selected];
+      return txListFieldsMap[this.selected_key];
+    },
+    selected: function() {
+      return this.selected_key.match("-")
+        ? this.selected_key.split("-")
+        : [this.selected_key, ""];
     }
   },
   methods: {
@@ -79,24 +84,23 @@ export default {
       const { pageSize, totalCount } = this;
       const page = Math.ceil(totalCount / pageSize) - currentPage + 1;
       this.$store.dispatch("transactions/fetchList", {
-        action: this.selected,
+        action: this.selected[0],
         page
       });
     },
     onSelect: function(value) {
-      this.selected = value;
+      this.selected_key = value;
       this.fetchData();
     },
     fetchData: async function() {
-      await this.$store.dispatch("transactions/fetchTotalCount", {
-        action: this.selected
-      });
+      const params = { action: this.selected[0] };
+      if (this.selected[1]) {
+        params.category = this.selected[1];
+      }
+      await this.$store.dispatch("transactions/fetchTotalCount", params);
       const { pageSize, totalCount } = this;
-      const page = Math.ceil(totalCount / pageSize) || 1;
-      this.$store.dispatch("transactions/fetchList", {
-        action: this.selected,
-        page
-      });
+      params.page = Math.ceil(totalCount / pageSize) || 1;
+      this.$store.dispatch("transactions/fetchList", params);
     }
   },
   mounted: function() {
@@ -104,7 +108,7 @@ export default {
   },
   watch: {
     category() {
-      this.selected = Object.keys(txTypes[this.category])[0];
+      this.selected_key = Object.keys(txTypes[this.category])[0];
       this.fetchData();
     }
   }
