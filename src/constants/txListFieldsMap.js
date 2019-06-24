@@ -259,11 +259,16 @@ export const txListFieldsMap = {
   ],
 
   // exchange
-  create_order: [
+  make: [
     ...defaultListFields,
     {
+      name: 'Order ID',
+      field: 'tags.2.value',
+      linkType: ''
+    },
+    {
       name: 'Seller',
-      field: 'tx.value.msg.0.value.seller',
+      field: 'tags.3.value',
       linkType: 'address'
     },
     {
@@ -277,44 +282,34 @@ export const txListFieldsMap = {
       linkType: ''
     }
   ],
-  withdrawal_order: [
+  'cancel-exchange': [
     ...defaultListFields,
     {
       name: 'Order ID',
-      field: 'tx.value.msg.0.value.order_id',
+      field: 'tags.2.value',
       linkType: ''
     },
     {
-      name: 'Seller',
-      field: 'tx.value.msg.0.value.seller',
+      name: 'Sender',
+      field: 'tags.3.value',
       linkType: 'address'
-    },
-    {
-      name: 'Status',
-      field: 'tags.4.value',
-      linkType: ''
     }
   ],
-  take_order: [
+  take: [
     ...defaultListFields,
     {
       name: 'Order ID',
-      field: 'tx.value.msg.0.value.order_id',
+      field: 'tags.2.value',
       linkType: ''
     },
     {
       name: 'Buyer',
-      field: 'tx.value.msg.0.value.buyer',
+      field: 'tags.3.value',
       linkType: 'address'
     },
     {
       name: 'Value',
       field: 'tx.value.msg.0.value.value',
-      linkType: ''
-    },
-    {
-      name: 'Status',
-      field: 'tags.4.value',
       linkType: ''
     }
   ],

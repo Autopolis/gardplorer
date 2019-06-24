@@ -20,9 +20,9 @@ export const txTypes = {
     vote: 'Vote'
   },
   exchanges: {
-    create_order: 'Make Order',
-    take_order: 'Take Order',
-    withdrawal_order: 'Cancel Order'
+    make: 'Make Order',
+    take: 'Take Order',
+    'cancel-exchange': 'Cancel Order'
   },
   issuances: {
     issue: 'Issue',

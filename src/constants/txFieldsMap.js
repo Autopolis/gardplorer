@@ -130,12 +130,12 @@ export const txFieldsMap = {
   vote: [...txListFieldsMap.vote, ...defaultFields],
 
   // exchange
-  create_order: [...txListFieldsMap.create_order, ...defaultFields],
-  withdrawal_order: [...txListFieldsMap.withdrawal_order, ...defaultFields],
-  take_order: [...txListFieldsMap.take_order, ...defaultFields],
+  make_exchange: [...txListFieldsMap.make, ...defaultFields],
+  take_exchange: [...txListFieldsMap.take, ...defaultFields],
+  cancel_exchange: [...txListFieldsMap['cancel-exchange'], ...defaultFields],
 
   // issue
-  issue: [
+  issue_issue: [
     ...txListFieldsMap.issue,
     ...defaultFields,
     {
@@ -179,8 +179,8 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  issue_transfer_ownership: [...txListFieldsMap.issue_transfer_ownership, ...defaultFields],
-  issue_description: [
+  issue_transfer_ownership_issue: [...txListFieldsMap.issue_transfer_ownership, ...defaultFields],
+  issue_description_issue: [
     ...txListFieldsMap.issue_description,
     ...defaultFields,
     {
@@ -189,7 +189,7 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  issue_mint: [
+  issue_mint_issue: [
     ...txListFieldsMap.issue_mint,
     ...defaultFields,
     {
@@ -203,12 +203,12 @@ export const txFieldsMap = {
       linkType: 'address'
     }
   ],
-  issue_burn_owner: [...txListFieldsMap.issue_burn_owner, ...defaultFields],
-  issue_burn_from: [...txListFieldsMap.issue_burn_from, ...defaultFields],
-  issue_burn_holder: [...txListFieldsMap.issue_burn_holder, ...defaultFields],
-  issue_freeze: [...txListFieldsMap.issue_freeze, ...defaultFields],
-  issue_unfreeze: [...txListFieldsMap.issue_unfreeze, ...defaultFields],
-  issue_disable_feature: [...txListFieldsMap.issue_disable_feature, ...defaultFields],
+  issue_burn_owner_issue: [...txListFieldsMap.issue_burn_owner, ...defaultFields],
+  issue_burn_from_issue: [...txListFieldsMap.issue_burn_from, ...defaultFields],
+  issue_burn_holder_issue: [...txListFieldsMap.issue_burn_holder, ...defaultFields],
+  issue_freeze_issue: [...txListFieldsMap.issue_freeze, ...defaultFields],
+  issue_unfreeze_issue: [...txListFieldsMap.issue_unfreeze, ...defaultFields],
+  issue_disable_feature_issue: [...txListFieldsMap.issue_disable_feature, ...defaultFields],
 
   // box
   create_lock: [
@@ -284,6 +284,7 @@ export const txFieldsMap = {
     }
   ],
   cancel_deposit: [
+    ...txListFieldsMap['cancel-deposit'],
     ...defaultFields,
     {
       name: 'Box ID',
@@ -294,16 +295,20 @@ export const txFieldsMap = {
       name: 'Sender',
       field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
-    },
+    }
+  ],
+  cancel_future: [
+    ...txListFieldsMap['cancel-future'],
+    ...defaultFields,
     {
-      name: 'Interest',
-      field: 'tx.value.msg.0.value.interest',
+      name: 'Box ID',
+      field: 'tx.value.msg.0.value.box_id',
       linkType: ''
     },
     {
-      name: 'Operation',
-      field: 'tx.value.msg.0.value.operation',
-      linkType: ''
+      name: 'Sender',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: 'address'
     }
   ],
   describe: [

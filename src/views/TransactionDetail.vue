@@ -127,12 +127,26 @@ export default {
           "tx.value.msg.0.value.params.total_amount.token.denom"
         );
       }
+      if (action.match("take")) {
+        denom = get(this.detail, "tx.value.msg.0.value.value.denom");
+      }
       if (denom && denom.match(/^coin.{10}$/)) {
         this.$store.dispatch("tokens/fetchDetail", denom);
         return;
       }
       if (action.match("send")) {
         const coins = get(this.detail, "tx.value.msg.0.value.amount");
+        coins.forEach(i => {
+          if (i.denom.match(/^coin.{10}$/)) {
+            this.$store.dispatch("tokens/fetchDetail", i.denom);
+          }
+        });
+      }
+      if (action === "make") {
+        const coins = [
+          get(this.detail, "tx.value.msg.0.value.target"),
+          get(this.detail, "tx.value.msg.0.value.supply")
+        ];
         coins.forEach(i => {
           if (i.denom.match(/^coin.{10}$/)) {
             this.$store.dispatch("tokens/fetchDetail", i.denom);
