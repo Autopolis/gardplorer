@@ -329,17 +329,17 @@ export const txListFieldsMap = {
     },
     {
       name: 'Issuer',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.issuer',
+      field: 'tx.value.msg.0.value.sender',
       linkType: 'address'
     },
     {
       name: 'Token Name',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.name',
+      field: 'tx.value.msg.0.value.params.name',
       linkType: ''
     },
     {
       name: 'Token Symbol',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.symbol',
+      field: 'tx.value.msg.0.value.params.symbol',
       linkType: ''
     }
   ],
@@ -585,64 +585,39 @@ export const txListFieldsMap = {
     ...defaultListFields,
     {
       name: 'Box ID',
-      field: 'tx.value.msg.0.value.box_id',
+      field: 'tags.2.value',
       linkType: ''
     },
     {
       name: 'Sender',
-      field: 'tx.value.msg.0.value.sender',
+      field: 'tags.3.value',
       linkType: 'address'
-    },
-    {
-      name: 'Interest',
-      field: 'tx.value.msg.0.value.interest',
-      linkType: ''
-    },
-    {
-      name: 'Operation',
-      field: 'tx.value.msg.0.value.operation',
-      linkType: ''
     }
   ],
   'cancel-future': [
     ...defaultListFields,
     {
       name: 'Box ID',
-      field: 'tx.value.msg.0.value.box_id',
+      field: 'tags.2.value',
       linkType: ''
     },
     {
       name: 'Sender',
-      field: 'tx.value.msg.0.value.sender',
+      field: 'tags.3.value',
       linkType: 'address'
-    },
-    {
-      name: 'Interest',
-      field: 'tx.value.msg.0.value.interest',
-      linkType: ''
-    },
-    {
-      name: 'Operation',
-      field: 'tx.value.msg.0.value.operation',
-      linkType: ''
     }
   ],
   describe: [
     ...defaultListFields,
     {
       name: 'Box ID',
-      field: 'tx.value.msg.0.value.box_id',
+      field: 'tags.2.value',
       linkType: ''
     },
     {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
+      name: 'Sender',
+      field: 'tags.3.value',
       linkType: 'address'
-    },
-    {
-      name: 'Description',
-      field: 'tx.value.msg.0.value.description',
-      linkType: ''
     }
   ],
   disable_feature: [

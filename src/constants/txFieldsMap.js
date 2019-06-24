@@ -139,52 +139,44 @@ export const txFieldsMap = {
     ...txListFieldsMap.issue,
     ...defaultFields,
     {
-      name: 'Owner',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.owner',
-      linkType: 'address',
-      hideInTable: true
-    },
-    {
       name: 'Total Supply',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.total_supply',
-      linkType: '',
-      hideInTable: true
+      field: 'tx.value.msg.0.value.params.total_supply',
+      linkType: ''
     },
     {
       name: 'Decimals',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.decimals',
-      linkType: '',
-      hideInTable: true
+      field: 'tx.value.msg.0.value.params.decimals',
+      linkType: ''
     },
     {
       name: 'Description',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.description',
-      linkType: '',
-      hideInTable: true
+      field: 'tx.value.msg.0.value.params.description',
+      linkType: ''
     },
     {
-      name: 'Burning Off Function',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.burning_off',
-      linkType: '',
-      hideInTable: true
+      name: 'Owner Burn Disabled',
+      field: 'tx.value.msg.0.value.params.burn_owner_disabled',
+      linkType: ''
     },
     {
-      name: 'Burning From Off Function',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.burning_from_off',
-      linkType: '',
-      hideInTable: true
+      name: 'Owner Burn From Holder Disabled',
+      field: 'tx.value.msg.0.value.params.burn_from_disabled',
+      linkType: ''
     },
     {
-      name: 'Burning Any Off Function',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.burning_any_off',
-      linkType: '',
-      hideInTable: true
+      name: 'Holder Burn Disabled',
+      field: 'tx.value.msg.0.value.params.burn_holder_disabled',
+      linkType: ''
     },
     {
-      name: 'Minting Finished Function',
-      field: 'tx.value.msg.0.value.CoinIssueInfo.minting_finished',
-      linkType: '',
-      hideInTable: true
+      name: 'Freeze Disabled',
+      field: 'tx.value.msg.0.value.params.freeze_disabled',
+      linkType: ''
+    },
+    {
+      name: 'Minting Finished',
+      field: 'tx.value.msg.0.value.params.minting_finished',
+      linkType: ''
     }
   ],
   issue_transfer_ownership: [...txListFieldsMap.issue_transfer_ownership, ...defaultFields],
@@ -194,8 +186,7 @@ export const txFieldsMap = {
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.description',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     }
   ],
   issue_mint: [
@@ -204,14 +195,12 @@ export const txFieldsMap = {
     {
       name: 'Decimals',
       field: 'tx.value.msg.0.value.decimals',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     },
     {
       name: 'To',
       field: 'tx.value.msg.0.value.to',
-      linkType: 'address',
-      hideInTable: true
+      linkType: 'address'
     }
   ],
   issue_burn_owner: [...txListFieldsMap.issue_burn_owner, ...defaultFields],
@@ -233,14 +222,12 @@ export const txFieldsMap = {
     {
       name: 'Total Amount',
       field: 'tx.value.msg.0.value.params.total_amount.token',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     },
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.params.description',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     }
   ],
   create_deposit: [
@@ -254,14 +241,12 @@ export const txFieldsMap = {
     {
       name: 'Total Amount',
       field: 'tx.value.msg.0.value.params.total_amount.token',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     },
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.params.description',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     }
   ],
   create_future: [
@@ -270,14 +255,12 @@ export const txFieldsMap = {
     {
       name: 'Total Amount',
       field: 'tx.value.msg.0.value.params.total_amount.token',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     },
     {
       name: 'Description',
       field: 'tx.value.msg.0.value.params.description',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     }
   ],
   withdraw_deposit: [...txListFieldsMap.withdraw, ...defaultFields],
@@ -288,8 +271,7 @@ export const txFieldsMap = {
     {
       name: 'Amount',
       field: 'tx.value.msg.0.value.amount',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     }
   ],
   inject_future: [
@@ -298,8 +280,7 @@ export const txFieldsMap = {
     {
       name: 'Amount',
       field: 'tx.value.msg.0.value.amount',
-      linkType: '',
-      hideInTable: true
+      linkType: ''
     }
   ],
   cancel_deposit: [

@@ -42,6 +42,9 @@
             <span v-else-if="item.name.match('Time')">
               {{ get(detail, item.field) | formatTime }}
             </span>
+            <span v-else-if="typeof get(detail, item.field) === 'boolean'">
+              {{ get(detail, item.field).toString() }}
+            </span>
             <span v-else>
               {{ get(detail, item.field) || '-'}}
             </span>
@@ -94,6 +97,10 @@ export default {
       const action = get(this.detail, "tags", []).filter(
         item => item.key === "action"
       )[0];
+      // issue 模块交易失败的时候 tags 中不包含 category 字段。
+      // if (action && action.value.match("issue")) {
+      //   return action && action.value;
+      // }
       const category = get(this.detail, "tags", []).filter(
         item => item.key === "category"
       )[0];
@@ -107,8 +114,20 @@ export default {
       }
       // fetch token detail
       const action = get(this.detail, "tags.0.value");
+      let denom = "";
       if (action.match("issue")) {
-        const denom = get(this.detail, "tags.2.value");
+        denom = get(this.detail, "tags.2.value");
+      }
+      if (action.match("inject")) {
+        denom = get(this.detail, "tx.value.msg.0.value.amount.denom");
+      }
+      if (action.match("create")) {
+        denom = get(
+          this.detail,
+          "tx.value.msg.0.value.params.total_amount.token.denom"
+        );
+      }
+      if (denom && denom.match(/^coin.{10}$/)) {
         this.$store.dispatch("tokens/fetchDetail", denom);
         return;
       }
@@ -119,12 +138,6 @@ export default {
             this.$store.dispatch("tokens/fetchDetail", i.denom);
           }
         });
-      }
-      if (action.match("inject")) {
-        const coin = get(this.detail, "tx.value.msg.0.value.amount");
-        if (coin.denom.match(/^coin.{10}$/)) {
-          this.$store.dispatch("tokens/fetchDetail", coin.denom);
-        }
       }
     }
   },
