@@ -22,7 +22,7 @@
     </div>
     <transaction-list
       :list="list"
-      :fields="fields.filter(i => !i.hideInTable)"
+      :fields="fields"
       :load="load"
     />
     <div class="card-footer">

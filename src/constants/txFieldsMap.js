@@ -349,19 +349,5 @@ export const txFieldsMap = {
       field: 'tx.value.msg.0.value.feature',
       linkType: ''
     }
-  ],
-
-  all: [
-    ...defaultFields,
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: ''
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
-      linkType: ''
-    }
   ]
 };
