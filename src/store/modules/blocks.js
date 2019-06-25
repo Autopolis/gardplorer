@@ -54,7 +54,7 @@ export default {
   actions: {
     fetchList: async function(context, params = { page: 1 }) {
       const { minHeight, maxHeight, page } = params;
-      let blockApiUri = 'https://www.gardplorer.io/testnet/node';
+      let blockApiUri = 'https://node.hashgard.com/testnet/node';
       // if (!location.hostname.match('gardplorer.io')) {
       //   blockApiUri = 'http://node.hgdev.io';
       // }
