@@ -21,7 +21,7 @@
         title="Transaction List"
       >
         <transaction-list
-          :fields="send.filter(i => !i.hideInTable)"
+          :fields="send"
           :load="load"
           :list="transactionList"
         />
@@ -34,11 +34,11 @@
 import { get, isEmpty } from "lodash";
 import { mapState, mapGetters } from "vuex";
 
-import { txFieldsMap } from "@/constants";
+import { txListFieldsMap } from "@/constants";
 
 export default {
   data: function() {
-    return txFieldsMap;
+    return txListFieldsMap;
   },
   methods: { get, isEmpty },
 
