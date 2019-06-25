@@ -10,57 +10,72 @@
         v-if="detail"
       >
         <data-item label="Proposal ID">
-          <span>{{ detail.value.proposal_id}}</span>
+          <span>{{ detail.proposal_id}}</span>
         </data-item>
         <data-item label="Type">
-          <span>{{ detail.value.proposal_type }}</span>
+          <span>{{ detail.proposal_content.type }}</span>
         </data-item>
         <data-item label="Status">
-          <span>{{ detail.value.proposal_status }}</span>
-        </data-item>
-        <data-item label="Title">
-          <span>{{ detail.value.title }}</span>
-        </data-item>
-        <data-item label="Description">
-          <span>{{ detail.value.description }}</span>
+          <span>{{ detail.proposal_status }}</span>
         </data-item>
         <data-item label="Submit Time">
-          <span>{{ detail.value.submit_time | formatTime }}</span>
+          <span>{{ detail.submit_time | formatTime }}</span>
         </data-item>
         <data-item label="Deposit End Time">
-          <span>{{ detail.value.deposit_end_time | formatTime }}</span>
+          <span>{{ detail.deposit_end_time | formatTime }}</span>
         </data-item>
         <data-item label="Total Deposit">
-          <data-amount :list="detail.value.total_deposit" />
+          <data-amount :list="detail.total_deposit" />
         </data-item>
       </card>
 
       <card
+        title="Proposal Content"
+        v-if="detail"
+      >
+        <data-item label="Title">
+          <span>{{ get(detail, 'proposal_content.value.TextProposal.title') }}</span>
+        </data-item>
+        <data-item label="Description">
+          <span>{{ get(detail, 'proposal_content.value.TextProposal.description') }}</span>
+        </data-item>
+        <div v-if="!isEmpty(get(detail, 'proposal_content.value.proposal_params'))">
+          <data-item
+            v-for="para in get(detail, 'proposal_content.value.proposal_params')"
+            :key="para.key"
+            :label="para.key"
+          >
+            <span>{{ para.value }}</span>
+          </data-item>
+        </div>
+      </card>
+
+      <card
         title="Voting Status"
-        v-if="detail && detail.value.proposal_status !== 'DepositPeriod'"
+        v-if="detail && detail.proposal_status !== 'DepositPeriod'"
       >
         <data-item label="Voting Start Time">
-          <span>{{ detail.value.voting_start_time | formatTime }}</span>
+          <span>{{ detail.voting_start_time | formatTime }}</span>
         </data-item>
         <data-item label="Voting End Time">
-          <span>{{ detail.value.voting_end_time | formatTime }}</span>
+          <span>{{ detail.voting_end_time | formatTime }}</span>
         </data-item>
         <data-item label="Voting Result">
           <div class="voting-result">
             <div class="yes">
-              <span>{{detail.value.final_tally_result.yes}}</span>
+              <span>{{detail.final_tally_result.yes}}</span>
               <p>YES</p>
             </div>
             <div class="no">
-              <span>{{detail.value.final_tally_result.no}}</span>
+              <span>{{detail.final_tally_result.no}}</span>
               <p>NO</p>
             </div>
             <div class="veto">
-              <span>{{detail.value.final_tally_result.no_with_veto}}</span>
+              <span>{{detail.final_tally_result.no_with_veto}}</span>
               <p>NO WITH VETO</p>
             </div>
             <div class="abstain">
-              <span>{{detail.value.final_tally_result.abstain}}</span>
+              <span>{{detail.final_tally_result.abstain}}</span>
               <p>ABSTAIN</p>
             </div>
           </div>
@@ -71,7 +86,7 @@
 </template>
 
 <script>
-import { get } from "lodash";
+import { get, isEmpty } from "lodash";
 import { mapGetters, mapState } from "vuex";
 
 export default {
@@ -81,7 +96,8 @@ export default {
     };
   },
   methods: {
-    get
+    get,
+    isEmpty
   },
   computed: {
     ...mapState("proposals", ["details"]),

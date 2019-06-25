@@ -20,9 +20,9 @@ export const txTypes = {
     vote: 'Vote'
   },
   exchanges: {
-    create_order: 'Make Order',
-    take_order: 'Take Order',
-    withdrawal_order: 'Cancel Order'
+    make: 'Make Order',
+    take: 'Take Order',
+    'cancel-exchange': 'Cancel Order'
   },
   issuances: {
     issue: 'Issue',
@@ -37,12 +37,12 @@ export const txTypes = {
     issue_disable_feature: 'Disable Feature'
   },
   tokenBoxs: {
-    box_create_lock: 'Create LockBox',
-    box_create_deposit: 'Create DepositBox',
-    box_create_future: 'Create FutureBox',
-    box_interest: 'Deposit Interests',
-    box_deposit: 'Deposit Capital',
-    box_description: 'Box Description',
-    box_disable_feature: 'Desable Feature'
+    create: 'Create Box',
+    withdraw: 'Withdraw',
+    inject: 'Inject',
+    'cancel-deposit': 'Cancel Deposit',
+    'cancel-future': 'Cancel Future',
+    describe: 'Description',
+    disable_feature: 'Disable Feature'
   }
 };
