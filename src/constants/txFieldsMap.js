@@ -20,7 +20,7 @@ const defaultFields = [
 
 export const txFieldsMap = {
   // bank
-  send: [
+  send_bank: [
     ...txListFieldsMap.send,
     ...defaultFields,
     {
@@ -29,11 +29,11 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  multisend: [...txListFieldsMap.multisend, ...defaultFields],
+  multisend_bank: [...txListFieldsMap.multisend, ...defaultFields],
 
   // staking
-  delegate: [...txListFieldsMap.delegate, ...defaultFields],
-  begin_redelegate: [
+  delegate_staking: [...txListFieldsMap.delegate, ...defaultFields],
+  begin_redelegate_staking: [
     ...txListFieldsMap.begin_redelegate,
     ...defaultFields,
     {
@@ -42,7 +42,7 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  begin_unbonding: [
+  begin_unbonding_staking: [
     ...txListFieldsMap.begin_unbonding,
     ...defaultFields,
     {
@@ -51,7 +51,7 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  create_validator: [
+  create_validator_staking: [
     ...txListFieldsMap.create_validator,
     ...defaultFields,
     {
@@ -70,7 +70,7 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  edit_validator: [
+  edit_validator_staking: [
     ...txListFieldsMap.edit_validator,
     ...defaultFields,
     {
@@ -101,18 +101,21 @@ export const txFieldsMap = {
   ],
 
   // slashing
-  unjail: [...txListFieldsMap.unjail, ...defaultFields],
+  unjail_slashing: [...txListFieldsMap.unjail, ...defaultFields],
 
   // distribution
-  set_withdraw_address: [...txListFieldsMap.set_withdraw_address, ...defaultFields],
-  withdraw_delegator_reward: [...txListFieldsMap.withdraw_delegator_reward, ...defaultFields],
-  withdraw_validator_rewards_all: [
+  set_withdraw_address_distribution: [...txListFieldsMap.set_withdraw_address, ...defaultFields],
+  withdraw_delegator_reward_distribution: [
+    ...txListFieldsMap.withdraw_delegator_reward,
+    ...defaultFields
+  ],
+  withdraw_validator_rewards_all_distribution: [
     ...txListFieldsMap.withdraw_validator_rewards_all,
     ...defaultFields
   ],
 
   // gov
-  submit_proposal: [
+  submit_proposal_governance: [
     ...txListFieldsMap.submit_proposal,
     ...defaultFields,
     {
@@ -126,8 +129,8 @@ export const txFieldsMap = {
       linkType: ''
     }
   ],
-  deposit: [...txListFieldsMap.deposit, ...defaultFields],
-  vote: [...txListFieldsMap.vote, ...defaultFields],
+  deposit_governance: [...txListFieldsMap.deposit, ...defaultFields],
+  vote_governance: [...txListFieldsMap.vote, ...defaultFields],
 
   // exchange
   make_exchange: [...txListFieldsMap.make, ...defaultFields],

@@ -31,7 +31,7 @@
             />
             <data-amount
               v-else-if="item.name === 'Amount'"
-              :list="[{denom: get(detail, fields[type].find(f => f.linkType === 'token').field), amount: get(detail, item.field)}]"
+              :list="[{denom: get(get(detail, fields[type].find(f => f.linkType === 'token'), 'field')), amount: get(detail, item.field)}]"
             />
             <span v-else-if="item.name === 'Lock End'">
               {{ get(detail, item.field) | formatTime }}

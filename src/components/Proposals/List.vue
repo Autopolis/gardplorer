@@ -4,7 +4,7 @@
       <template slot-scope="scope">
         <hg-link
           type="proposal"
-          :content="scope.row.value.proposal_id"
+          :content="get(scope.row, 'proposal_id')"
         />
       </template>
     </el-table-column>
@@ -12,30 +12,31 @@
       <template slot-scope="scope">
         <hg-link
           type="proposal"
-          :content="scope.row.value.title"
-          :link="scope.row.value.proposal_id"
+          :content="get(scope.row, 'proposal_content.value.TextProposal.title')"
+          :link="get(scope.row, 'proposal_id')"
         />
       </template>
     </el-table-column>
     <el-table-column
       label="TYPE"
-      prop="value.proposal_type"
+      prop="proposal_content.type"
     >
     </el-table-column>
     <el-table-column
       label="STATUS"
-      prop="value.proposal_status"
+      prop="proposal_status"
     >
     </el-table-column>
     <el-table-column label="SUBMIT TIME">
       <template slot-scope="scope">
-        {{ scope.row.value.submit_time | formatTime }}
+        {{ scope.row.submit_time | formatTime }}
       </template>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
+import { get } from "lodash";
 export default {
   props: {
     list: {
@@ -46,6 +47,9 @@ export default {
       type: String,
       default: ""
     }
+  },
+  methods: {
+    get
   }
 };
 </script>
