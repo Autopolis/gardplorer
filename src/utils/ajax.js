@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Message } from 'element-ui';
 
-let baseURL = 'https://www.gardplorer.io/testnet/api';
+let baseURL = 'https://node.hashgard.com/testnet/api';
 // if (!location.hostname.match('gardplorer.io')) {
 //   baseURL = 'http://api.hgdev.io';
 // }
