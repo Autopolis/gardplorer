@@ -5,7 +5,8 @@ export default {
   namespaced: true,
 
   state: {
-    name: ''
+    name: '',
+    pool: {}
   },
 
   getters: {},
@@ -13,6 +14,9 @@ export default {
   mutations: {
     setName: function(state, name) {
       state.name = name;
+    },
+    setPool: function(state, pool) {
+      state.pool = pool;
     }
   },
 
@@ -23,6 +27,14 @@ export default {
         return Promise.reject();
       }
       context.commit('setName', get(data, 'network'));
+      return Promise.resolve();
+    },
+    fetchPool: async function(context) {
+      const { data } = await ajax.get('/staking/pool');
+      if (isEmpty(data)) {
+        return Promise.reject();
+      }
+      context.commit('setPool', data);
       return Promise.resolve();
     }
   }

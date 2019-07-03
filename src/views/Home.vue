@@ -1,43 +1,29 @@
 <template>
   <div class="home-container">
-    <el-row :gutter="16">
-      <el-col
-        :xs="12"
-        :sm="6"
-      >
-        <div class="home-panel">
-          <p>Block Height</p>
-          <span>{{get(blocksLastList, `0.header.height`)}}</span>
-        </div>
-      </el-col>
-      <el-col
-        :xs="12"
-        :sm="6"
-      >
-        <div class="home-panel">
-          <p>Avg Block Time</p>
-          <span>{{blockTime}}</span> S
-        </div>
-      </el-col>
-      <el-col
-        :xs="12"
-        :sm="6"
-      >
-        <div class="home-panel">
-          <p>Validators</p>
-          <span>{{validatorOnlineList.length}} / {{validatorList.length}}</span>
-        </div>
-      </el-col>
-      <el-col
-        :xs="12"
-        :sm="6"
-      >
-        <div class="home-panel">
-          <p>Bonded Tokens</p>
-          <span>{{bonded}}</span>
-        </div>
-      </el-col>
-    </el-row>
+    <div class="panels">
+      <div class="home-panel">
+        <p>Block Height</p>
+        <span>{{get(blocksLastList, `0.header.height`)}}</span>
+      </div>
+      <div class="home-panel">
+        <p>Avg Block Time</p>
+        <span>{{blockTime}}</span> S
+      </div>
+      <div class="home-panel">
+        <p>Bonded Tokens</p>
+        <span>{{bonded}}</span> M
+      </div>
+      <div class="home-panel">
+        <p>Bonded Ratio</p>
+        <span>{{bondedRatio}}</span> %
+      </div>
+      <div class="home-panel">
+        <p>
+          <router-link to="/validator">Active Validators</router-link>
+        </p>
+        <span>{{validatorList.length}}</span>
+      </div>
+    </div>
 
     <el-row :gutter="24">
       <el-col
@@ -72,7 +58,7 @@
       >
         <Card
           title="transactions"
-          link="/tx"
+          link="/txs/transfers"
         >
           <ul>
             <li
@@ -105,15 +91,15 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import moment from "dayjs";
-import { get } from "lodash";
+import { get, isEmpty } from "lodash";
 
 export default {
   name: "Home",
   interval: null,
   computed: {
+    ...mapState("basic", ["pool"]),
     ...mapState("blocks", { blockList: "list" }),
     ...mapState("validators", { validatorList: "list" }),
-    ...mapGetters("validators", { validatorOnlineList: "onlineList" }),
     ...mapGetters("blocks", { blocksLastList: "lastList" }),
     ...mapGetters("transactions", { txLastList: "lastList" }),
     blockTime() {
@@ -125,8 +111,17 @@ export default {
       return ((first - last) / this.blockList.length).toFixed(2);
     },
     bonded() {
-      const v = this.validatorList.reduce((a, b) => b.tokens - 0 + a, 0);
-      return (v / Math.pow(10, 24)).toFixed(2) + "M";
+      return (this.pool.bonded_tokens / Math.pow(10, 24)).toFixed(2);
+    },
+    bondedRatio() {
+      if (isEmpty(this.pool)) {
+        return 0;
+      }
+      const bondedStr = this.pool.bonded_tokens + "";
+      const unbondedStr = this.pool.not_bonded_tokens + "";
+      const bonded = bondedStr.slice(0, bondedStr.length - 18) - 0;
+      const unbonded = unbondedStr.slice(0, unbondedStr.length - 18) - 0;
+      return ((bonded * 100) / (bonded + unbonded)).toFixed(2);
     }
   },
   methods: {
@@ -136,6 +131,7 @@ export default {
     }
   },
   mounted: async function() {
+    await this.$store.dispatch("basic/fetchPool");
     await this.$store.dispatch("transactions/fetchTotalCount");
     await this.$store.dispatch("validators/fetchAll", "bonded");
     await this.$store.dispatch("transactions/fetchLastList");
@@ -157,10 +153,16 @@ export default {
   max-width: 1400px;
   margin: 0 auto;
 
+  .panels {
+    display: flex;
+    margin: 0 -1%;
+  }
+
   .home-panel {
+    flex-basis: 18%;
+    margin: 24px 1% 0;
     text-align: center;
     padding: 24px 0;
-    margin-top: 24px;
     height: 146px;
     overflow: hidden;
     background: white;
@@ -207,6 +209,17 @@ export default {
 
 .transactions > .gas {
   flex-basis: 100%;
+}
+
+@include responsive($sm) {
+  .home-container {
+    .panels {
+      flex-wrap: wrap;
+    }
+    .home-panel {
+      flex-basis: 98%;
+    }
+  }
 }
 </style>
 
