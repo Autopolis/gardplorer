@@ -2,8 +2,7 @@
  * The mapping between the elements displayed in the transaction page and the tx data.
  * linkType has 5 options: '', 'tx', 'block', 'address', 'validator', 'token'. (default = '', for no link)
  */
-export const defaultListFields = [
-  {
+export const defaultListFields = [{
     name: 'Time',
     field: 'timestamp',
     linkType: ''
@@ -180,7 +179,7 @@ export const txListFieldsMap = {
     {
       name: 'Rewards',
       field: 'tags.4.value',
-      linkType: 'validator'
+      linkType: ''
     }
   ],
   withdraw_validator_rewards_all: [

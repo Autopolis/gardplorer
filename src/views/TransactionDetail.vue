@@ -33,6 +33,10 @@
               v-else-if="item.name === 'Amount'"
               :list="[{denom: get(detail, get(fields[type].find(f => f.linkType === 'token'), 'field')), amount: get(detail, item.field)}]"
             />
+            <data-amount
+              v-else-if="item.name === 'Rewards'"
+              :list="[{denom: getDenom(get(detail, item.field)), amount: getAmount(get(detail, item.field))}]"
+            />
             <span v-else-if="item.name === 'Lock End'">
               {{ get(detail, item.field) | formatTime }}
             </span>
@@ -68,7 +72,13 @@ export default {
     return { fields: txFieldsMap };
   },
   methods: {
-    get
+    get,
+    getDenom(val) {
+      return val.replace(/[^a-z]+/gi, "");
+    },
+    getAmount(val) {
+      return val.replace(/[^0-9]/gi, "");
+    }
   },
   computed: {
     ...mapState("transactions", ["details"]),

@@ -27,6 +27,10 @@
             :list="[get(scope.row, item.field)]"
           />
           <data-amount
+            v-else-if="item.name === 'Rewards'"
+            :list="[{denom: getDenom(get(scope.row, item.field)), amount: getAmount(get(scope.row, item.field))}]"
+          />
+          <data-amount
             v-else-if="item.name === 'Amount'"
             :list="[{denom: get(scope.row, get(fields.find(f => f.linkType === 'token'), 'field')), amount: get(scope.row, item.field)}]"
           />
@@ -53,7 +57,13 @@ export default {
     load: { type: Boolean, default: false }
   },
   methods: {
-    get
+    get,
+    getDenom(val) {
+      return val.replace(/[^a-z]+/gi, "");
+    },
+    getAmount(val) {
+      return val.replace(/[^0-9]/gi, "");
+    }
   }
 };
 </script>
