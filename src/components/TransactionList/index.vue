@@ -28,7 +28,7 @@
           />
           <data-amount
             v-else-if="item.name === 'Rewards'"
-            :list="[{denom: getDenom(get(scope.row, item.field)), amount: getAmount(get(scope.row, item.field))}]"
+            :list="rewardList(get(scope.row, item.field))"
           />
           <data-amount
             v-else-if="item.name === 'Amount'"
@@ -58,11 +58,8 @@ export default {
   },
   methods: {
     get,
-    getDenom(val) {
-      return val.replace(/[^a-z]+/gi, "");
-    },
-    getAmount(val) {
-      return val.replace(/[^0-9]/gi, "");
+    rewardList(val) {
+      return [{ denom: "agard", amount: val.replace(/[^0-9]/gi, "") }];
     }
   }
 };
