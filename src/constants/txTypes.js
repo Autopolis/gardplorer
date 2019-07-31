@@ -44,5 +44,8 @@ export const txTypes = {
     'cancel-future': 'Cancel Future',
     describe: 'Description',
     disable_feature: 'Disable Feature'
+  },
+  records: {
+    record: 'record'
   }
 };

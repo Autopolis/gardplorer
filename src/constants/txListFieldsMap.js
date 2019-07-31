@@ -645,5 +645,25 @@ export const txListFieldsMap = {
       field: 'gas_used',
       linkType: ''
     }
+  ],
+
+  //recoed
+  record: [
+    ...defaultListFields,
+    {
+      name: 'Record Name',
+      field: 'tx.value.msg.0.value.params.name',
+      linkType: ''
+    },
+    {
+      name: 'Hash',
+      field: 'tx.value.msg.0.value.params.hash',
+      linkType: ''
+    },
+    {
+      name: 'Operator',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: 'address'
+    }
   ]
 };
