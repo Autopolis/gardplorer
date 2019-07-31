@@ -1,7 +1,8 @@
-import { txListFieldsMap } from './txListFieldsMap';
+import {
+  txListFieldsMap
+} from './txListFieldsMap';
 
-const defaultFields = [
-  {
+const defaultFields = [{
     name: 'Action',
     field: 'tags.0.value',
     linkType: ''
@@ -347,6 +348,32 @@ export const txFieldsMap = {
     {
       name: 'Feature',
       field: 'tx.value.msg.0.value.feature',
+      linkType: ''
+    }
+  ],
+
+  //record
+  record_record: [
+    ...txListFieldsMap.record,
+    ...defaultFields,
+    {
+      name: 'Author',
+      field: 'tx.value.msg.0.value.params.author',
+      linkType: ''
+    },
+    {
+      name: 'Description',
+      field: 'tx.value.msg.0.value.params.description',
+      linkType: ''
+    },
+    {
+      name: 'Record Number',
+      field: 'tx.value.msg.0.value.params.record_number',
+      linkType: ''
+    },
+    {
+      name: 'Record Type',
+      field: 'tx.value.msg.0.value.params.record_type',
       linkType: ''
     }
   ]

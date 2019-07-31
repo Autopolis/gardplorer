@@ -38,7 +38,8 @@
             {{ get(scope.row, item.field) | formatTime }}
           </span>
           <span v-else>
-            {{ get(scope.row, item.field) || '-'}}
+            <span v-if="item.name === 'Hash'">{{ (get(scope.row, item.field) || '-').slice(0, 18) + '...'}}</span>
+            <span v-else>{{ get(scope.row, item.field) || '-'}}</span>
           </span>
         </span>
       </template>

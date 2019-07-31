@@ -27,6 +27,10 @@ export const menu = [{
       {
         name: 'token boxs',
         link: '/txs/tokenBoxs'
+      },
+      {
+        name: 'records',
+        link: '/txs/records'
       }
     ]
   },
