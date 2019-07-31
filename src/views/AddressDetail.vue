@@ -15,6 +15,10 @@
         <data-item label="Address">
           <span>{{ address }}</span>
         </data-item>
+        <data-item label="Memo Required">
+          <span v-if="addressMemo">Yes</span>
+          <span v-else>No</span>
+        </data-item>
       </card>
       <card
         v-if="!isEmpty(transactionList)"
@@ -43,10 +47,13 @@ export default {
   methods: { get, isEmpty },
 
   computed: {
-    ...mapState("address", ["info"]),
+    ...mapState("address", ["info", "addressMap"]),
     ...mapState("transactions", { transactionList: "list", load: "load" }),
     address: function() {
       return this.$route.params.address;
+    },
+    addressMemo() {
+      return get(this.addressMap[this.address], "memo_required") || "";
     }
   },
 
@@ -66,6 +73,7 @@ export default {
       action: "send",
       sender: this.address
     });
+    this.$store.dispatch("address/fetchDetail", this.address);
   }
 };
 </script>
