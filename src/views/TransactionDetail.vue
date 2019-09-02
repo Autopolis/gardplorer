@@ -44,7 +44,7 @@
               {{ description }}
             </span>
             <span v-else-if="item.name.match('Time')">
-              {{ get(detail, item.field) | formatTime }}
+              {{ get(detail, item.field) | formatTime }}1
             </span>
             <span v-else-if="typeof get(detail, item.field) === 'boolean'">
               {{ get(detail, item.field).toString() }}
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { isEmpty, get } from "lodash";
+import { isEmpty, get, find } from "lodash";
 import { mapGetters, mapState } from "vuex";
 import Base64 from "crypto-js/enc-base64";
 import Utf8 from "crypto-js/enc-utf8";
@@ -101,17 +101,34 @@ export default {
       }
     },
     type: function() {
-      const action = get(this.detail, "tags", []).filter(
-        item => item.key === "action"
-      )[0];
       // issue 模块交易失败的时候 tags 中不包含 category 字段。
       // if (action && action.value.match("issue")) {
       //   return action && action.value;
       // }
-      const category = get(this.detail, "tags", []).filter(
-        item => item.key === "category"
-      )[0];
-      return `${action && action.value}_${category && category.value}`;
+      return `${this.action && this.action}_${this.module && this.module}`;
+    },
+    action() {
+      const eventsMessage = get(this.detail, "events", []).filter(
+        item => item.type === "message"
+      );
+      const action =
+        find(get(eventsMessage[0], "attributes"), {
+          key: "action"
+        }) || {};
+      return action.value;
+    },
+    module() {
+      const eventsMessage = get(this.detail, "events", []).filter(
+        item => item.type === "message"
+      );
+      const moduleObj =
+        find(get(eventsMessage[0], "attributes"), {
+          key: "module"
+        }) ||
+        (!isEmpty(get(this.detail, "logs.0.log"))
+          ? JSON.parse(get(this.detail, "logs.0.log"))
+          : {});
+      return moduleObj.value || moduleObj.codespace;
     }
   },
   watch: {
@@ -120,28 +137,27 @@ export default {
         return false;
       }
       // fetch token detail
-      const action = get(this.detail, "tags.0.value");
       let denom = "";
-      if (action.match("issue")) {
+      if (this.action.match("issue")) {
         denom = get(this.detail, "tags.2.value");
       }
-      if (action.match("inject")) {
+      if (this.action.match("inject")) {
         denom = get(this.detail, "tx.value.msg.0.value.amount.denom");
       }
-      if (action.match("create")) {
+      if (this.action.match("create")) {
         denom = get(
           this.detail,
           "tx.value.msg.0.value.params.total_amount.token.denom"
         );
       }
-      if (action.match("take")) {
+      if (this.action.match("take")) {
         denom = get(this.detail, "tx.value.msg.0.value.value.denom");
       }
       if (denom && denom.match(/^coin.{10}$/)) {
         this.$store.dispatch("tokens/fetchDetail", denom);
         return;
       }
-      if (action.match("send")) {
+      if (this.action.match("send")) {
         const coins = get(this.detail, "tx.value.msg.0.value.amount");
         coins.forEach(i => {
           if (i.denom.match(/^coin.{10}$/)) {
@@ -149,7 +165,7 @@ export default {
           }
         });
       }
-      if (action === "make") {
+      if (this.action === "make") {
         const coins = [
           get(this.detail, "tx.value.msg.0.value.target"),
           get(this.detail, "tx.value.msg.0.value.supply")

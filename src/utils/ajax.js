@@ -1,17 +1,22 @@
 import axios from 'axios';
-import { Message } from 'element-ui';
+import {
+  Message
+} from 'element-ui';
 
-let baseURL = 'https://node.hashgard.com/testnet/api';
+// let baseURL = 'https://node.hashgard.com/testnet/api';
+let baseURL = 'http://rest.hashgard.io:1317'
 // if (!location.hostname.match('gardplorer.io')) {
 //   baseURL = 'http://api.hgdev.io';
 // }
-const $ajax = axios.create({ baseURL });
+const $ajax = axios.create({
+  baseURL
+});
 
 $ajax.interceptors.response.use(
-  function(config) {
+  function (config) {
     return config;
   },
-  function(error) {
+  function (error) {
     Message({
       type: 'error',
       message: 'Network Error',

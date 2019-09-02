@@ -1,4 +1,7 @@
-import { set, isEmpty } from 'lodash';
+import {
+  set,
+  isEmpty
+} from 'lodash';
 import $ajax from '@/utils/ajax';
 
 export default {
@@ -19,55 +22,73 @@ export default {
     setTotalCount(state, data) {
       state.totalCount = data;
     },
-    setList: function(state, list) {
+    setList: function (state, list) {
       state.list = list.reverse();
     },
-    setLastList: function(state, list) {
+    setLastList: function (state, list) {
       state.lastList = list.reverse();
     },
-    setDetails: function(state, data) {
+    setDetails: function (state, data) {
       const details = state.details;
-      const { txhash } = data;
+      const {
+        txhash
+      } = data;
       if (isEmpty(details[txhash])) {
-        state.details = Object.assign({}, state.details, { [txhash]: data });
+        state.details = Object.assign({}, state.details, {
+          [txhash]: data
+        });
       }
     },
-    setLoad: function(state, load) {
+    setLoad: function (state, load) {
       state.load = load;
     }
   },
   actions: {
-    fetchTotalCount: async function(context, params = { action: 'send', page: 1 }) {
+    fetchTotalCount: async function (context, params = {
+      'message.action': 'send',
+      page: 1
+    }) {
       context.commit('setLoad', true);
-      const { data } = await $ajax.get('/txs', {
+      const {
+        data
+      } = await $ajax.get('/txs', {
         params
       });
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
       }
-      context.commit('setTotalCount', Number(data.totalCount));
+      context.commit('setTotalCount', Number(data.total_count));
       return Promise.resolve();
     },
-    fetchList: async function(context, params = { action: 'send', page: 1 }) {
+    fetchList: async function (context, params = {
+      'message.action': 'send',
+      page: 1
+    }) {
       params.limit = context.state.pageSize;
       context.commit('setLoad', true);
-      const { data } = await $ajax.get('/txs', { params });
+      const {
+        data
+      } = await $ajax.get('/txs', {
+        params
+      });
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
       }
-      context.commit('setTotalCount', Number(data.totalCount));
+      context.commit('setTotalCount', Number(data.total_count));
       context.commit('setList', data.txs);
       return Promise.resolve();
     },
-    fetch: async function(context, hash) {
+    fetch: async function (context, hash) {
       // check if existed;
       if (!isEmpty(context.state.details[hash])) {
         return Promise.resolve();
       }
       context.commit('setLoad', true);
-      const { data } = await $ajax.get(`/txs/${hash}`);
+      const {
+        data
+      } = await $ajax.get(`/txs/${hash}`);
       context.commit('setLoad', false);
       if (isEmpty(data)) {
         return Promise.reject();
@@ -75,7 +96,7 @@ export default {
       context.commit('setDetails', data);
       return Promise.resolve(data);
     },
-    fetchLastList: async function(context, config = {}) {
+    fetchLastList: async function (context, config = {}) {
       const PAGE_SIZE = 5;
       const action = config.action || 'send';
       const totalCount = context.state.totalCount;
@@ -88,15 +109,26 @@ export default {
       };
 
       context.commit('setLoad', true);
-      var { data } = await $ajax.get('/txs', { params });
+      var {
+        data
+      } = await $ajax.get('/txs', {
+        params
+      });
       if (isEmpty(data)) {
         context.commit('setLoad', false);
         return Promise.reject();
       }
       let txs = data.txs;
       if (txs.length < PAGE_SIZE && totalCount > PAGE_SIZE) {
-        const prePageParams = { ...params, page: lastPage - 1 };
-        var { data } = await $ajax.get('/txs', { params: prePageParams });
+        const prePageParams = {
+          ...params,
+          page: lastPage - 1
+        };
+        var {
+          data
+        } = await $ajax.get('/txs', {
+          params: prePageParams
+        });
         if (isEmpty(data)) {
           context.commit('setLoad', false);
           return Promise.reject();
@@ -104,16 +136,21 @@ export default {
         txs = txs.concat(data.txs);
       }
       context.commit('setLoad', false);
-      context.commit('setTotalCount', data.totalCount);
+      context.commit('setTotalCount', data.total_count);
       context.commit('setLastList', txs);
       return Promise.resolve();
     },
-    fetchAddressTxList: async function(context, params = { action: 'send', page: 1 }) {
+    fetchAddressTxList: async function (context, params = {
+      action: 'send',
+      page: 1
+    }) {
       params.limit = 100;
       context.commit('setLoad', true);
 
       // 1. query txs as sender
-      const senderData = await $ajax.get('/txs', { params });
+      const senderData = await $ajax.get('/txs', {
+        params
+      });
       if (isEmpty(senderData.data)) {
         context.commit('setLoad', false);
         return Promise.reject();
@@ -122,7 +159,9 @@ export default {
       // 2. query txs as recipient
       params.recipient = params.sender;
       delete params.sender;
-      const recipientData = await $ajax.get('/txs', { params });
+      const recipientData = await $ajax.get('/txs', {
+        params
+      });
       if (isEmpty(recipientData.data)) {
         context.commit('setLoad', false);
         return Promise.reject();

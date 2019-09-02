@@ -29,7 +29,7 @@
       <el-pagination
         class="pagination"
         background
-        :pager-count="3"
+        :pager-count="5"
         layout="prev, pager, next"
         :current-page="currentPage"
         :page-size="pageSize"
@@ -93,7 +93,7 @@ export default {
       this.fetchData();
     },
     fetchData: async function() {
-      const params = { action: this.selected[0] };
+      const params = { "message.action": this.selected[0] };
       if (this.selected[1]) {
         params.category = this.selected[1];
       }
