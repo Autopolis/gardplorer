@@ -70,8 +70,8 @@ export default {
   mounted() {
     this.$store.dispatch("address/fetch", this.address);
     this.$store.dispatch("transactions/fetchAddressTxList", {
-      action: "send",
-      sender: this.address
+      "message.action": "send",
+      "message.sender": this.address
     });
     this.$store.dispatch("address/fetchDetail", this.address);
   }

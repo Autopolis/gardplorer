@@ -1,10 +1,9 @@
 import {
   txListFieldsMap
 } from './txListFieldsMap';
-
 const defaultFields = [{
     name: 'Action',
-    field: 'tags.0.value',
+    field: '',
     linkType: ''
   },
   {

@@ -5,7 +5,7 @@
       <el-pagination
         class="pagination"
         background
-        :pager-count="3"
+        :pager-count="5"
         layout="prev, pager, next"
         :current-page="currentPage"
         :page-size="pageSize"

@@ -103,7 +103,7 @@ export default {
       const lastPage = Math.ceil(totalCount / PAGE_SIZE) || 1;
 
       let params = {
-        action,
+        'message.action': action,
         limit: PAGE_SIZE,
         page: lastPage
       };
@@ -141,7 +141,7 @@ export default {
       return Promise.resolve();
     },
     fetchAddressTxList: async function (context, params = {
-      action: 'send',
+      "message.action": 'send',
       page: 1
     }) {
       params.limit = 100;

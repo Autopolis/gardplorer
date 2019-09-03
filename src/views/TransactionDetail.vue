@@ -29,6 +29,9 @@
               v-else-if="(get(detail, item.field) instanceof Object)"
               :list="[get(detail, item.field)]"
             />
+            <span v-else-if="item.name === 'Action'">
+              {{action}}
+            </span>
             <data-amount
               v-else-if="item.name === 'Amount'"
               :list="[{denom: get(detail, get(fields[type].find(f => f.linkType === 'token'), 'field')), amount: get(detail, item.field)}]"
@@ -124,11 +127,8 @@ export default {
       const moduleObj =
         find(get(eventsMessage[0], "attributes"), {
           key: "module"
-        }) ||
-        (!isEmpty(get(this.detail, "logs.0.log"))
-          ? JSON.parse(get(this.detail, "logs.0.log"))
-          : {});
-      return moduleObj.value || moduleObj.codespace;
+        }) || {};
+      return moduleObj.value;
     }
   },
   watch: {

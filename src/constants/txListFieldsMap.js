@@ -178,7 +178,7 @@ export const txListFieldsMap = {
     },
     {
       name: 'Rewards',
-      field: 'tags.4.value',
+      field: 'events.2.attributes.0.value',
       linkType: ''
     }
   ],
@@ -201,7 +201,7 @@ export const txListFieldsMap = {
     ...defaultListFields,
     {
       name: 'Proposal Id',
-      field: 'tags.1.value',
+      field: 'events.1.attributes.1.value',
       linkType: ''
     },
     {
@@ -211,12 +211,12 @@ export const txListFieldsMap = {
     },
     {
       name: 'Proposal Type',
-      field: 'tx.value.msg.0.value.proposal_type',
+      field: 'tx.value.msg.0.value.content.type',
       linkType: ''
     },
     {
       name: 'Title',
-      field: 'tx.value.msg.0.value.title',
+      field: 'tx.value.msg.0.value.content.value.title',
       linkType: ''
     }
   ],

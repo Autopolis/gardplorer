@@ -3,7 +3,8 @@
     <div class="panels">
       <div class="home-panel">
         <p>Block Height</p>
-        <span>{{get(blocksLastList, `0.header.height`)}}</span>
+        <!-- <span>{{get(blocksLastList, `0.header.height`)}}</span> -->
+        <span>{{lastHeight}}</span>
       </div>
       <div class="home-panel">
         <p>Avg Block Time</p>
@@ -98,7 +99,7 @@ export default {
   interval: null,
   computed: {
     ...mapState("basic", ["pool"]),
-    ...mapState("blocks", { blockList: "list" }),
+    ...mapState("blocks", { blockList: "list", lastHeight: "lastHeight" }),
     ...mapState("validators", { validatorList: "list" }),
     ...mapGetters("blocks", { blocksLastList: "lastList" }),
     ...mapGetters("transactions", { txLastList: "lastList" }),
@@ -128,6 +129,9 @@ export default {
     get,
     fetchData: function() {
       this.$store.dispatch("blocks/fetchList");
+    },
+    fetchLatestBlock() {
+      this.$store.dispatch("blocks/fetchLatest");
     }
   },
   mounted: async function() {
@@ -135,9 +139,11 @@ export default {
     await this.$store.dispatch("transactions/fetchTotalCount");
     await this.$store.dispatch("validators/fetchAll", "bonded");
     await this.$store.dispatch("transactions/fetchLastList");
+    this.fetchLatestBlock();
     this.fetchData();
     this.interval = setInterval(() => {
-      this.fetchData();
+      // this.fetchData();
+      this.fetchLatestBlock();
     }, 5 * 1000);
   },
   beforeDestroy: function() {

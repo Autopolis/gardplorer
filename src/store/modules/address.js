@@ -32,8 +32,8 @@ export default {
       if (isEmpty(data)) {
         return Promise.reject();
       }
-      data.sort(i => (i.denom === 'gard' ? -1 : 1));
-      context.commit('setInfo', data);
+      data.result.sort(i => (i.denom === 'gard' ? -1 : 1));
+      context.commit('setInfo', data.result);
       return Promise.resolve();
     },
     fetchDetail: async function (context, address) {

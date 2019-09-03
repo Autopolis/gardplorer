@@ -28,7 +28,7 @@
           />
           <data-amount
             v-else-if="item.name === 'Rewards'"
-            :list="rewardList(get(scope.row, item.field))"
+            :list="rewardList(scope.row, item.field)"
           />
           <data-amount
             v-else-if="item.name === 'Amount'"
@@ -59,8 +59,11 @@ export default {
   },
   methods: {
     get,
-    rewardList(val) {
-      return [{ denom: "agard", amount: val.replace(/[^0-9]/gi, "") }];
+    rewardList(row, key) {
+      const val = get(row, key);
+      return !isEmpty(val)
+        ? [{ denom: "agard", amount: val.replace(/[^0-9]/gi, "") }]
+        : [];
     }
   }
 };

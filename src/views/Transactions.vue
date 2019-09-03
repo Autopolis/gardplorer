@@ -84,7 +84,7 @@ export default {
       const { pageSize, totalCount } = this;
       const page = Math.ceil(totalCount / pageSize) - currentPage + 1;
       this.$store.dispatch("transactions/fetchList", {
-        action: this.selected[0],
+        "message.action": this.selected[0],
         page
       });
     },

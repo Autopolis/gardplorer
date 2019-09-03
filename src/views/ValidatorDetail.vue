@@ -7,7 +7,7 @@
     <div class="content">
       <card
         title="Validator Profile"
-        v-if="detail"
+        v-if="!isEmpty(detail)"
       >
         <data-item label="Operator Address">
           <span>{{ detail.operator_address}}</span>
@@ -16,7 +16,7 @@
           <span>{{ detail.description.moniker }}</span>
         </data-item>
         <data-item label="Comission Rate">
-          <span>{{ Number(get(detail, 'commission.rate')) * 100 }} %</span>
+          <span>{{ Number(get(detail, 'commission.commission_rates.rate')) * 100 }} %</span>
         </data-item>
 
         <data-item label="Website">
@@ -28,13 +28,13 @@
         </data-item>
 
         <data-item label="Identity">
-          <span>{{ detail.description.Identity || '-' }}</span>
+          <span>{{ detail.description.identity || '-' }}</span>
         </data-item>
       </card>
 
       <card
         title="Current Status"
-        v-if="detail"
+        v-if="!isEmpty(detail)"
       >
         <data-item label="Voting Power">
           <span>{{ detail.tokens | formatAGARD }}</span>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { get } from "lodash";
+import { get, isEmpty } from "lodash";
 import { mapGetters, mapState } from "vuex";
 
 export default {
@@ -64,12 +64,15 @@ export default {
     };
   },
   methods: {
-    get
+    get,
+    isEmpty
   },
   computed: {
     ...mapState("validators", ["details"]),
     detail: function() {
-      return get(this.details, this.address);
+      if (!isEmpty(this.details)) {
+        return get(this.details, this.address).result;
+      }
     }
   },
   mounted: function() {
