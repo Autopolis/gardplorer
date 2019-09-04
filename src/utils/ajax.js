@@ -5,8 +5,7 @@ import {
 
 let baseURL = 'https://node.hashgard.com/testnet/api';
 if (!location.hostname.match('gardplorer.io')) {
-  // baseURL = 'http://api.hgdev.io';
-  baseURL = 'http://rest.hashgard.io:1317';
+  baseURL = 'http://rest.hashgard.io:89/testnet/api';
 }
 const $ajax = axios.create({
   baseURL

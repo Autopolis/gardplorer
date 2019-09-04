@@ -15,22 +15,6 @@ export const menu = [{
       {
         name: 'governance',
         link: '/txs/governance'
-      },
-      {
-        name: 'token exchanges',
-        link: '/txs/exchanges'
-      },
-      {
-        name: 'issuances',
-        link: '/txs/issuances'
-      },
-      {
-        name: 'token boxs',
-        link: '/txs/tokenBoxs'
-      },
-      {
-        name: 'records',
-        link: '/txs/records'
       }
     ]
   },
@@ -41,10 +25,6 @@ export const menu = [{
   {
     name: 'Proposals',
     link: '/proposal'
-  },
-  {
-    name: 'Tokens',
-    link: '/token'
   },
   {
     name: 'Validators',

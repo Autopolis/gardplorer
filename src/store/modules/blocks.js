@@ -73,8 +73,7 @@ export default {
       } = params;
       let blockApiUri = 'http://rest.hashgard.com/testnet/node';
       if (!location.hostname.match('gardplorer.io')) {
-        blockApiUri = 'http://node.hgdev.io:26657';
-        // blockApiUri = 'http://rest.hashgard.io:1317';
+        blockApiUri = 'http://rest.hashgard.io:89/testnet/node';
       }
       const {
         data
@@ -117,16 +116,17 @@ export default {
       const {
         data
       } = await $ajax.get(`/validatorsets/${height}`);
-      if (!isEmpty(data)) {
+      const result = data.result
+      if (!isEmpty(result)) {
         context.commit('setValidatorsets', {
-          [height]: data
+          [height]: result
         });
 
         // find proposer of this block
         const block = context.state.details[height];
         const cons_hex = get(block, 'block.header.proposer_address');
         const cons_addr = Codec.Bech32.toBech32('gardvalcons', cons_hex);
-        const proposer = data.validators.find(v => v.address === cons_addr);
+        const proposer = result.validators.find(v => v.address === cons_addr);
         context.commit('setProposers', {
           [height]: proposer
         });

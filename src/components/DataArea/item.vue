@@ -31,7 +31,7 @@ $height: 36px;
   > .content {
     color: rgba(0, 0, 0, 0.65);
     width: 100%;
-    overflow: hidden;
+    overflow-wrap: break-word;
   }
 }
 

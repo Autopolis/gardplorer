@@ -1,6 +1,5 @@
 import {
-  isEmpty,
-  get
+  isEmpty
 } from 'lodash';
 import ajax from '@/utils/ajax.js';
 
@@ -9,7 +8,6 @@ export default {
 
   state: {
     info: [],
-    addressMap: {}
   },
 
   getters: {},
@@ -17,10 +15,7 @@ export default {
   mutations: {
     setInfo: function (state, info) {
       state.info = info;
-    },
-    setAddressMap: function (state, data) {
-      state.addressMap = Object.assign({}, state.addressMap, data);
-    },
+    }
   },
 
   actions: {
@@ -35,17 +30,6 @@ export default {
       data.result.sort(i => (i.denom === 'gard' ? -1 : 1));
       context.commit('setInfo', data.result);
       return Promise.resolve();
-    },
-    fetchDetail: async function (context, address) {
-      const {
-        data
-      } = await ajax.get(`/account/query/${address}`)
-      if (isEmpty(data)) {
-        return Promise.reject();
-      }
-      context.commit('setAddressMap', {
-        [address]: data
-      })
     }
   }
 };

@@ -168,7 +168,8 @@ export default {
       }
       // show action as receive in address page
       const recipientList = recipientData.data.txs.map(i => {
-        set(i, 'tags.0.value', 'receive');
+
+        set(i, 'events.0.attributes.0.value', 'receive');
         return i;
       });
       const list = [...senderData.data.txs, ...recipientList];

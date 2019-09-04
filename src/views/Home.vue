@@ -142,7 +142,7 @@ export default {
     this.fetchLatestBlock();
     this.fetchData();
     this.interval = setInterval(() => {
-      // this.fetchData();
+      this.fetchData();
       this.fetchLatestBlock();
     }, 5 * 1000);
   },

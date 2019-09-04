@@ -47,7 +47,8 @@
               {{ description }}
             </span>
             <span v-else-if="item.name.match('Time')">
-              {{ get(detail, item.field) | formatTime }}1
+              <span v-if="action === 'begin_unbonding'">{{completionTime | formatTime}}</span>
+              <span v-else>{{ get(detail, item.field) | formatTime }}</span>
             </span>
             <span v-else-if="typeof get(detail, item.field) === 'boolean'">
               {{ get(detail, item.field).toString() }}
@@ -129,6 +130,16 @@ export default {
           key: "module"
         }) || {};
       return moduleObj.value;
+    },
+    completionTime() {
+      const eventsMessage = get(this.detail, "events", []).filter(
+        item => item.type === "unbond"
+      );
+      const unbondObj =
+        find(get(eventsMessage[0], "attributes"), {
+          key: "completion_time"
+        }) || {};
+      return unbondObj.value;
     }
   },
   watch: {
