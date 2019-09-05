@@ -1,5 +1,5 @@
 import {
-  set,
+  get,
   isEmpty
 } from 'lodash';
 import $ajax from '@/utils/ajax';
@@ -144,6 +144,7 @@ export default {
       "message.action": 'send',
       page: 1
     }) {
+      const address = params["message.sender"]
       params.limit = 100;
       context.commit('setLoad', true);
 
@@ -155,10 +156,9 @@ export default {
         context.commit('setLoad', false);
         return Promise.reject();
       }
-
       // 2. query txs as recipient
-      params.recipient = params.sender;
-      delete params.sender;
+      params["message.recipient"] = params.sender;
+      delete params["message.sender"];
       const recipientData = await $ajax.get('/txs', {
         params
       });
@@ -167,11 +167,9 @@ export default {
         return Promise.reject();
       }
       // show action as receive in address page
-      const recipientList = recipientData.data.txs.map(i => {
-
-        set(i, 'events.0.attributes.0.value', 'receive');
-        return i;
-      });
+      const recipientList = recipientData.data.txs.filter(i => {
+        return get(i, "events.1.attributes.0.value") === address
+      })
       const list = [...senderData.data.txs, ...recipientList];
 
       list.sort((a, b) => a.height - b.height);

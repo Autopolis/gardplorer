@@ -38,7 +38,7 @@ export const txFieldsMap = {
     ...defaultFields,
     {
       name: 'End Time',
-      field: 'tags.5.value',
+      field: '',
       linkType: ''
     }
   ],
