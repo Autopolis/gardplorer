@@ -4,7 +4,7 @@
     @select="handleSelect"
     class="menu-container"
     mode="horizontal"
-    background-color="#3a2b7e"
+    background-color="transparent"
     text-color="rgba(255,255,255,0.8)"
     active-text-color="#00fffb"
   >
@@ -65,7 +65,10 @@ export default {
 .menu-container {
   border-bottom: none;
   padding-right: 40px;
-
+  .el-menu--popup {
+    background-color: #30cfd0 !important;
+    color: #fff !important;
+  }
   .item {
     transition: $trans;
     &:hover {
@@ -82,6 +85,18 @@ export default {
 @include responsive($sm) {
   .menu-container {
     display: none;
+  }
+}
+</style>
+<style lang="scss">
+.el-menu--popup {
+  background-color: #fff !important;
+  li {
+    color: #000 !important;
+    &:hover {
+      background-color: #30cfd0 !important;
+      color: #fff !important;
+    }
   }
 }
 </style>

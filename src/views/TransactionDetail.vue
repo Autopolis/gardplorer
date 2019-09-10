@@ -51,6 +51,9 @@
               <span v-else-if="action === 'begin_redelegate'">{{RedelegateCompletionTime | formatTime}}</span>
               <span v-else>{{ get(detail, item.field) | formatTime }}</span>
             </span>
+            <span v-else-if="item.name === 'Proposal Type'">
+              {{ (get(detail, item.field) || "").slice(11, (get(detail, item.field) || "").length) }}
+            </span>
             <span v-else-if="typeof get(detail, item.field) === 'boolean'">
               {{ get(detail, item.field).toString() }}
             </span>

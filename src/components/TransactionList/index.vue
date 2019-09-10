@@ -37,6 +37,9 @@
           <span v-else-if="item.name.match('Time')">
             {{ get(scope.row, item.field) | formatTime }}
           </span>
+          <span v-else-if="item.name === 'Proposal Type'">
+            {{ (get(scope.row, item.field) || "").slice(11, (get(scope.row, item.field) || "").length) }}
+          </span>
           <span v-else>
             <span v-if="item.name === 'Hash'">{{ (get(scope.row, item.field) || '-').slice(0, 18) + '...'}}</span>
             <span v-else>{{ get(scope.row, item.field) || '-'}}</span>
