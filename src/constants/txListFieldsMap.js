@@ -255,5 +255,13 @@ export const txListFieldsMap = {
       field: 'tx.value.msg.0.value.voter',
       linkType: 'address'
     }
+  ],
+  invoke: [
+    ...defaultListFields,
+    {
+      name: 'Contract Address',
+      field: '',
+      linkType: ''
+    }
   ]
 };

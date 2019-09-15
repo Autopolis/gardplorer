@@ -21,7 +21,7 @@
       <p>TOTAL AMOUNT: {{ totalCount }}</P>
     </div>
     <transaction-list
-      :list="list"
+      :list="txList"
       :fields="fields"
       :load="load"
     />
@@ -47,6 +47,7 @@ import { mapGetters, mapState } from "vuex";
 import Card from "@/components/Card";
 import TransactionList from "@/components/TransactionList";
 import { txTypes, txListFieldsMap } from "@/constants";
+import { get, find } from "lodash";
 
 export default {
   data: function() {
@@ -64,6 +65,12 @@ export default {
       "pageSize",
       "load"
     ]),
+    txList() {
+      const result = this.list.filter(i => {
+        return get(i, "logs.0.success") === true;
+      });
+      return result;
+    },
     category: function() {
       return this.$route.params.category;
     },

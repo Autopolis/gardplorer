@@ -45,9 +45,10 @@ export default {
   },
   actions: {
     fetchTotalCount: async function (context, params = {
-      'message.action': 'send',
-      page: 1
+      'message.action': 'send'
     }) {
+      params.page = 1
+      params.limit = context.state.pageSize;
       context.commit('setLoad', true);
       const {
         data
@@ -63,8 +64,8 @@ export default {
     },
     fetchList: async function (context, params = {
       'message.action': 'send',
-      page: 1
     }) {
+      params.page = 1
       params.limit = context.state.pageSize;
       context.commit('setLoad', true);
       const {

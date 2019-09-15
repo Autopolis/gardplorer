@@ -130,5 +130,29 @@ export const txFieldsMap = {
     }
   ],
   deposit_governance: [...txListFieldsMap.deposit, ...defaultFields],
-  vote_governance: [...txListFieldsMap.vote, ...defaultFields]
+  vote_governance: [...txListFieldsMap.vote, ...defaultFields],
+  invoke_contract: [
+    ...txListFieldsMap.invoke,
+    ...defaultFields,
+    {
+      name: 'Contract Gas',
+      field: 'tx.value.msg.0.value.contract_gas',
+      linkType: ''
+    },
+    {
+      name: 'Sender',
+      field: 'tx.value.msg.0.value.sender',
+      linkType: ''
+    },
+    {
+      name: 'Method',
+      filed: '',
+      linkType: ''
+    },
+    {
+      name: 'Params',
+      filed: '',
+      linkType: ''
+    }
+  ]
 };
