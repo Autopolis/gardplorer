@@ -2,8 +2,7 @@
  * The mapping between the elements displayed in the transaction page and the tx data.
  * linkType has 5 options: '', 'tx', 'block', 'address', 'validator', 'token'. (default = '', for no link)
  */
-export const defaultListFields = [
-  {
+export const defaultListFields = [{
     name: 'Time',
     field: 'timestamp',
     linkType: ''
@@ -179,8 +178,8 @@ export const txListFieldsMap = {
     },
     {
       name: 'Rewards',
-      field: 'tags.4.value',
-      linkType: 'validator'
+      field: 'events.2.attributes.0.value',
+      linkType: ''
     }
   ],
   withdraw_validator_rewards_all: [
@@ -202,7 +201,7 @@ export const txListFieldsMap = {
     ...defaultListFields,
     {
       name: 'Proposal Id',
-      field: 'tags.1.value',
+      field: 'events.1.attributes.1.value',
       linkType: ''
     },
     {
@@ -212,12 +211,12 @@ export const txListFieldsMap = {
     },
     {
       name: 'Proposal Type',
-      field: 'tx.value.msg.0.value.proposal_type',
+      field: 'tx.value.msg.0.value.content.type',
       linkType: ''
     },
     {
       name: 'Title',
-      field: 'tx.value.msg.0.value.title',
+      field: 'tx.value.msg.0.value.content.value.title',
       linkType: ''
     }
   ],
@@ -257,393 +256,11 @@ export const txListFieldsMap = {
       linkType: 'address'
     }
   ],
-
-  // exchange
-  make: [
+  invoke: [
     ...defaultListFields,
     {
-      name: 'Order ID',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
-      name: 'Seller',
-      field: 'tags.3.value',
-      linkType: 'address'
-    },
-    {
-      name: 'Supply',
-      field: 'tx.value.msg.0.value.supply',
-      linkType: ''
-    },
-    {
-      name: 'Target',
-      field: 'tx.value.msg.0.value.target',
-      linkType: ''
-    }
-  ],
-  'cancel-exchange': [
-    ...defaultListFields,
-    {
-      name: 'Order ID',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
-      name: 'Sender',
-      field: 'tags.3.value',
-      linkType: 'address'
-    }
-  ],
-  take: [
-    ...defaultListFields,
-    {
-      name: 'Order ID',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
-      name: 'Buyer',
-      field: 'tags.3.value',
-      linkType: 'address'
-    },
-    {
-      name: 'Value',
-      field: 'tx.value.msg.0.value.value',
-      linkType: ''
-    }
-  ],
-
-  // issue
-  issue: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tags.2.value',
-      linkType: 'token'
-    },
-    {
-      name: 'Issuer',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Token Name',
-      field: 'tx.value.msg.0.value.params.name',
-      linkType: ''
-    },
-    {
-      name: 'Token Symbol',
-      field: 'tx.value.msg.0.value.params.symbol',
-      linkType: ''
-    }
-  ],
-  issue_transfer_ownership: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'New Owner',
-      field: 'tx.value.msg.0.value.to',
-      linkType: 'address'
-    }
-  ],
-  issue_description: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    }
-  ],
-  issue_mint: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Amount',
-      field: 'tx.value.msg.0.value.amount',
-      linkType: ''
-    }
-  ],
-  issue_burn_owner: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Amount',
-      field: 'tx.value.msg.0.value.amount',
-      linkType: ''
-    }
-  ],
-  issue_burn_from: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Burn From',
-      field: 'tx.value.msg.0.value.holder',
-      linkType: 'address'
-    },
-    {
-      name: 'Amount',
-      field: 'tx.value.msg.0.value.amount',
-      linkType: ''
-    }
-  ],
-  issue_burn_holder: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Amount',
-      field: 'tx.value.msg.0.value.amount',
-      linkType: ''
-    }
-  ],
-  issue_freeze: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Freeze Address',
-      field: 'tx.value.msg.0.value.accAddress',
-      linkType: 'address'
-    },
-    {
-      name: 'Freeze Type',
-      field: 'tx.value.msg.0.value.freeze_type',
-      linkType: ''
-    },
-    {
-      name: 'End Time',
-      field: 'tx.value.msg.0.value.end_time',
-      linkType: ''
-    }
-  ],
-  issue_unfreeze: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Unfreeze Address',
-      field: 'tx.value.msg.0.value.accAddress',
-      linkType: 'address'
-    },
-    {
-      name: 'Freeze Type',
-      field: 'tx.value.msg.0.value.freeze_type',
-      linkType: ''
-    }
-  ],
-  issue_disable_feature: [
-    ...defaultListFields,
-    {
-      name: 'Issue ID',
-      field: 'tx.value.msg.0.value.issue_id',
-      linkType: 'token'
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Feature',
-      field: 'tx.value.msg.0.value.feature',
-      linkType: ''
-    }
-  ],
-
-  // box
-  create: [
-    ...defaultListFields,
-    {
-      name: 'Box ID',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
-      name: 'Creator',
-      field: 'tags.3.value',
-      linkType: 'address'
-    },
-    {
-      name: 'Box Name',
-      field: 'tx.value.msg.0.value.params.name',
-      linkType: ''
-    },
-    {
-      name: 'Box Category',
-      field: 'tags.1.value',
-      linkType: ''
-    }
-  ],
-  withdraw: [
-    ...defaultListFields,
-    {
-      name: 'Box ID',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
-      name: 'Operator',
-      field: 'tags.3.value',
-      linkType: 'address'
-    },
-    {
-      name: 'Box Category',
-      field: 'tags.1.value',
-      linkType: ''
-    }
-  ],
-  inject: [
-    ...defaultListFields,
-    {
-      name: 'Box ID',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
-      name: 'Operator',
-      field: 'tags.3.value',
-      linkType: 'address'
-    },
-    {
-      name: 'Box Category',
-      field: 'tags.1.value',
-      linkType: ''
-    }
-  ],
-  'cancel-deposit': [
-    ...defaultListFields,
-    {
-      name: 'Box ID',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
-      name: 'Sender',
-      field: 'tags.3.value',
-      linkType: 'address'
-    }
-  ],
-  'cancel-future': [
-    ...defaultListFields,
-    {
-      name: 'Box ID',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
-      name: 'Sender',
-      field: 'tags.3.value',
-      linkType: 'address'
-    }
-  ],
-  describe: [
-    ...defaultListFields,
-    {
-      name: 'Box ID',
-      field: 'tags.2.value',
-      linkType: ''
-    },
-    {
-      name: 'Sender',
-      field: 'tags.3.value',
-      linkType: 'address'
-    }
-  ],
-  disable_feature: [
-    ...defaultListFields,
-    {
-      name: 'Box ID',
-      field: 'tx.value.msg.0.value.box_id',
-      linkType: ''
-    },
-    {
-      name: 'Operator',
-      field: 'tx.value.msg.0.value.sender',
-      linkType: 'address'
-    },
-    {
-      name: 'Feature',
-      field: 'tx.value.msg.0.value.feature',
-      linkType: ''
-    }
-  ],
-
-  all: [
-    ...defaultListFields,
-    {
-      name: 'Memo',
-      field: 'tx.value.memo',
-      linkType: ''
-    },
-    {
-      name: 'Gas Used',
-      field: 'gas_used',
+      name: 'Contract Address',
+      field: '',
       linkType: ''
     }
   ]

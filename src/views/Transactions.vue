@@ -21,7 +21,7 @@
       <p>TOTAL AMOUNT: {{ totalCount }}</P>
     </div>
     <transaction-list
-      :list="list"
+      :list="txList"
       :fields="fields"
       :load="load"
     />
@@ -29,7 +29,7 @@
       <el-pagination
         class="pagination"
         background
-        :pager-count="3"
+        :pager-count="5"
         layout="prev, pager, next"
         :current-page="currentPage"
         :page-size="pageSize"
@@ -47,6 +47,7 @@ import { mapGetters, mapState } from "vuex";
 import Card from "@/components/Card";
 import TransactionList from "@/components/TransactionList";
 import { txTypes, txListFieldsMap } from "@/constants";
+import { get, find } from "lodash";
 
 export default {
   data: function() {
@@ -64,6 +65,12 @@ export default {
       "pageSize",
       "load"
     ]),
+    txList() {
+      const result = this.list.filter(i => {
+        return get(i, "logs.0.success") === true;
+      });
+      return result;
+    },
     category: function() {
       return this.$route.params.category;
     },
@@ -84,7 +91,7 @@ export default {
       const { pageSize, totalCount } = this;
       const page = Math.ceil(totalCount / pageSize) - currentPage + 1;
       this.$store.dispatch("transactions/fetchList", {
-        action: this.selected[0],
+        "message.action": this.selected[0],
         page
       });
     },
@@ -93,7 +100,7 @@ export default {
       this.fetchData();
     },
     fetchData: async function() {
-      const params = { action: this.selected[0] };
+      const params = { "message.action": this.selected[0] };
       if (this.selected[1]) {
         params.category = this.selected[1];
       }

@@ -8,8 +8,6 @@ import TransactionDetail from './views/TransactionDetail.vue';
 import AddressDetail from './views/AddressDetail.vue';
 import Proposals from './views/Proposals.vue';
 import ProposalDetail from './components/Proposals/Detail.vue';
-import Tokens from './views/Tokens.vue';
-import TokenDetail from './components/Tokens/Detail.vue';
 import Validators from './views/Validators.vue';
 import ValidatorDetail from './views/ValidatorDetail.vue';
 import NotFound from './views/NotFound.vue';
@@ -20,8 +18,7 @@ Vue.use(Router);
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
       redirect: '/home'
     },
@@ -33,8 +30,7 @@ export default new Router({
     {
       path: '/block',
       component: View,
-      children: [
-        {
+      children: [{
           path: '',
           name: 'blocks',
           component: Blocks
@@ -64,8 +60,7 @@ export default new Router({
     {
       path: '/proposal',
       component: View,
-      children: [
-        {
+      children: [{
           path: '',
           name: 'proposals',
           component: Proposals
@@ -78,26 +73,9 @@ export default new Router({
       ]
     },
     {
-      path: '/token',
-      component: View,
-      children: [
-        {
-          path: '',
-          name: 'tokens',
-          component: Tokens
-        },
-        {
-          path: ':id',
-          name: 'tokenDetail',
-          component: TokenDetail
-        }
-      ]
-    },
-    {
       path: '/validator',
       component: View,
-      children: [
-        {
+      children: [{
           path: '',
           name: 'validators',
           component: Validators

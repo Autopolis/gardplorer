@@ -54,8 +54,8 @@ export default {
     const address = to.params.address;
     this.$store.dispatch("address/fetch", address);
     this.$store.dispatch("transactions/fetchAddressTxList", {
-      action: "send",
-      sender: address
+      "message.action": "send",
+      "message.sender": address
     });
     next();
   },
@@ -63,8 +63,8 @@ export default {
   mounted() {
     this.$store.dispatch("address/fetch", this.address);
     this.$store.dispatch("transactions/fetchAddressTxList", {
-      action: "send",
-      sender: this.address
+      "message.action": "send",
+      "message.sender": this.address
     });
   }
 };

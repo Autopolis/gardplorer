@@ -35,27 +35,40 @@
           @focus="onFocus"
         />
       </div>
-
-      <el-dropdown
-        class="dropdown-menu"
-        trigger="click"
-        @command="handleCommand"
+      <span
+        class="menuBtn"
+        v-html="menuIcon"
+        @click="drawer = true"
       >
-        <span
-          class="menuBtn"
-          v-html="menuIcon"
-        >
-        </span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item
+      </span>
+      <el-drawer
+        :visible.sync="drawer"
+        :direction="direction"
+        custom-class="drawer"
+      >
+        <el-menu @select="handleSelect">
+          <label
             v-for="(item,index) in menu"
             :key="index"
-            :command="item.link"
           >
-            {{item.name}}
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+            <el-submenu
+              v-if="!isEmpty(item.children)"
+              :index="item.name"
+            >
+              <template slot="title">{{item.name.toUpperCase()}}</template>
+              <el-menu-item
+                v-for="i in item.children"
+                :key="i.link"
+                :index="i.link"
+              >{{i.name.toUpperCase()}}</el-menu-item>
+            </el-submenu>
+            <el-menu-item
+              v-else
+              :index="item.link"
+            >{{item.name.toUpperCase()}}</el-menu-item>
+          </label>
+        </el-menu>
+      </el-drawer>
     </div>
     <div
       v-if="$route.path === '/home'"
@@ -70,6 +83,7 @@
 
 <script>
 import { getMapper } from "vuex";
+import { isEmpty } from "lodash";
 import { menu } from "@/constants";
 import Menu from "@/components/Menu";
 import InputSearch from "@/components/InputSearch";
@@ -81,21 +95,25 @@ export default {
       expandSearch: false,
       isMobile: !!navigator.userAgent.match(/iPad|iPhone|Android/),
       menu,
-      menuIcon: `<svg class="icon" fill="#fff" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1605"><path d="M981.333333 554.666667 42.666667 554.666667c-23.466667 0-42.666667-19.2-42.666667-42.666667 0-23.466667 19.2-42.666667 42.666667-42.666667l938.666667 0c23.466667 0 42.666667 19.2 42.666667 42.666667C1024 535.466667 1004.8 554.666667 981.333333 554.666667zM981.333333 213.333333 42.666667 213.333333c-23.466667 0-42.666667-19.2-42.666667-42.666667s19.2-42.666667 42.666667-42.666667l938.666667 0c23.466667 0 42.666667 19.2 42.666667 42.666667S1004.8 213.333333 981.333333 213.333333zM42.666667 810.666667l938.666667 0c23.466667 0 42.666667 19.2 42.666667 42.666667 0 23.466667-19.2 42.666667-42.666667 42.666667L42.666667 896c-23.466667 0-42.666667-19.2-42.666667-42.666667C0 829.866667 19.2 810.666667 42.666667 810.666667z" p-id="1606"></path></svg>`
+      menuIcon: `<svg class="icon" fill="#fff" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1605"><path d="M981.333333 554.666667 42.666667 554.666667c-23.466667 0-42.666667-19.2-42.666667-42.666667 0-23.466667 19.2-42.666667 42.666667-42.666667l938.666667 0c23.466667 0 42.666667 19.2 42.666667 42.666667C1024 535.466667 1004.8 554.666667 981.333333 554.666667zM981.333333 213.333333 42.666667 213.333333c-23.466667 0-42.666667-19.2-42.666667-42.666667s19.2-42.666667 42.666667-42.666667l938.666667 0c23.466667 0 42.666667 19.2 42.666667 42.666667S1004.8 213.333333 981.333333 213.333333zM42.666667 810.666667l938.666667 0c23.466667 0 42.666667 19.2 42.666667 42.666667 0 23.466667-19.2 42.666667-42.666667 42.666667L42.666667 896c-23.466667 0-42.666667-19.2-42.666667-42.666667C0 829.866667 19.2 810.666667 42.666667 810.666667z" p-id="1606"></path></svg>`,
+      drawer: false,
+      direction: "rtl"
     };
   },
   props: {
     netName: String
   },
   methods: {
+    isEmpty,
     onBlur() {
       this.expandSearch = false;
     },
     onFocus() {
       this.expandSearch = true;
     },
-    handleCommand(v) {
+    handleSelect(v) {
       this.$router.push(v);
+      this.drawer = false;
     }
   }
 };
@@ -171,5 +189,10 @@ export default {
       vertical-align: top;
     }
   }
+}
+</style>
+<style>
+.drawer {
+  width: auto !important;
 }
 </style>

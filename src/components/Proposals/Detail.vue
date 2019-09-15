@@ -7,13 +7,13 @@
     <div class="content">
       <card
         title="Proposal Details"
-        v-if="detail"
+        v-if="!isEmpty(detail)"
       >
         <data-item label="Proposal ID">
-          <span>{{ detail.proposal_id}}</span>
+          <span>{{ detail.id}}</span>
         </data-item>
         <data-item label="Type">
-          <span>{{ detail.proposal_content.type }}</span>
+          <span>{{ detail.content.type }}</span>
         </data-item>
         <data-item label="Status">
           <span>{{ detail.proposal_status }}</span>
@@ -31,13 +31,13 @@
 
       <card
         title="Proposal Content"
-        v-if="detail"
+        v-if="!isEmpty(detail)"
       >
         <data-item label="Title">
-          <span>{{ get(detail, 'proposal_content.value.TextProposal.title') }}</span>
+          <span>{{ get(detail, 'content.value.title') }}</span>
         </data-item>
         <data-item label="Description">
-          <span>{{ get(detail, 'proposal_content.value.TextProposal.description') }}</span>
+          <span>{{ get(detail, 'content.value.description') }}</span>
         </data-item>
         <div v-if="!isEmpty(get(detail, 'proposal_content.value.proposal_params'))">
           <data-item
@@ -52,7 +52,7 @@
 
       <card
         title="Voting Status"
-        v-if="detail && detail.proposal_status !== 'DepositPeriod'"
+        v-if="!isEmpty(detail) && detail.proposal_status !== 'DepositPeriod'"
       >
         <data-item label="Voting Start Time">
           <span>{{ detail.voting_start_time | formatTime }}</span>
@@ -102,7 +102,7 @@ export default {
   computed: {
     ...mapState("proposals", ["details"]),
     detail: function() {
-      return get(this.details, this.id);
+      return !isEmpty(this.details) ? get(this.details, this.id).result : {};
     }
   },
   mounted: function() {

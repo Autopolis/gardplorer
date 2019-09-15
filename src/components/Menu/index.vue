@@ -1,3 +1,4 @@
+    
 <template>
   <el-menu
     :default-active="$route.path"
@@ -36,7 +37,6 @@
 
 <script>
 import { menu } from "@/constants";
-
 export default {
   data() {
     const menus = [];
@@ -65,7 +65,6 @@ export default {
 .menu-container {
   border-bottom: none;
   padding-right: 40px;
-
   .item {
     transition: $trans;
     &:hover {
@@ -73,12 +72,10 @@ export default {
       color: #00fffb !important;
     }
   }
-
   a {
     text-decoration: none;
   }
 }
-
 @include responsive($sm) {
   .menu-container {
     display: none;

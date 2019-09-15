@@ -4,7 +4,7 @@
       <template slot-scope="scope">
         <hg-link
           type="proposal"
-          :content="get(scope.row, 'proposal_id')"
+          :content="get(scope.row, 'id')"
         />
       </template>
     </el-table-column>
@@ -12,14 +12,14 @@
       <template slot-scope="scope">
         <hg-link
           type="proposal"
-          :content="get(scope.row, 'proposal_content.value.TextProposal.title')"
-          :link="get(scope.row, 'proposal_id')"
+          :content="get(scope.row, 'content.value.title')"
+          :link="get(scope.row, 'id')"
         />
       </template>
     </el-table-column>
     <el-table-column
       label="TYPE"
-      prop="proposal_content.type"
+      prop="content.type"
     >
     </el-table-column>
     <el-table-column

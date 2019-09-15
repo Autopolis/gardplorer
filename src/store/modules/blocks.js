@@ -1,4 +1,7 @@
-import { get, isEmpty } from 'lodash';
+import {
+  get,
+  isEmpty
+} from 'lodash';
 import axios from 'axios';
 import $ajax from '@/utils/ajax';
 import Codec from '@/utils/cdec';
@@ -17,49 +20,69 @@ export default {
   getters: {
     lastList: state => state.list.slice(0, 5),
     list: state => {
-      const { list, details, validatorsets } = state;
+      const {
+        list,
+        details,
+        validatorsets
+      } = state;
       return list.map(item => {
         const height = get(item, 'header.height');
         if (isEmpty(details[height])) return item;
         const validators = get(validatorsets, [height, 'validators'], []);
         const block = get(details, [height, 'block']);
-        return { ...item, block, validators };
+        return {
+          ...item,
+          block,
+          validators
+        };
       });
     }
   },
   mutations: {
-    setCurrentPage: function(state, page) {
+    setCurrentPage: function (state, page) {
       state.currentPage = page;
     },
-    setLastHeight: function(state, height) {
+    setLastHeight: function (state, height) {
       height = Number(height);
       if (state.lastHeight > height) {
         return false;
       }
       state.lastHeight = height;
     },
-    setList: function(state, list) {
+    setList: function (state, list) {
       state.list = list;
     },
-    setDetails: function(state, data) {
+    setDetails: function (state, data) {
       state.details = Object.assign({}, data, state.details);
     },
-    setProposers: function(state, data) {
+    setProposers: function (state, data) {
       state.proposers = Object.assign({}, data, state.proposers);
     },
-    setValidatorsets: function(state, data) {
+    setValidatorsets: function (state, data) {
       state.validatorsets = Object.assign({}, data, state.validatorsets);
     }
   },
   actions: {
-    fetchList: async function(context, params = { page: 1 }) {
-      const { minHeight, maxHeight, page } = params;
-      let blockApiUri = 'https://node.hashgard.com/testnet/node';
-      // if (!location.hostname.match('gardplorer.io')) {
-      //   blockApiUri = 'http://node.hgdev.io';
-      // }
-      const { data } = await axios.get(`${blockApiUri}/blockchain`, {
-        params: { minHeight, maxHeight, random: new Date().getTime() }
+    fetchList: async function (context, params = {
+      page: 1
+    }) {
+      const {
+        minHeight,
+        maxHeight,
+        page
+      } = params;
+      let blockApiUri = 'http://rest.hashgard.com/testnet/node';
+      if (!location.hostname.match('gardplorer.io')) {
+        blockApiUri = 'http://rest.hashgard.io:89/testnet/node';
+      }
+      const {
+        data
+      } = await axios.get(`${blockApiUri}/blockchain`, {
+        params: {
+          minHeight,
+          maxHeight,
+          random: new Date().getTime()
+        }
       });
       const result = get(data, 'result');
       if (isEmpty(result)) {
@@ -81,27 +104,46 @@ export default {
       });
       return Promise.resolve();
     },
-    fetchValidatorset: async function(context, height) {
-      const { data } = await $ajax.get(`/validatorsets/${height}`);
-      if (!isEmpty(data)) {
-        context.commit('setValidatorsets', { [height]: data });
+    fetchLatest: async function (context) {
+      const {
+        data
+      } = await $ajax.get("/blocks/latest")
+      const latestHeight = get(data, 'block.header.height')
+      context.commit('setLastHeight', latestHeight)
+      return Promise.resolve(data)
+    },
+    fetchValidatorset: async function (context, height) {
+      const {
+        data
+      } = await $ajax.get(`/validatorsets/${height}`);
+      const result = data.result
+      if (!isEmpty(result)) {
+        context.commit('setValidatorsets', {
+          [height]: result
+        });
 
         // find proposer of this block
         const block = context.state.details[height];
         const cons_hex = get(block, 'block.header.proposer_address');
         const cons_addr = Codec.Bech32.toBech32('gardvalcons', cons_hex);
-        const proposer = data.validators.find(v => v.address === cons_addr);
-        context.commit('setProposers', { [height]: proposer });
+        const proposer = result.validators.find(v => v.address === cons_addr);
+        context.commit('setProposers', {
+          [height]: proposer
+        });
       }
     },
-    fetchDetail: async function(context, height) {
+    fetchDetail: async function (context, height) {
       if (!isEmpty(context.state.details[height])) {
         return Promise.resolve(context.state.details[height]);
       }
-      const { data } = await $ajax.get(`/blocks/${height}`);
+      const {
+        data
+      } = await $ajax.get(`/blocks/${height}`);
       if (!isEmpty(data)) {
         context.dispatch('fetchValidatorset', height);
-        context.commit('setDetails', { [height]: data });
+        context.commit('setDetails', {
+          [height]: data
+        });
         return Promise.resolve(data);
       }
     }

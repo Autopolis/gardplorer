@@ -27,14 +27,25 @@
             :list="[get(scope.row, item.field)]"
           />
           <data-amount
+            v-else-if="item.name === 'Rewards'"
+            :list="rewardList(scope.row, item.field)"
+          />
+          <data-amount
             v-else-if="item.name === 'Amount'"
             :list="[{denom: get(scope.row, get(fields.find(f => f.linkType === 'token'), 'field')), amount: get(scope.row, item.field)}]"
           />
           <span v-else-if="item.name.match('Time')">
             {{ get(scope.row, item.field) | formatTime }}
           </span>
+          <span v-else-if="item.name === 'Proposal Type'">
+            {{ (get(scope.row, item.field) || "").slice(11, (get(scope.row, item.field) || "").length) }}
+          </span>
+          <span v-else-if="item.name === 'Contract Address'">
+            {{ `${contractAddress(scope.row).slice(0, 20)}......` }}
+          </span>
           <span v-else>
-            {{ get(scope.row, item.field) || '-'}}
+            <span v-if="item.name === 'Hash'">{{ (get(scope.row, item.field) || '-').slice(0, 18) + '...'}}</span>
+            <span v-else>{{ get(scope.row, item.field) || '-'}}</span>
           </span>
         </span>
       </template>
@@ -43,7 +54,7 @@
 </template>
 
 <script>
-import { isEmpty, get } from "lodash";
+import { isEmpty, get, find } from "lodash";
 import { mapGetters, mapState } from "vuex";
 
 export default {
@@ -52,8 +63,30 @@ export default {
     fields: Array,
     load: { type: Boolean, default: false }
   },
+  computed: {
+    contractAddress() {
+      return function(row) {
+        let result = [];
+        get(row, "events", []).forEach(i => {
+          i.attributes.forEach(k => {
+            result.push(k);
+          });
+        });
+        const address = find(result, i => {
+          return i.key === "contract_address";
+        });
+        return address.value;
+      };
+    }
+  },
   methods: {
-    get
+    get,
+    rewardList(row, key) {
+      const val = get(row, key);
+      return !isEmpty(val)
+        ? [{ denom: "agard", amount: val.replace(/[^0-9]/gi, "") }]
+        : [];
+    }
   }
 };
 </script>

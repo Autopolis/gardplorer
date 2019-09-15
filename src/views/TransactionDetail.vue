@@ -6,7 +6,7 @@
     />
     <div
       class="transaction-detail-content"
-      v-if="detail"
+      v-if="!isEmpty(detail)"
     >
       <card title="Transaction Information">
         <data-item
@@ -29,9 +29,16 @@
               v-else-if="(get(detail, item.field) instanceof Object)"
               :list="[get(detail, item.field)]"
             />
+            <span v-else-if="item.name === 'Action'">
+              {{action}}
+            </span>
             <data-amount
               v-else-if="item.name === 'Amount'"
               :list="[{denom: get(detail, get(fields[type].find(f => f.linkType === 'token'), 'field')), amount: get(detail, item.field)}]"
+            />
+            <data-amount
+              v-else-if="item.name === 'Rewards'"
+              :list="rewardList(get(detail, item.field))"
             />
             <span v-else-if="item.name === 'Lock End'">
               {{ get(detail, item.field) | formatTime }}
@@ -40,10 +47,24 @@
               {{ description }}
             </span>
             <span v-else-if="item.name.match('Time')">
-              {{ get(detail, item.field) | formatTime }}
+              <span v-if="action === 'begin_unbonding'">{{completionTime | formatTime}}</span>
+              <span v-else-if="action === 'begin_redelegate'">{{RedelegateCompletionTime | formatTime}}</span>
+              <span v-else>{{ get(detail, item.field) | formatTime }}</span>
+            </span>
+            <span v-else-if="item.name === 'Proposal Type'">
+              {{ (get(detail, item.field) || "").slice(11, (get(detail, item.field) || "").length) }}
             </span>
             <span v-else-if="typeof get(detail, item.field) === 'boolean'">
               {{ get(detail, item.field).toString() }}
+            </span>
+            <span v-else-if="item.name === 'Contract Address'">{{contractAddress}}</span>
+            <span v-else-if="item.name === 'Method'">{{contractMethod}}</span>
+            <span v-else-if="item.name === 'Params'">
+              <span
+                class="item-params"
+                v-for="(i,index) in params"
+                :key="index"
+              >{{i}}</span>
             </span>
             <span v-else>
               {{ get(detail, item.field) || '-'}}
@@ -56,7 +77,7 @@
 </template>
 
 <script>
-import { isEmpty, get } from "lodash";
+import { isEmpty, get, find } from "lodash";
 import { mapGetters, mapState } from "vuex";
 import Base64 from "crypto-js/enc-base64";
 import Utf8 from "crypto-js/enc-utf8";
@@ -68,7 +89,11 @@ export default {
     return { fields: txFieldsMap };
   },
   methods: {
-    get
+    isEmpty,
+    get,
+    rewardList(val) {
+      return [{ denom: "agard", amount: val.replace(/[^0-9]/gi, "") }];
+    }
   },
   computed: {
     ...mapState("transactions", ["details"]),
@@ -94,17 +119,79 @@ export default {
       }
     },
     type: function() {
-      const action = get(this.detail, "tags", []).filter(
-        item => item.key === "action"
-      )[0];
       // issue 模块交易失败的时候 tags 中不包含 category 字段。
       // if (action && action.value.match("issue")) {
       //   return action && action.value;
       // }
-      const category = get(this.detail, "tags", []).filter(
-        item => item.key === "category"
-      )[0];
-      return `${action && action.value}_${category && category.value}`;
+      return `${this.action && this.action}_${this.module && this.module}`;
+    },
+    action() {
+      const eventsMessage = get(this.detail, "events", []).filter(
+        item => item.type === "message"
+      );
+      const action =
+        find(get(eventsMessage[0], "attributes"), {
+          key: "action"
+        }) || {};
+      return action.value;
+    },
+    module() {
+      const eventsMessage = get(this.detail, "events", []).filter(
+        item => item.type === "message"
+      );
+      const moduleObj =
+        find(get(eventsMessage[0], "attributes"), {
+          key: "module"
+        }) || {};
+      return moduleObj.value;
+    },
+    completionTime() {
+      const eventsMessage = get(this.detail, "events", []).filter(
+        item => item.type === "unbond"
+      );
+      const unbondObj =
+        find(get(eventsMessage[0], "attributes"), {
+          key: "completion_time"
+        }) || {};
+      return unbondObj.value;
+    },
+    RedelegateCompletionTime() {
+      const eventsMessage = get(this.detail, "events", []).filter(
+        item => item.type === "redelegate"
+      );
+      const redelegateObj =
+        find(get(eventsMessage[0], "attributes"), {
+          key: "completion_time"
+        }) || {};
+      return redelegateObj.value;
+    },
+    contractAddress() {
+      let result = [];
+      get(this.detail, "events", []).forEach(i => {
+        i.attributes.forEach(k => {
+          result.push(k);
+        });
+      });
+      const address = find(result, i => {
+        return i.key === "contract_address";
+      });
+      return address.value;
+    },
+    contract_param() {
+      const contract_param =
+        get(this.detail, "tx.value.msg.0.value.contract_param") || "";
+      return contract_param.split(",[");
+    },
+    contractMethod() {
+      return this.contract_param[0]
+        ? this.contract_param[0].split(":")[1]
+        : "-";
+    },
+    params() {
+      let result = this.contract_param[1]
+        ? this.contract_param[1].split("]")[0]
+        : "-";
+      return result.split(",");
     }
   },
   watch: {
@@ -113,28 +200,27 @@ export default {
         return false;
       }
       // fetch token detail
-      const action = get(this.detail, "tags.0.value");
       let denom = "";
-      if (action.match("issue")) {
+      if (this.action.match("issue")) {
         denom = get(this.detail, "tags.2.value");
       }
-      if (action.match("inject")) {
+      if (this.action.match("inject")) {
         denom = get(this.detail, "tx.value.msg.0.value.amount.denom");
       }
-      if (action.match("create")) {
+      if (this.action.match("create")) {
         denom = get(
           this.detail,
           "tx.value.msg.0.value.params.total_amount.token.denom"
         );
       }
-      if (action.match("take")) {
+      if (this.action.match("take")) {
         denom = get(this.detail, "tx.value.msg.0.value.value.denom");
       }
       if (denom && denom.match(/^coin.{10}$/)) {
         this.$store.dispatch("tokens/fetchDetail", denom);
         return;
       }
-      if (action.match("send")) {
+      if (this.action.match("send")) {
         const coins = get(this.detail, "tx.value.msg.0.value.amount");
         coins.forEach(i => {
           if (i.denom.match(/^coin.{10}$/)) {
@@ -142,7 +228,7 @@ export default {
           }
         });
       }
-      if (action === "make") {
+      if (this.action === "make") {
         const coins = [
           get(this.detail, "tx.value.msg.0.value.target"),
           get(this.detail, "tx.value.msg.0.value.supply")
@@ -160,3 +246,8 @@ export default {
   }
 };
 </script>
+<style lang="scss" scope>
+.item-params {
+  display: block;
+}
+</style>

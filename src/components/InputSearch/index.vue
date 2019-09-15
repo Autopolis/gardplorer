@@ -1,18 +1,14 @@
 <template>
   <div :class="`search-container ${mini && !expand?'mini':''}`">
-    <el-autocomplete
+    <el-input
       ref="input"
       class="search-inner"
-      placeholder="Token ID/ Token Symbol/ Address/ Txhash/ Block"
+      placeholder="Address/ Txhash/ Block"
       v-model.trim="value"
-      :fetch-suggestions="querySearch"
-      :trigger-on-focus="false"
       @keyup.enter.native="onSearch"
       @blur="onBlur"
-      @select="handleSelect"
       :clearable="!mini"
-      autofocus
-    ></el-autocomplete>
+    ></el-input>
     <i
       class="el-icon-search search-icon"
       @click="expandSearch"
@@ -49,26 +45,6 @@ export default {
         this.$emit("blur");
       }
     },
-    querySearch: async function(queryString, cb) {
-      cb([]);
-      if (isEmpty(queryString)) {
-        return;
-      }
-      const data = await this.$store.dispatch("tokens/search", {
-        symbol: queryString
-      });
-      if (isEmpty(data)) {
-        return;
-      }
-      const res = data.map(i => {
-        i.value = `${i.symbol} ( ${i.name} ${i.issue_id} )`;
-        return i;
-      });
-      cb(res);
-    },
-    handleSelect(v) {
-      this.$router.push(`/token/${v.issue_id}`);
-    },
     onSearch() {
       let { value } = this;
       value = value.replace(/ /g, "");
@@ -94,13 +70,6 @@ export default {
       const valPattern = /^gardvaloper.{39}$/;
       if (valPattern.test(value)) {
         this.$router.push({ path: "/validator/" + value });
-        return false;
-      }
-
-      // jump to token detail page;
-      const tokenPattern = /^coin.{10}$/;
-      if (tokenPattern.test(value)) {
-        this.$router.push({ path: "/token/" + value });
         return false;
       }
 
