@@ -6,7 +6,7 @@
     />
     <div
       class="transaction-detail-content"
-      v-if="detail"
+      v-if="!isEmpty(detail)"
     >
       <card title="Transaction Information">
         <data-item
@@ -57,6 +57,9 @@
             <span v-else-if="typeof get(detail, item.field) === 'boolean'">
               {{ get(detail, item.field).toString() }}
             </span>
+            <span v-else-if="item.name === 'Contract Address'">{{contractAddress}}</span>
+            <span v-else-if="item.name === 'Method'">{{contractMethod}}</span>
+            <span v-else-if="item.name === 'Params'">{{params}}</span>
             <span v-else>
               {{ get(detail, item.field) || '-'}}
             </span>
@@ -80,6 +83,7 @@ export default {
     return { fields: txFieldsMap };
   },
   methods: {
+    isEmpty,
     get,
     rewardList(val) {
       return [{ denom: "agard", amount: val.replace(/[^0-9]/gi, "") }];
@@ -154,6 +158,33 @@ export default {
           key: "completion_time"
         }) || {};
       return redelegateObj.value;
+    },
+    contractAddress() {
+      let result = [];
+      get(this.detail, "events", []).forEach(i => {
+        i.attributes.forEach(k => {
+          result.push(k);
+        });
+      });
+      const address = find(result, i => {
+        return i.key === "contract_address";
+      });
+      return address.value;
+    },
+    contract_param() {
+      const contract_param =
+        get(this.detail, "tx.value.msg.0.value.contract_param") || "";
+      return contract_param.split(",[");
+    },
+    contractMethod() {
+      return this.contract_param[0]
+        ? this.contract_param[0].split(":")[1]
+        : "-";
+    },
+    params() {
+      return this.contract_param[1]
+        ? this.contract_param[1].split("]")[0]
+        : "-";
     }
   },
   watch: {

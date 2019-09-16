@@ -45,9 +45,10 @@ export default {
   },
   actions: {
     fetchTotalCount: async function (context, params = {
-      'message.action': 'send',
-      page: 1
+      'message.action': 'send'
     }) {
+      params.page = 1
+      params.limit = context.state.pageSize;
       context.commit('setLoad', true);
       const {
         data
@@ -63,8 +64,8 @@ export default {
     },
     fetchList: async function (context, params = {
       'message.action': 'send',
-      page: 1
     }) {
+      params.page = 1
       params.limit = context.state.pageSize;
       context.commit('setLoad', true);
       const {
@@ -175,6 +176,25 @@ export default {
       list.sort((a, b) => a.height - b.height);
       context.commit('setLoad', false);
       context.commit('setList', list);
+      return Promise.resolve();
+    },
+    fetchContractDetail: async function (context, params) {
+      const {
+        data
+      } = await $ajax.get(`/contract/detail/${params.contractAddress}`)
+      return Promise.resolve();
+    },
+    fetchContractData: async function (context, params) {
+      const {
+        data
+      } = await $ajax.get(`/contract/query-data/${params.contractAddress}`)
+      return Promise.resolve();
+    },
+    fetchContractMethod: async function (context, params) {
+      const {
+        data
+      } = await $ajax.get(
+        `/contract/query/${params.contractAddress}/${params.methodName}/${params.returnType}`)
       return Promise.resolve();
     }
   }

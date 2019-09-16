@@ -18,5 +18,8 @@ export const txTypes = {
     submit_proposal: 'Submit Proposal',
     deposit: 'Deposit',
     vote: 'Vote'
+  },
+  contract: {
+    invoke: 'Invoke'
   }
 };

@@ -15,6 +15,10 @@ export const menu = [{
       {
         name: 'governance',
         link: '/txs/governance'
+      },
+      {
+        name: 'contract',
+        link: '/txs/contract'
       }
     ]
   },

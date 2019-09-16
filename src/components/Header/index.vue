@@ -3,7 +3,7 @@
     <div class="header">
       <div class="logo">
         <a href="/">
-          <img src="https://qbao.fund/static/img/logo2.9d6e486.png" />
+          <img src="~@/assets/logo-white.png" />
         </a>
       </div>
 
@@ -131,9 +131,6 @@ export default {
     .logo {
       flex-basis: 140px;
       flex-grow: 1;
-      img {
-        height: 60px;
-      }
     }
     .select-net {
       flex-basis: 120px;
@@ -149,7 +146,7 @@ export default {
   }
 
   .header-title {
-    color: #330867;
+    color: #00fffb;
     font-size: 28px;
     text-align: center;
     margin: 64px auto;

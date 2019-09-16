@@ -40,6 +40,9 @@
           <span v-else-if="item.name === 'Proposal Type'">
             {{ (get(scope.row, item.field) || "").slice(11, (get(scope.row, item.field) || "").length) }}
           </span>
+          <span v-else-if="item.name === 'Contract Address'">
+            {{ `${contractAddress(scope.row).slice(0, 20)}......` }}
+          </span>
           <span v-else>
             <span v-if="item.name === 'Hash'">{{ (get(scope.row, item.field) || '-').slice(0, 18) + '...'}}</span>
             <span v-else>{{ get(scope.row, item.field) || '-'}}</span>
@@ -51,7 +54,7 @@
 </template>
 
 <script>
-import { isEmpty, get } from "lodash";
+import { isEmpty, get, find } from "lodash";
 import { mapGetters, mapState } from "vuex";
 
 export default {
@@ -59,6 +62,22 @@ export default {
     list: Array,
     fields: Array,
     load: { type: Boolean, default: false }
+  },
+  computed: {
+    contractAddress() {
+      return function(row) {
+        let result = [];
+        get(row, "events", []).forEach(i => {
+          i.attributes.forEach(k => {
+            result.push(k);
+          });
+        });
+        const address = find(result, i => {
+          return i.key === "contract_address";
+        });
+        return address.value;
+      };
+    }
   },
   methods: {
     get,
